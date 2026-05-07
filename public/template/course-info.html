@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kiaalap - Modern Education Management Dashboard for Universities">
+    <meta name="keywords" content="education, dashboard, university, management, admin">
+    <meta name="author" content="Kiaalap">
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+    <link rel="preconnect" href="https://ui-avatars.com" crossorigin>
+    <link rel="dns-prefetch" href="https://flagcdn.com">
+
+    <title>Course info - Kiaalap Dashboard</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="./assets/favicon-9EIT7vLh.ico">
+
+
+    <!-- Load stylesheets -->
+
+    <!-- Diagnostic inline styles - maximum specificity -->
+    <style>.sidebar.collapsed{max-width:70px!important;min-width:70px!important;width:70px!important}.sidebar.collapsed .sidebar-brand h5{font-size:0!important}.sidebar.collapsed .nav-link span{display:none!important}</style>
+
+  <script type="module" crossorigin src="./assets/main-COwrHBJ0.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/dashboard-hMfJATH4.css">
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="visually-hidden-focusable">Skip to main content</a>
+
+    <!-- Required DOM elements for dashboard.js -->
+    <div class="search-backdrop" id="searchBackdrop"></div>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+<style>*{box-sizing:border-box;margin:0;padding:0}body{background:#f5f7fa;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif}.sidebar{background:#1f2937;height:100vh;left:0;position:fixed;top:0;width:260px;z-index:1040}.main-wrapper{margin-left:260px;min-height:100vh;transition:margin-left .3s ease}.top-navbar{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.1);height:60px;padding:0 1rem}.dashboard-content{padding:24px}.loading{animation:pulse 2s cubic-bezier(.4,0,.6,1) infinite;background:#e5e7eb}.dashboard-card{background:#fff;border:1px solid #e5e7eb;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.1)}.dashboard-card-header{border-bottom:1px solid #e5e7eb;padding:16px 20px}.dashboard-card-body{padding:20px}.dashboard-card-title{color:#1f2937;font-size:1.125rem;font-weight:600;margin:0}.chart-wrapper{background:#fff;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.1);padding:20px}.chart-container-main{height:300px;margin-top:10px;position:relative}.chart-container-small{height:200px;margin-top:10px;position:relative}.stats-card{background:#fff;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.1);padding:20px}.stats-card-label{color:#6b7280;font-size:.875rem;margin-bottom:8px}.stats-card-value{color:#1f2937;font-size:2rem;font-weight:700}.stats-card-change{border-radius:12px;display:inline-block;font-size:.75rem;margin-top:8px;padding:2px 8px}.stats-card-change.positive{background:#d1fae5;color:#059669}.stats-card-change.negative{background:#fee2e2;color:#dc2626}.dashboard-row{margin-bottom:24px}.dashboard-grid{display:grid;gap:24px}.grid-cols-1{grid-template-columns:1fr}.grid-cols-2{grid-template-columns:repeat(2,1fr)}.grid-cols-3{grid-template-columns:repeat(3,1fr)}.grid-cols-4{grid-template-columns:repeat(4,1fr)}.grid-cols-3-1{grid-template-columns:3fr 1fr}.dashboard-col-8{grid-column:span 8/span 8}.dashboard-col-4{grid-column:span 4/span 4}@media (max-width:1200px){.grid-cols-3,.grid-cols-4{grid-template-columns:repeat(2,1fr)}.grid-cols-3-1{grid-template-columns:1fr}}@media (max-width:768px){.dashboard-grid{gap:16px}.grid-cols-2,.grid-cols-3,.grid-cols-3-1,.grid-cols-4{grid-template-columns:1fr}}</style>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-brand">
+            <h5>
+                <i class="bi bi-mortarboard-fill"></i>
+                Kiaalap
+            </h5>
+            <button class="sidebar-close" id="sidebarClose">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+    </div>
+
+    <nav class="sidebar-nav">
+        <div class="menu-section">
+            <div class="menu-section-title">Main</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#dashboardSubmenu" aria-expanded="false">
+                        <i class="bi bi-speedometer2"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <ul id="dashboardSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="index.html">Dashboard v.1</a></li>
+                        <li><a class="nav-link " href="index-1.html">Dashboard v.2</a></li>
+                        <li><a class="nav-link " href="index-2.html">Dashboard v.3</a></li>
+                        <li><a class="nav-link " href="analytics.html">Analytics</a></li>
+                        <li><a class="nav-link " href="widgets.html">Widgets</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="events.html">
+                        <i class="bi bi-calendar-event"></i>
+                        <span>Events</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Academic</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#professorsSubmenu" aria-expanded="false">
+                        <i class="bi bi-person-badge"></i>
+                        <span>Professors</span>
+                    </a>
+                    <ul id="professorsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="all-professors.html">All Professors</a></li>
+                        <li><a class="nav-link " href="add-professor.html">Add Professor</a></li>
+                        <li><a class="nav-link " href="edit-professor.html">Edit Professor</a></li>
+                        <li><a class="nav-link " href="professor-profile.html">Professor Profile</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#studentsSubmenu" aria-expanded="false">
+                        <i class="bi bi-people"></i>
+                        <span>Students</span>
+                    </a>
+                    <ul id="studentsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="all-students.html">All Students</a></li>
+                        <li><a class="nav-link " href="add-student.html">Add Student</a></li>
+                        <li><a class="nav-link " href="edit-student.html">Edit Student</a></li>
+                        <li><a class="nav-link " href="student-profile.html">Student Profile</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#coursesSubmenu" aria-expanded="false">
+                        <i class="bi bi-book"></i>
+                        <span>Courses</span>
+                    </a>
+                    <ul id="coursesSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="all-courses.html">All Courses</a></li>
+                        <li><a class="nav-link " href="add-course.html">Add Course</a></li>
+                        <li><a class="nav-link " href="edit-course.html">Edit Course</a></li>
+                        <li><a class="nav-link active" href="course-info.html">Course Info</a></li>
+                        <li><a class="nav-link " href="course-payment.html">Course Payment</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#librarySubmenu" aria-expanded="false">
+                        <i class="bi bi-journal-bookmark"></i>
+                        <span>Library</span>
+                    </a>
+                    <ul id="librarySubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="library-assets.html">Library Assets</a></li>
+                        <li><a class="nav-link " href="add-library-assets.html">Add Library Asset</a></li>
+                        <li><a class="nav-link " href="edit-library-assets.html">Edit Library Asset</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#departmentsSubmenu" aria-expanded="false">
+                        <i class="bi bi-building"></i>
+                        <span>Departments</span>
+                    </a>
+                    <ul id="departmentsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="departments.html">Departments List</a></li>
+                        <li><a class="nav-link " href="add-department.html">Add Department</a></li>
+                        <li><a class="nav-link " href="edit-department.html">Edit Department</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Communication</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#mailboxSubmenu" aria-expanded="false">
+                        <i class="bi bi-envelope"></i>
+                        <span>Mailbox</span>
+                    </a>
+                    <ul id="mailboxSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="mailbox.html">Inbox</a></li>
+                        <li><a class="nav-link " href="mailbox-compose.html">Compose</a></li>
+                        <li><a class="nav-link " href="mailbox-view.html">View Message</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Interface</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#componentsSubmenu" aria-expanded="false">
+                        <i class="bi bi-layout-wtf"></i>
+                        <span>Components</span>
+                    </a>
+                    <ul id="componentsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="buttons.html">Buttons</a></li>
+                        <li><a class="nav-link " href="alerts.html">Alerts</a></li>
+                        <li><a class="nav-link " href="modals.html">Modals</a></li>
+                        <li><a class="nav-link " href="tabs.html">Tabs</a></li>
+                        <li><a class="nav-link " href="accordion.html">Accordion</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#formsSubmenu" aria-expanded="false">
+                        <i class="bi bi-card-list"></i>
+                        <span>Forms</span>
+                    </a>
+                    <ul id="formsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="basic-form-element.html">Basic Forms</a></li>
+                        <li><a class="nav-link " href="advance-form-element.html">Advanced Forms</a></li>
+                        <li><a class="nav-link " href="password-meter.html">Password Meter</a></li>
+                        <li><a class="nav-link " href="multi-upload.html">File Upload</a></li>
+                        <li><a class="nav-link " href="images-cropper.html">Image Cropper</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#chartsSubmenu" aria-expanded="false">
+                        <i class="bi bi-bar-chart"></i>
+                        <span>Charts</span>
+                    </a>
+                    <ul id="chartsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="line-charts.html">Line Charts</a></li>
+                        <li><a class="nav-link " href="area-charts.html">Area Charts</a></li>
+                        <li><a class="nav-link " href="bar-charts.html">Bar Charts</a></li>
+                        <li><a class="nav-link " href="c3.html">C3 Charts</a></li>
+                        <li><a class="nav-link " href="peity.html">Peity Charts</a></li>
+                        <li><a class="nav-link " href="rounded-chart.html">Rounded Charts</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#tablesSubmenu" aria-expanded="false">
+                        <i class="bi bi-table"></i>
+                        <span>Tables</span>
+                    </a>
+                    <ul id="tablesSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="static-table.html">Static Tables</a></li>
+                        <li><a class="nav-link " href="data-table.html">Data Tables</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Developer Tools</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link " href="code-editor.html">
+                        <i class="bi bi-code-slash"></i>
+                        <span>Code Editor</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#uiToolsSubmenu" aria-expanded="false">
+                        <i class="bi bi-tools"></i>
+                        <span>UI Components</span>
+                    </a>
+                    <ul id="uiToolsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="preloader.html">Preloaders</a></li>
+                        <li><a class="nav-link " href="notifications.html">Notifications</a></li>
+                        <li><a class="nav-link " href="tree-view.html">Tree View</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#viewersSubmenu" aria-expanded="false">
+                        <i class="bi bi-eye"></i>
+                        <span>Viewers</span>
+                    </a>
+                    <ul id="viewersSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="pdf-viewer.html">PDF Viewer</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#mapsSubmenu" aria-expanded="false">
+                        <i class="bi bi-map"></i>
+                        <span>Maps</span>
+                    </a>
+                    <ul id="mapsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="google-map.html">Interactive Maps</a></li>
+                        <li><a class="nav-link " href="data-maps.html">Data Maps</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Pages</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#authSubmenu" aria-expanded="false">
+                        <i class="bi bi-shield-lock"></i>
+                        <span>Authentication</span>
+                    </a>
+                    <ul id="authSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="login.html">Login</a></li>
+                        <li><a class="nav-link " href="register.html">Register</a></li>
+                        <li><a class="nav-link " href="lock.html">Lock Screen</a></li>
+                        <li><a class="nav-link " href="password-recovery.html">Forgot Password</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#errorsSubmenu" aria-expanded="false">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        <span>Error Pages</span>
+                    </a>
+                    <ul id="errorsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="404.html">404 Error</a></li>
+                        <li><a class="nav-link " href="500.html">500 Error</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</aside>
+<!-- Main Content Wrapper -->
+<div class="main-wrapper" id="mainWrapper">
+    <!-- Header -->
+    <nav class="navbar top-navbar">
+        <div class="container-fluid d-flex align-items-center h-100">
+            <!-- Hamburger Menu -->
+            <button class="hamburger-menu" id="sidebarToggle">
+                <i class="bi bi-list"></i>
+            </button>
+    
+            <!-- Breadcrumb for desktop -->
+            <nav aria-label="breadcrumb" class="d-none d-lg-block ms-3">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active">Course info</li>
+                </ol>
+            </nav>
+    
+            <!-- Logo for mobile -->
+            <div class="navbar-brand d-lg-none fw-bold me-auto">Kiaalap</div>
+    
+            <!-- Spacer for desktop -->
+            <div class="flex-grow-1 d-none d-lg-block"></div>
+    
+            <!-- Right Actions -->
+            <div class="d-flex align-items-center gap-2">
+                <!-- Search -->
+                <div class="search-container">
+                    <button class="btn btn-light btn-icon" id="searchToggle">
+                        <i class="bi bi-search"></i>
+                    </button>
+    
+                    <form class="search-form" id="searchForm">
+                        <i class="bi bi-search search-icon"></i>
+                        <input type="text"
+                               class="form-control"
+                               id="searchInput"
+                               placeholder="Search..."
+                               data-bs-toggle="dropdown">
+                        <button type="button" class="close-search" id="closeSearch">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+    
+                        <ul class="dropdown-menu w-100 mt-2">
+                            <li><a class="dropdown-item" href="#">Student Registration</a></li>
+                            <li><a class="dropdown-item" href="#">Course Management</a></li>
+                            <li><a class="dropdown-item" href="#">Grade Submission</a></li>
+                            <li><a class="dropdown-item" href="#">Faculty Directory</a></li>
+                            <li><a class="dropdown-item" href="#">Library Resources</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Advanced Search</a></li>
+                        </ul>
+                    </form>
+                </div>
+    
+                <!-- Notifications -->
+                <div class="dropdown">
+                    <button class="btn btn-light btn-icon position-relative" data-bs-toggle="dropdown" id="notificationsToggle">
+                        <i class="bi bi-bell"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">3</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" style="width: 320px;">
+                        <li class="dropdown-header d-flex align-items-center justify-content-between">
+                            <span>Notifications</span>
+                            <small class="text-muted">3 new</small>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item py-2" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="rounded-circle bg-primary bg-opacity-10 p-2 me-3" style="width: 40px; height: 40px;">
+                                        <i class="bi bi-calendar-check text-primary"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="fw-semibold">New Event</div>
+                                        <div class="text-muted small">Science Fair on March 15</div>
+                                        <div class="text-muted small">5 minutes ago</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item py-2" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="rounded-circle bg-success bg-opacity-10 p-2 me-3" style="width: 40px; height: 40px;">
+                                        <i class="bi bi-check-circle text-success"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="fw-semibold">Assignment Submitted</div>
+                                        <div class="text-muted small">John submitted his project</div>
+                                        <div class="text-muted small">2 hours ago</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item py-2" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="rounded-circle bg-warning bg-opacity-10 p-2 me-3" style="width: 40px; height: 40px;">
+                                        <i class="bi bi-exclamation-triangle text-warning"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="fw-semibold">System Alert</div>
+                                        <div class="text-muted small">Database backup completed</div>
+                                        <div class="text-muted small">Yesterday</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item text-center" href="notifications.html">
+                                <small>View all notifications</small>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+    
+                <!-- Quick Actions -->
+                <div class="dropdown">
+                    <button class="btn btn-light btn-icon" data-bs-toggle="dropdown">
+                        <i class="bi bi-plus-lg"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="add-student.html"><i class="bi bi-person-plus me-2"></i>Add Student</a></li>
+                        <li><a class="dropdown-item" href="add-course.html"><i class="bi bi-book me-2"></i>Add Course</a></li>
+                        <li><a class="dropdown-item" href="add-professor.html"><i class="bi bi-person-badge me-2"></i>Add Professor</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-calendar-plus me-2"></i>Schedule Event</a></li>
+                    </ul>
+                </div>
+    
+                <!-- User Menu -->
+                <div class="dropdown">
+                    <button class="btn btn-light d-flex align-items-center" data-bs-toggle="dropdown">
+                        <div class="user-avatar me-2">
+                            <img src="https://ui-avatars.com/api/?name=Sarah Johnson&background=6366f1&color=fff&size=32"
+                                 alt="Sarah Johnson"
+                                 class="rounded-circle"
+                                 width="32"
+                                 height="32">
+                        </div>
+                        <span class="d-none d-md-inline">Sarah Johnson</span>
+                        <i class="bi bi-chevron-down ms-1"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Settings</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-question-circle me-2"></i>Help Center</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Main Content -->
+    <main class="dashboard-content" id="main-content">
+        <div class="container-fluid">
+<!-- Course Header -->
+            <div class="mb-3">
+                <div class="dashboard-card">
+                    <div class="dashboard-card-body">
+                        <div class="d-flex align-items-start gap-3">
+                            <img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=200&h=120&fit=crop"
+                                 alt="Course Image"
+                                 class="rounded flex-shrink-0"
+                                 width="200"
+                                 height="120"
+                                 loading="lazy">
+                            <div class="flex-grow-1">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h1 class="h3 fw-bold mb-1">CS101 - Introduction to Computer Science</h1>
+                                        <p class="text-muted mb-2">Computer Science Department</p>
+                                        <div class="d-flex flex-wrap gap-2 mb-2">
+                                            <span class="badge bg-success">Active</span>
+                                            <span class="badge bg-info text-dark">3 Credits</span>
+                                            <span class="badge bg-warning text-dark">Fall 2025</span>
+                                            <span class="badge bg-primary">Core Course</span>
+                                        </div>
+                                        <div class="d-flex align-items-center text-muted small">
+                                            <i class="bi bi-person me-1"></i>
+                                            <span class="me-3">Dr. Robert Smith</span>
+                                            <i class="bi bi-people me-1"></i>
+                                            <span class="me-3">42/45 Students</span>
+                                            <i class="bi bi-clock me-1"></i>
+                                            <span>MWF 10:00-11:30 AM</span>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown">
+                                        <button class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
+                                            Actions
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="edit-course.html"><i class="bi bi-pencil me-2"></i>Edit Course</a></li>
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-people me-2"></i>Manage Students</a></li>
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-file-text me-2"></i>View Syllabus</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="#"><i class="bi bi-download me-2"></i>Export Data</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course Tabs -->
+            <div class="dashboard-card">
+                <div class="dashboard-card-header border-0">
+                    <ul class="nav nav-tabs card-header-tabs" id="courseInfoTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab">
+                                <i class="bi bi-info-circle me-2"></i>Overview
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="students-tab" data-bs-toggle="tab" data-bs-target="#students" type="button" role="tab">
+                                <i class="bi bi-people me-2"></i>Students
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule" type="button" role="tab">
+                                <i class="bi bi-calendar me-2"></i>Schedule
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="materials-tab" data-bs-toggle="tab" data-bs-target="#materials" type="button" role="tab">
+                                <i class="bi bi-book me-2"></i>Materials
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="analytics-tab" data-bs-toggle="tab" data-bs-target="#analytics" type="button" role="tab">
+                                <i class="bi bi-graph-up me-2"></i>Analytics
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="dashboard-card-body">
+                    <div class="tab-content" id="courseInfoTabsContent">
+                        <!-- Overview Tab -->
+                        <div class="tab-pane fade show active" id="overview" role="tabpanel">
+                            <div class="dashboard-grid grid-cols-3-1">
+                                <div>
+                                    <h5 class="mb-3">Course Description</h5>
+                                    <p class="mb-3">This course provides a comprehensive introduction to computer science principles, programming fundamentals, and computational thinking. Students will learn basic programming concepts, data structures, and problem-solving techniques using modern programming languages.</p>
+
+                                    <h5 class="mb-3">Learning Objectives</h5>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Understand fundamental programming concepts</li>
+                                        <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Learn problem-solving techniques</li>
+                                        <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Master basic data structures</li>
+                                        <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i>Develop algorithmic thinking</li>
+                                    </ul>
+
+                                    <h5 class="mb-3">Prerequisites</h5>
+                                    <div class="alert alert-info" role="alert">
+                                        <i class="bi bi-info-circle me-2"></i>
+                                        <strong>Required:</strong> MATH101 - College Algebra
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="dashboard-card">
+                                        <div class="dashboard-card-header">
+                                            <h5 class="dashboard-card-title">Quick Stats</h5>
+                                        </div>
+                                        <div class="dashboard-card-body">
+                                            <!-- Enrollment -->
+                                            <div class="mb-4">
+                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                    <span class="text-muted" style="font-size: 0.875rem;">Enrollment</span>
+                                                    <span class="fw-semibold">42/45</span>
+                                                </div>
+                                                <div class="progress" style="height: 6px;">
+                                                    <div class="progress-bar bg-success" style="width: 93%"></div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Attendance -->
+                                            <div class="mb-4">
+                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                    <span class="text-muted" style="font-size: 0.875rem;">Avg. Attendance</span>
+                                                    <span class="fw-semibold">89%</span>
+                                                </div>
+                                                <div class="progress" style="height: 6px;">
+                                                    <div class="progress-bar bg-info" style="width: 89%"></div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Course Progress -->
+                                            <div class="mb-4">
+                                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                                    <span class="text-muted" style="font-size: 0.875rem;">Course Progress</span>
+                                                    <span class="fw-semibold">35%</span>
+                                                </div>
+                                                <div class="progress" style="height: 6px;">
+                                                    <div class="progress-bar bg-warning" style="width: 35%"></div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Divider -->
+                                            <div class="border-top my-3 pt-3">
+                                                <!-- Course Details -->
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <div class="flex-shrink-0">
+                                                        <div class="rounded-circle bg-light d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                                                            <i class="bi bi-calendar text-muted" style="font-size: 0.875rem;"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-2">
+                                                        <div class="text-muted" style="font-size: 0.75rem;">Created</div>
+                                                        <div class="small fw-semibold">Sept 15, 2025</div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <div class="flex-shrink-0">
+                                                        <div class="rounded-circle bg-light d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                                                            <i class="bi bi-clock text-muted" style="font-size: 0.875rem;"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-2">
+                                                        <div class="text-muted" style="font-size: 0.75rem;">Duration</div>
+                                                        <div class="small fw-semibold">16 weeks</div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0">
+                                                        <div class="rounded-circle bg-light d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                                                            <i class="bi bi-geo-alt text-muted" style="font-size: 0.875rem;"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-grow-1 ms-2">
+                                                        <div class="text-muted" style="font-size: 0.75rem;">Location</div>
+                                                        <div class="small fw-semibold">Building A, Room 101</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Students Tab -->
+                        <div class="tab-pane fade" id="students" role="tabpanel">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="mb-0">Enrolled Students (42)</h5>
+                                <div class="d-flex gap-2">
+                                    <div class="input-group" style="width: 300px;">
+                                        <input type="text" class="form-control" placeholder="Search students...">
+                                        <button class="btn btn-outline-secondary" type="button">
+                                            <i class="bi bi-search"></i>
+                                        </button>
+                                    </div>
+                                    <button class="btn btn-primary">
+                                        <i class="bi bi-plus-circle me-2"></i>Add Student
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Student</th>
+                                            <th>ID</th>
+                                            <th>Email</th>
+                                            <th>Attendance</th>
+                                            <th>Grade</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="https://ui-avatars.com/api/?name=Alex+Johnson&background=6366f1&color=fff"
+                                                         alt="Student"
+                                                         class="rounded-circle me-2"
+                                                         width="32"
+                                                         height="32">
+                                                    <span>Alex Johnson</span>
+                                                </div>
+                                            </td>
+                                            <td>STU2025001</td>
+                                            <td>alex.johnson@student.edu</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="me-2">92%</span>
+                                                    <div class="progress" style="width: 60px; height: 6px;">
+                                                        <div class="progress-bar bg-success" style="width: 92%"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="badge bg-success">A-</span></td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-sm btn-light" data-bs-toggle="dropdown">
+                                                        <i class="bi bi-three-dots-vertical"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>View Profile</a></li>
+                                                        <li><a class="dropdown-item" href="#"><i class="bi bi-envelope me-2"></i>Send Message</a></li>
+                                                        <li><a class="dropdown-item" href="#"><i class="bi bi-graph-up me-2"></i>View Grades</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="https://ui-avatars.com/api/?name=Sarah+Wilson&background=10b981&color=fff"
+                                                         alt="Student"
+                                                         class="rounded-circle me-2"
+                                                         width="32"
+                                                         height="32">
+                                                    <span>Sarah Wilson</span>
+                                                </div>
+                                            </td>
+                                            <td>STU2025002</td>
+                                            <td>sarah.wilson@student.edu</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="me-2">87%</span>
+                                                    <div class="progress" style="width: 60px; height: 6px;">
+                                                        <div class="progress-bar bg-warning" style="width: 87%"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="badge bg-info text-dark">B+</span></td>
+                                            <td><span class="badge bg-success">Active</span></td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-sm btn-light" data-bs-toggle="dropdown">
+                                                        <i class="bi bi-three-dots-vertical"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>View Profile</a></li>
+                                                        <li><a class="dropdown-item" href="#"><i class="bi bi-envelope me-2"></i>Send Message</a></li>
+                                                        <li><a class="dropdown-item" href="#"><i class="bi bi-graph-up me-2"></i>View Grades</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Schedule Tab -->
+                        <div class="tab-pane fade" id="schedule" role="tabpanel">
+                            <div class="dashboard-grid grid-cols-3-1">
+                                <div>
+                                    <h5 class="mb-3">Class Schedule</h5>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Day</th>
+                                                    <th>Time</th>
+                                                    <th>Topic</th>
+                                                    <th>Room</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Monday</td>
+                                                    <td>10:00 - 11:30 AM</td>
+                                                    <td>Introduction to Programming</td>
+                                                    <td>Building A, Room 101</td>
+                                                    <td><span class="badge bg-success">Completed</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Wednesday</td>
+                                                    <td>10:00 - 11:30 AM</td>
+                                                    <td>Variables and Data Types</td>
+                                                    <td>Building A, Room 101</td>
+                                                    <td><span class="badge bg-primary">Upcoming</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Friday</td>
+                                                    <td>10:00 - 11:30 AM</td>
+                                                    <td>Control Structures</td>
+                                                    <td>Building A, Room 101</td>
+                                                    <td><span class="badge bg-secondary">Scheduled</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="dashboard-card">
+                                        <div class="dashboard-card-header">
+                                            <h5 class="dashboard-card-title">Upcoming Events</h5>
+                                        </div>
+                                        <div class="dashboard-card-body">
+                                            <div class="d-flex align-items-start mb-4">
+                                                <div class="flex-shrink-0">
+                                                    <div class="rounded-circle bg-primary bg-opacity-10 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                                        <i class="bi bi-calendar text-primary"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1 ms-3">
+                                                    <h6 class="mb-1 fw-semibold">Midterm Exam</h6>
+                                                    <p class="text-muted mb-0" style="font-size: 0.875rem;">March 15, 2025 • 10:00 AM</p>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex align-items-start mb-4">
+                                                <div class="flex-shrink-0">
+                                                    <div class="rounded-circle bg-warning bg-opacity-10 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                                        <i class="bi bi-file-text text-warning"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1 ms-3">
+                                                    <h6 class="mb-1 fw-semibold">Assignment Due</h6>
+                                                    <p class="text-muted mb-0" style="font-size: 0.875rem;">March 10, 2025 • 11:59 PM</p>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex align-items-start">
+                                                <div class="flex-shrink-0">
+                                                    <div class="rounded-circle bg-info bg-opacity-10 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                                        <i class="bi bi-people text-info"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1 ms-3">
+                                                    <h6 class="mb-1 fw-semibold">Project Presentation</h6>
+                                                    <p class="text-muted mb-0" style="font-size: 0.875rem;">March 25, 2025 • 2:00 PM</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Materials Tab -->
+                        <div class="tab-pane fade" id="materials" role="tabpanel">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5 class="mb-0">Course Materials</h5>
+                                <button class="btn btn-primary">
+                                    <i class="bi bi-cloud-upload me-2"></i>Upload Material
+                                </button>
+                            </div>
+
+                            <div class="dashboard-grid grid-cols-2">
+                                <div class="dashboard-card">
+                                    <div class="d-flex align-items-start">
+                                        <div class="flex-shrink-0">
+                                            <div class="rounded-circle bg-danger bg-opacity-10 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+                                                <i class="bi bi-file-pdf text-danger fs-5"></i>
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <h6 class="mb-1">Course Syllabus</h6>
+                                            <p class="text-muted small mb-2">Complete course outline and requirements</p>
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <span class="text-muted" style="font-size: 0.75rem;">Sep 15, 2025 • 245 KB</span>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="bi bi-download"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dashboard-card">
+                                    <div class="d-flex align-items-start">
+                                        <div class="flex-shrink-0">
+                                            <div class="rounded-circle bg-warning bg-opacity-10 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+                                                <i class="bi bi-file-slides text-warning fs-5"></i>
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <h6 class="mb-1">Lecture 1 - Introduction</h6>
+                                            <p class="text-muted small mb-2">Introduction to programming concepts</p>
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <span class="text-muted" style="font-size: 0.75rem;">Sep 20, 2025 • 1.2 MB</span>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="bi bi-download"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dashboard-card">
+                                    <div class="d-flex align-items-start">
+                                        <div class="flex-shrink-0">
+                                            <div class="rounded-circle bg-success bg-opacity-10 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+                                                <i class="bi bi-file-code text-success fs-5"></i>
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <h6 class="mb-1">Sample Code</h6>
+                                            <p class="text-muted small mb-2">Example programs and exercises</p>
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <span class="text-muted" style="font-size: 0.75rem;">Sep 22, 2025 • 85 KB</span>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="bi bi-download"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dashboard-card">
+                                    <div class="d-flex align-items-start">
+                                        <div class="flex-shrink-0">
+                                            <div class="rounded-circle bg-info bg-opacity-10 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+                                                <i class="bi bi-file-text text-info fs-5"></i>
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <h6 class="mb-1">Assignment Guidelines</h6>
+                                            <p class="text-muted small mb-2">Homework and project instructions</p>
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <span class="text-muted" style="font-size: 0.75rem;">Sep 25, 2025 • 156 KB</span>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="bi bi-download"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Analytics Tab -->
+                        <div class="tab-pane fade" id="analytics" role="tabpanel">
+                            <!-- Stats Cards -->
+                            <div class="dashboard-grid grid-cols-4 mb-4">
+                                <div class="stats-card">
+                                    <div class="stats-card-label">Total Students</div>
+                                    <div class="stats-card-value">42</div>
+                                    <span class="stats-card-change positive">+3 this week</span>
+                                </div>
+                                <div class="stats-card">
+                                    <div class="stats-card-label">Avg. Attendance</div>
+                                    <div class="stats-card-value">89%</div>
+                                    <span class="stats-card-change positive">+2% from last month</span>
+                                </div>
+                                <div class="stats-card">
+                                    <div class="stats-card-label">Avg. GPA</div>
+                                    <div class="stats-card-value">3.2</div>
+                                    <span class="stats-card-change negative">-0.1 from last term</span>
+                                </div>
+                                <div class="stats-card">
+                                    <div class="stats-card-label">Completion Rate</div>
+                                    <div class="stats-card-value">94%</div>
+                                    <span class="stats-card-change positive">+5% improvement</span>
+                                </div>
+                            </div>
+
+                            <!-- Charts Row -->
+                            <div class="dashboard-grid grid-cols-2">
+                                <div class="chart-wrapper">
+                                    <div class="dashboard-card-header">
+                                        <h5 class="dashboard-card-title">Attendance Trend</h5>
+                                    </div>
+                                    <div class="chart-container-main">
+                                        <canvas id="attendanceChart"></canvas>
+                                    </div>
+                                </div>
+                                <div class="chart-wrapper">
+                                    <div class="dashboard-card-header">
+                                        <h5 class="dashboard-card-title">Grade Distribution</h5>
+                                    </div>
+                                    <div class="chart-container-main">
+                                        <canvas id="gradeChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Additional Charts Row -->
+                            <div class="dashboard-grid grid-cols-3 mt-4">
+                                <div class="chart-wrapper">
+                                    <div class="dashboard-card-header">
+                                        <h5 class="dashboard-card-title">Weekly Activity</h5>
+                                    </div>
+                                    <div class="chart-container-small">
+                                        <canvas id="weeklyActivityChart"></canvas>
+                                    </div>
+                                </div>
+                                <div class="chart-wrapper">
+                                    <div class="dashboard-card-header">
+                                        <h5 class="dashboard-card-title">Assignment Scores</h5>
+                                    </div>
+                                    <div class="chart-container-small">
+                                        <canvas id="assignmentScoresChart"></canvas>
+                                    </div>
+                                </div>
+                                <div class="chart-wrapper">
+                                    <div class="dashboard-card-header">
+                                        <h5 class="dashboard-card-title">Participation Rate</h5>
+                                    </div>
+                                    <div class="chart-container-small">
+                                        <canvas id="participationChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Performance Metrics -->
+                            <div class="dashboard-grid grid-cols-3 mt-4">
+                                <div class="dashboard-card">
+                                    <h6 class="mb-3">Assignment Performance</h6>
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between mb-1">
+                                            <span class="text-muted small">Submitted on time</span>
+                                            <span class="small fw-semibold">85%</span>
+                                        </div>
+                                        <div class="progress" style="height: 6px;">
+                                            <div class="progress-bar bg-success" style="width: 85%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between mb-1">
+                                            <span class="text-muted small">Late submissions</span>
+                                            <span class="small fw-semibold">10%</span>
+                                        </div>
+                                        <div class="progress" style="height: 6px;">
+                                            <div class="progress-bar bg-warning" style="width: 10%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="d-flex justify-content-between mb-1">
+                                            <span class="text-muted small">Missing</span>
+                                            <span class="small fw-semibold">5%</span>
+                                        </div>
+                                        <div class="progress" style="height: 6px;">
+                                            <div class="progress-bar bg-danger" style="width: 5%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dashboard-card">
+                                    <h6 class="mb-3">Engagement Metrics</h6>
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between mb-1">
+                                            <span class="text-muted small">Forum participation</span>
+                                            <span class="small fw-semibold">72%</span>
+                                        </div>
+                                        <div class="progress" style="height: 6px;">
+                                            <div class="progress-bar bg-info" style="width: 72%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between mb-1">
+                                            <span class="text-muted small">Resource downloads</span>
+                                            <span class="small fw-semibold">91%</span>
+                                        </div>
+                                        <div class="progress" style="height: 6px;">
+                                            <div class="progress-bar bg-primary" style="width: 91%"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="d-flex justify-content-between mb-1">
+                                            <span class="text-muted small">Video views</span>
+                                            <span class="small fw-semibold">68%</span>
+                                        </div>
+                                        <div class="progress" style="height: 6px;">
+                                            <div class="progress-bar bg-secondary" style="width: 68%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dashboard-card">
+                                    <h6 class="mb-3">Top Performers</h6>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <span class="badge bg-warning text-dark me-2">1</span>
+                                        <div class="flex-grow-1">
+                                            <div class="small fw-semibold">Sarah Johnson</div>
+                                            <div class="text-muted" style="font-size: 0.75rem;">GPA: 3.9</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <span class="badge bg-secondary text-white me-2">2</span>
+                                        <div class="flex-grow-1">
+                                            <div class="small fw-semibold">Michael Chen</div>
+                                            <div class="text-muted" style="font-size: 0.75rem;">GPA: 3.8</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge bg-success bg-opacity-75 me-2">3</span>
+                                        <div class="flex-grow-1">
+                                            <div class="small fw-semibold">Emily Davis</div>
+                                            <div class="text-muted" style="font-size: 0.75rem;">GPA: 3.7</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>        </div>
+    </main>
+
+            <!-- Footer -->
+            <footer class="dashboard-footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="mb-0">&copy; 2026 Kiaalap. All rights reserved.</p>
+                        </div>
+                        <div class="col-md-6 text-md-end">
+                            <p class="mb-0">Built with <i class="bi bi-heart-fill text-danger"></i> for education</p>
+                        </div>
+                    </div>
+                </div>
+            </footer></div>
+
+    <!-- Load JavaScript -->
+
+</body>
+</html>
+<!-- Chart.js for Analytics -->
+<script src="node_modules/chart.js/dist/chart.umd.min.js"></script>
+
+<script>
+// Initialize charts when Analytics tab is shown
+        document.addEventListener('DOMContentLoaded', function() {
+            const analyticsTab = document.querySelector('button[data-bs-target="#analytics"]');
+            let chartsInitialized = false;
+
+            if (analyticsTab) {
+                analyticsTab.addEventListener('shown.bs.tab', function() {
+                    if (!chartsInitialized) {
+                        initializeCharts();
+                        chartsInitialized = true;
+                    }
+                });
+            }
+
+            function initializeCharts() {
+                // Attendance Chart
+                const attendanceCtx = document.getElementById('attendanceChart');
+                if (attendanceCtx) {
+                    new Chart(attendanceCtx, {
+                        type: 'line',
+                        data: {
+                            labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6'],
+                            datasets: [{
+                                label: 'Attendance %',
+                                data: [92, 88, 90, 87, 89, 91],
+                                borderColor: 'rgb(59, 130, 246)',
+                                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                                tension: 0.3
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    display: false
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: false,
+                                    min: 80,
+                                    max: 100
+                                }
+                            }
+                        }
+                    });
+                }
+
+                // Grade Distribution Chart
+                const gradeCtx = document.getElementById('gradeChart');
+                if (gradeCtx) {
+                    new Chart(gradeCtx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['A', 'B', 'C', 'D', 'F'],
+                            datasets: [{
+                                label: 'Students',
+                                data: [8, 15, 12, 5, 2],
+                                backgroundColor: [
+                                    'rgba(16, 185, 129, 0.8)',
+                                    'rgba(59, 130, 246, 0.8)',
+                                    'rgba(251, 146, 60, 0.8)',
+                                    'rgba(239, 68, 68, 0.8)',
+                                    'rgba(107, 114, 128, 0.8)'
+                                ]
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    display: false
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                }
+
+                // Weekly Activity Chart (Radar)
+                const weeklyCtx = document.getElementById('weeklyActivityChart');
+                if (weeklyCtx) {
+                    new Chart(weeklyCtx, {
+                        type: 'radar',
+                        data: {
+                            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+                            datasets: [{
+                                label: 'This Week',
+                                data: [85, 92, 78, 88, 95],
+                                borderColor: 'rgb(99, 102, 241)',
+                                backgroundColor: 'rgba(99, 102, 241, 0.2)',
+                                pointBackgroundColor: 'rgb(99, 102, 241)',
+                                pointBorderColor: '#fff',
+                                pointHoverBackgroundColor: '#fff',
+                                pointHoverBorderColor: 'rgb(99, 102, 241)'
+                            }, {
+                                label: 'Last Week',
+                                data: [78, 85, 82, 80, 87],
+                                borderColor: 'rgb(156, 163, 175)',
+                                backgroundColor: 'rgba(156, 163, 175, 0.1)',
+                                pointBackgroundColor: 'rgb(156, 163, 175)',
+                                pointBorderColor: '#fff',
+                                pointHoverBackgroundColor: '#fff',
+                                pointHoverBorderColor: 'rgb(156, 163, 175)'
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                r: {
+                                    beginAtZero: true,
+                                    max: 100
+                                }
+                            }
+                        }
+                    });
+                }
+
+                // Assignment Scores Chart (Line)
+                const assignmentCtx = document.getElementById('assignmentScoresChart');
+                if (assignmentCtx) {
+                    new Chart(assignmentCtx, {
+                        type: 'line',
+                        data: {
+                            labels: ['HW1', 'HW2', 'Quiz1', 'HW3', 'Quiz2', 'Midterm'],
+                            datasets: [{
+                                label: 'Class Average',
+                                data: [85, 88, 82, 90, 85, 78],
+                                borderColor: 'rgb(34, 197, 94)',
+                                backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                                tension: 0.4
+                            }, {
+                                label: 'Top 10%',
+                                data: [98, 96, 95, 98, 94, 92],
+                                borderColor: 'rgb(251, 146, 60)',
+                                backgroundColor: 'rgba(251, 146, 60, 0.1)',
+                                borderDash: [5, 5],
+                                tension: 0.4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                    position: 'bottom'
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: false,
+                                    min: 60,
+                                    max: 100
+                                }
+                            }
+                        }
+                    });
+                }
+
+                // Participation Chart (Doughnut)
+                const participationCtx = document.getElementById('participationChart');
+                if (participationCtx) {
+                    new Chart(participationCtx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['Very Active', 'Active', 'Moderate', 'Low'],
+                            datasets: [{
+                                data: [12, 18, 8, 4],
+                                backgroundColor: [
+                                    'rgba(34, 197, 94, 0.8)',
+                                    'rgba(59, 130, 246, 0.8)',
+                                    'rgba(251, 191, 36, 0.8)',
+                                    'rgba(239, 68, 68, 0.8)'
+                                ],
+                                borderWidth: 2,
+                                borderColor: '#fff'
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                    position: 'bottom'
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        });
+</script>

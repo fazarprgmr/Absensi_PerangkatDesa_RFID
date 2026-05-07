@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kiaalap - Modern Education Management Dashboard for Universities">
+    <meta name="keywords" content="education, dashboard, university, management, admin">
+    <meta name="author" content="Kiaalap">
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+    <link rel="preconnect" href="https://ui-avatars.com" crossorigin>
+    <link rel="dns-prefetch" href="https://flagcdn.com">
+
+    <title>Data maps - Kiaalap Dashboard</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="./assets/favicon-9EIT7vLh.ico">
+
+
+    <!-- Load stylesheets -->
+
+    <!-- Diagnostic inline styles - maximum specificity -->
+    <style>.sidebar.collapsed{max-width:70px!important;min-width:70px!important;width:70px!important}.sidebar.collapsed .sidebar-brand h5{font-size:0!important}.sidebar.collapsed .nav-link span{display:none!important}</style>
+
+  <script type="module" crossorigin src="./assets/main-COwrHBJ0.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/dashboard-hMfJATH4.css">
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="visually-hidden-focusable">Skip to main content</a>
+
+    <!-- Required DOM elements for dashboard.js -->
+    <div class="search-backdrop" id="searchBackdrop"></div>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+<style>.data-map-card{background:#fff;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.1);margin-bottom:24px;padding:30px}.map-container{height:400px;margin-top:20px;overflow:hidden}.map-container,.map-legend{border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,.1)}.map-legend{background:#fff;margin-top:15px;padding:15px}.legend-title{font-weight:600;margin-bottom:10px}.legend-item{align-items:center;display:flex;margin-bottom:8px}.legend-color{border-radius:4px;height:24px;margin-right:10px;width:24px}.data-stats{display:grid;gap:15px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:20px}.stat-card{background:#f8f9fa;border-radius:8px;padding:20px;text-align:center}.stat-value{color:#4361ee;font-size:32px;font-weight:700;margin-bottom:5px}.stat-label{color:#6b7280;font-size:14px}.heatmap-info{background:#e0e7ff;border-radius:8px;margin-top:15px;padding:15px}</style>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-brand">
+            <h5>
+                <i class="bi bi-mortarboard-fill"></i>
+                Kiaalap
+            </h5>
+            <button class="sidebar-close" id="sidebarClose">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+    </div>
+
+    <nav class="sidebar-nav">
+        <div class="menu-section">
+            <div class="menu-section-title">Main</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#dashboardSubmenu" aria-expanded="false">
+                        <i class="bi bi-speedometer2"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <ul id="dashboardSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="index.html">Dashboard v.1</a></li>
+                        <li><a class="nav-link " href="index-1.html">Dashboard v.2</a></li>
+                        <li><a class="nav-link " href="index-2.html">Dashboard v.3</a></li>
+                        <li><a class="nav-link " href="analytics.html">Analytics</a></li>
+                        <li><a class="nav-link " href="widgets.html">Widgets</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="events.html">
+                        <i class="bi bi-calendar-event"></i>
+                        <span>Events</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Academic</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#professorsSubmenu" aria-expanded="false">
+                        <i class="bi bi-person-badge"></i>
+                        <span>Professors</span>
+                    </a>
+                    <ul id="professorsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="all-professors.html">All Professors</a></li>
+                        <li><a class="nav-link " href="add-professor.html">Add Professor</a></li>
+                        <li><a class="nav-link " href="edit-professor.html">Edit Professor</a></li>
+                        <li><a class="nav-link " href="professor-profile.html">Professor Profile</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#studentsSubmenu" aria-expanded="false">
+                        <i class="bi bi-people"></i>
+                        <span>Students</span>
+                    </a>
+                    <ul id="studentsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="all-students.html">All Students</a></li>
+                        <li><a class="nav-link " href="add-student.html">Add Student</a></li>
+                        <li><a class="nav-link " href="edit-student.html">Edit Student</a></li>
+                        <li><a class="nav-link " href="student-profile.html">Student Profile</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#coursesSubmenu" aria-expanded="false">
+                        <i class="bi bi-book"></i>
+                        <span>Courses</span>
+                    </a>
+                    <ul id="coursesSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="all-courses.html">All Courses</a></li>
+                        <li><a class="nav-link " href="add-course.html">Add Course</a></li>
+                        <li><a class="nav-link " href="edit-course.html">Edit Course</a></li>
+                        <li><a class="nav-link " href="course-info.html">Course Info</a></li>
+                        <li><a class="nav-link " href="course-payment.html">Course Payment</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#librarySubmenu" aria-expanded="false">
+                        <i class="bi bi-journal-bookmark"></i>
+                        <span>Library</span>
+                    </a>
+                    <ul id="librarySubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="library-assets.html">Library Assets</a></li>
+                        <li><a class="nav-link " href="add-library-assets.html">Add Library Asset</a></li>
+                        <li><a class="nav-link " href="edit-library-assets.html">Edit Library Asset</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#departmentsSubmenu" aria-expanded="false">
+                        <i class="bi bi-building"></i>
+                        <span>Departments</span>
+                    </a>
+                    <ul id="departmentsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="departments.html">Departments List</a></li>
+                        <li><a class="nav-link " href="add-department.html">Add Department</a></li>
+                        <li><a class="nav-link " href="edit-department.html">Edit Department</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Communication</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#mailboxSubmenu" aria-expanded="false">
+                        <i class="bi bi-envelope"></i>
+                        <span>Mailbox</span>
+                    </a>
+                    <ul id="mailboxSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="mailbox.html">Inbox</a></li>
+                        <li><a class="nav-link " href="mailbox-compose.html">Compose</a></li>
+                        <li><a class="nav-link " href="mailbox-view.html">View Message</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Interface</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#componentsSubmenu" aria-expanded="false">
+                        <i class="bi bi-layout-wtf"></i>
+                        <span>Components</span>
+                    </a>
+                    <ul id="componentsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="buttons.html">Buttons</a></li>
+                        <li><a class="nav-link " href="alerts.html">Alerts</a></li>
+                        <li><a class="nav-link " href="modals.html">Modals</a></li>
+                        <li><a class="nav-link " href="tabs.html">Tabs</a></li>
+                        <li><a class="nav-link " href="accordion.html">Accordion</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#formsSubmenu" aria-expanded="false">
+                        <i class="bi bi-card-list"></i>
+                        <span>Forms</span>
+                    </a>
+                    <ul id="formsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="basic-form-element.html">Basic Forms</a></li>
+                        <li><a class="nav-link " href="advance-form-element.html">Advanced Forms</a></li>
+                        <li><a class="nav-link " href="password-meter.html">Password Meter</a></li>
+                        <li><a class="nav-link " href="multi-upload.html">File Upload</a></li>
+                        <li><a class="nav-link " href="images-cropper.html">Image Cropper</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#chartsSubmenu" aria-expanded="false">
+                        <i class="bi bi-bar-chart"></i>
+                        <span>Charts</span>
+                    </a>
+                    <ul id="chartsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="line-charts.html">Line Charts</a></li>
+                        <li><a class="nav-link " href="area-charts.html">Area Charts</a></li>
+                        <li><a class="nav-link " href="bar-charts.html">Bar Charts</a></li>
+                        <li><a class="nav-link " href="c3.html">C3 Charts</a></li>
+                        <li><a class="nav-link " href="peity.html">Peity Charts</a></li>
+                        <li><a class="nav-link " href="rounded-chart.html">Rounded Charts</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#tablesSubmenu" aria-expanded="false">
+                        <i class="bi bi-table"></i>
+                        <span>Tables</span>
+                    </a>
+                    <ul id="tablesSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="static-table.html">Static Tables</a></li>
+                        <li><a class="nav-link " href="data-table.html">Data Tables</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Developer Tools</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link " href="code-editor.html">
+                        <i class="bi bi-code-slash"></i>
+                        <span>Code Editor</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#uiToolsSubmenu" aria-expanded="false">
+                        <i class="bi bi-tools"></i>
+                        <span>UI Components</span>
+                    </a>
+                    <ul id="uiToolsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="preloader.html">Preloaders</a></li>
+                        <li><a class="nav-link " href="notifications.html">Notifications</a></li>
+                        <li><a class="nav-link " href="tree-view.html">Tree View</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#viewersSubmenu" aria-expanded="false">
+                        <i class="bi bi-eye"></i>
+                        <span>Viewers</span>
+                    </a>
+                    <ul id="viewersSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="pdf-viewer.html">PDF Viewer</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#mapsSubmenu" aria-expanded="false">
+                        <i class="bi bi-map"></i>
+                        <span>Maps</span>
+                    </a>
+                    <ul id="mapsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="google-map.html">Interactive Maps</a></li>
+                        <li><a class="nav-link active" href="data-maps.html">Data Maps</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Pages</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#authSubmenu" aria-expanded="false">
+                        <i class="bi bi-shield-lock"></i>
+                        <span>Authentication</span>
+                    </a>
+                    <ul id="authSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="login.html">Login</a></li>
+                        <li><a class="nav-link " href="register.html">Register</a></li>
+                        <li><a class="nav-link " href="lock.html">Lock Screen</a></li>
+                        <li><a class="nav-link " href="password-recovery.html">Forgot Password</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#errorsSubmenu" aria-expanded="false">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        <span>Error Pages</span>
+                    </a>
+                    <ul id="errorsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="404.html">404 Error</a></li>
+                        <li><a class="nav-link " href="500.html">500 Error</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</aside>
+<!-- Main Content Wrapper -->
+<div class="main-wrapper" id="mainWrapper">
+    <!-- Header -->
+    <nav class="navbar top-navbar">
+        <div class="container-fluid d-flex align-items-center h-100">
+            <!-- Hamburger Menu -->
+            <button class="hamburger-menu" id="sidebarToggle">
+                <i class="bi bi-list"></i>
+            </button>
+    
+            <!-- Breadcrumb for desktop -->
+            <nav aria-label="breadcrumb" class="d-none d-lg-block ms-3">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active">Data maps</li>
+                </ol>
+            </nav>
+    
+            <!-- Logo for mobile -->
+            <div class="navbar-brand d-lg-none fw-bold me-auto">Kiaalap</div>
+    
+            <!-- Spacer for desktop -->
+            <div class="flex-grow-1 d-none d-lg-block"></div>
+    
+            <!-- Right Actions -->
+            <div class="d-flex align-items-center gap-2">
+                <!-- Search -->
+                <div class="search-container">
+                    <button class="btn btn-light btn-icon" id="searchToggle">
+                        <i class="bi bi-search"></i>
+                    </button>
+    
+                    <form class="search-form" id="searchForm">
+                        <i class="bi bi-search search-icon"></i>
+                        <input type="text"
+                               class="form-control"
+                               id="searchInput"
+                               placeholder="Search..."
+                               data-bs-toggle="dropdown">
+                        <button type="button" class="close-search" id="closeSearch">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+    
+                        <ul class="dropdown-menu w-100 mt-2">
+                            <li><a class="dropdown-item" href="#">Student Registration</a></li>
+                            <li><a class="dropdown-item" href="#">Course Management</a></li>
+                            <li><a class="dropdown-item" href="#">Grade Submission</a></li>
+                            <li><a class="dropdown-item" href="#">Faculty Directory</a></li>
+                            <li><a class="dropdown-item" href="#">Library Resources</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Advanced Search</a></li>
+                        </ul>
+                    </form>
+                </div>
+    
+                <!-- Notifications -->
+                <div class="dropdown">
+                    <button class="btn btn-light btn-icon position-relative" data-bs-toggle="dropdown" id="notificationsToggle">
+                        <i class="bi bi-bell"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">3</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" style="width: 320px;">
+                        <li class="dropdown-header d-flex align-items-center justify-content-between">
+                            <span>Notifications</span>
+                            <small class="text-muted">3 new</small>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item py-2" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="rounded-circle bg-primary bg-opacity-10 p-2 me-3" style="width: 40px; height: 40px;">
+                                        <i class="bi bi-calendar-check text-primary"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="fw-semibold">New Event</div>
+                                        <div class="text-muted small">Science Fair on March 15</div>
+                                        <div class="text-muted small">5 minutes ago</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item py-2" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="rounded-circle bg-success bg-opacity-10 p-2 me-3" style="width: 40px; height: 40px;">
+                                        <i class="bi bi-check-circle text-success"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="fw-semibold">Assignment Submitted</div>
+                                        <div class="text-muted small">John submitted his project</div>
+                                        <div class="text-muted small">2 hours ago</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item py-2" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="rounded-circle bg-warning bg-opacity-10 p-2 me-3" style="width: 40px; height: 40px;">
+                                        <i class="bi bi-exclamation-triangle text-warning"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="fw-semibold">System Alert</div>
+                                        <div class="text-muted small">Database backup completed</div>
+                                        <div class="text-muted small">Yesterday</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item text-center" href="notifications.html">
+                                <small>View all notifications</small>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+    
+                <!-- Quick Actions -->
+                <div class="dropdown">
+                    <button class="btn btn-light btn-icon" data-bs-toggle="dropdown">
+                        <i class="bi bi-plus-lg"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="add-student.html"><i class="bi bi-person-plus me-2"></i>Add Student</a></li>
+                        <li><a class="dropdown-item" href="add-course.html"><i class="bi bi-book me-2"></i>Add Course</a></li>
+                        <li><a class="dropdown-item" href="add-professor.html"><i class="bi bi-person-badge me-2"></i>Add Professor</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-calendar-plus me-2"></i>Schedule Event</a></li>
+                    </ul>
+                </div>
+    
+                <!-- User Menu -->
+                <div class="dropdown">
+                    <button class="btn btn-light d-flex align-items-center" data-bs-toggle="dropdown">
+                        <div class="user-avatar me-2">
+                            <img src="https://ui-avatars.com/api/?name=Sarah Johnson&background=6366f1&color=fff&size=32"
+                                 alt="Sarah Johnson"
+                                 class="rounded-circle"
+                                 width="32"
+                                 height="32">
+                        </div>
+                        <span class="d-none d-md-inline">Sarah Johnson</span>
+                        <i class="bi bi-chevron-down ms-1"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Settings</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-question-circle me-2"></i>Help Center</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Main Content -->
+    <main class="dashboard-content" id="main-content">
+        <div class="container-fluid">
+            <!-- Page Header -->
+            <div class="mb-4">
+                <h1 class="h3 mb-0 text-gray-800">Data Visualization Maps</h1>
+                <p class="text-muted">Interactive data maps with visualization layers (100% jQuery-free)</p>
+            </div>
+
+            <!-- Student Distribution Map -->
+            <div class="data-map-card">
+                <h5 class="mb-0">Student Distribution by Location</h5>
+                <p class="text-muted small">Interactive map showing student enrollment across regions</p>
+                <div id="studentMap" class="map-container"></div>
+                <div class="map-legend">
+                    <div class="legend-title">Enrollment Levels</div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #10b981;"></div>
+                        <span>High (500+ students)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #f59e0b;"></div>
+                        <span>Medium (200-500 students)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #ef4444;"></div>
+                        <span>Low (0-200 students)</span>
+                    </div>
+                </div>
+                <div class="data-stats">
+                    <div class="stat-card">
+                        <div class="stat-value">2,450</div>
+                        <div class="stat-label">Total Students</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">12</div>
+                        <div class="stat-label">Locations</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">85%</div>
+                        <div class="stat-label">Urban Coverage</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Campus Activity Heatmap -->
+            <div class="data-map-card">
+                <h5 class="mb-0">Campus Activity Heatmap</h5>
+                <p class="text-muted small">Real-time visualization of campus foot traffic</p>
+                <div id="heatmapMap" class="map-container"></div>
+                <div class="heatmap-info">
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>Note:</strong> This heatmap shows simulated activity patterns across campus facilities. Darker areas indicate higher activity levels.
+                </div>
+            </div>
+
+            <!-- Performance Data Map -->
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="data-map-card">
+                        <h5 class="mb-3">Department Locations</h5>
+                        <div id="departmentMap" class="map-container" style="height: 300px;"></div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="data-map-card">
+                        <h5 class="mb-3">Research Centers</h5>
+                        <div id="researchMap" class="map-container" style="height: 300px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Insights -->
+            <div class="data-map-card">
+                <h5 class="mb-3">Data Insights</h5>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <i class="bi bi-people-fill text-primary" style="font-size: 48px;"></i>
+                            <h4 class="mt-3">2,450</h4>
+                            <p class="text-muted">Active Students</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <i class="bi bi-geo-alt-fill text-success" style="font-size: 48px;"></i>
+                            <h4 class="mt-3">12</h4>
+                            <p class="text-muted">Campus Locations</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <i class="bi bi-building text-warning" style="font-size: 48px;"></i>
+                            <h4 class="mt-3">8</h4>
+                            <p class="text-muted">Departments</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <i class="bi bi-graph-up text-info" style="font-size: 48px;"></i>
+                            <h4 class="mt-3">92%</h4>
+                            <p class="text-muted">Satisfaction Rate</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+            <!-- Footer -->
+            <footer class="dashboard-footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="mb-0">&copy; 2026 Kiaalap. All rights reserved.</p>
+                        </div>
+                        <div class="col-md-6 text-md-end">
+                            <p class="mb-0">Built with <i class="bi bi-heart-fill text-danger"></i> for education</p>
+                        </div>
+                    </div>
+                </div>
+            </footer></div>
+
+    <!-- Load JavaScript -->
+
+</body>
+</html>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+// Data Visualization Maps (Vanilla JavaScript)
+document.addEventListener('DOMContentLoaded', function() {
+    const centerCoords = [37.7749, -122.4194];
+
+    // Student Distribution Map
+    const studentMap = L.map('studentMap').setView(centerCoords, 11);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(studentMap);
+
+    // Sample data points for student distribution
+    const studentData = [
+        { coords: [37.7749, -122.4194], count: 580, name: 'Main Campus' },
+        { coords: [37.7849, -122.4094], count: 420, name: 'North Campus' },
+        { coords: [37.7649, -122.4294], count: 350, name: 'South Campus' },
+        { coords: [37.7949, -122.4394], count: 180, name: 'West Campus' },
+        { coords: [37.7549, -122.3994], count: 520, name: 'East Campus' },
+        { coords: [37.8049, -122.4194], count: 400, name: 'Extension Center' }
+    ];
+
+    studentData.forEach(location => {
+        const color = location.count > 500 ? '#10b981' :
+                     location.count > 200 ? '#f59e0b' : '#ef4444';
+
+        const circle = L.circle(location.coords, {
+            color: color,
+            fillColor: color,
+            fillOpacity: 0.6,
+            radius: location.count * 2
+        }).addTo(studentMap);
+
+        circle.bindPopup(`
+            <b>${location.name}</b><br>
+            Students: ${location.count}<br>
+            <small>Click for more details</small>
+        `);
+
+        // Add marker
+        L.marker(location.coords).addTo(studentMap)
+            .bindPopup(`<b>${location.name}</b><br>${location.count} students`);
+    });
+
+    // Campus Activity Heatmap
+    const heatmapMap = L.map('heatmapMap').setView(centerCoords, 15);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(heatmapMap);
+
+    // Simulate heatmap with circles
+    const heatmapData = [
+        { coords: [37.7749, -122.4194], intensity: 0.9, name: 'Library' },
+        { coords: [37.7759, -122.4184], intensity: 0.7, name: 'Cafeteria' },
+        { coords: [37.7739, -122.4204], intensity: 0.8, name: 'Gym' },
+        { coords: [37.7769, -122.4174], intensity: 0.6, name: 'Lab Building' },
+        { coords: [37.7729, -122.4214], intensity: 0.5, name: 'Student Center' }
+    ];
+
+    heatmapData.forEach(point => {
+        const opacity = point.intensity;
+        const radius = point.intensity * 150;
+
+        L.circle(point.coords, {
+            color: '#ef4444',
+            fillColor: '#ef4444',
+            fillOpacity: opacity * 0.5,
+            radius: radius,
+            weight: 1
+        }).addTo(heatmapMap).bindPopup(`
+            <b>${point.name}</b><br>
+            Activity Level: ${(point.intensity * 100).toFixed(0)}%
+        `);
+    });
+
+    // Department Map
+    const departmentMap = L.map('departmentMap').setView(centerCoords, 14);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(departmentMap);
+
+    const departments = [
+        { coords: [37.7749, -122.4194], name: 'Computer Science', icon: '💻' },
+        { coords: [37.7769, -122.4174], name: 'Engineering', icon: '⚙️' },
+        { coords: [37.7729, -122.4214], name: 'Business', icon: '💼' },
+        { coords: [37.7789, -122.4204], name: 'Arts', icon: '🎨' }
+    ];
+
+    departments.forEach(dept => {
+        L.marker(dept.coords).addTo(departmentMap)
+            .bindPopup(`<b>${dept.icon} ${dept.name}</b>`);
+    });
+
+    // Research Centers Map
+    const researchMap = L.map('researchMap').setView(centerCoords, 14);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(researchMap);
+
+    const researchCenters = [
+        { coords: [37.7759, -122.4184], name: 'AI Research Lab', projects: 12 },
+        { coords: [37.7739, -122.4204], name: 'Biotech Center', projects: 8 },
+        { coords: [37.7779, -122.4164], name: 'Data Science Hub', projects: 15 }
+    ];
+
+    researchCenters.forEach(center => {
+        const marker = L.marker(center.coords).addTo(researchMap);
+        marker.bindPopup(`
+            <b>🔬 ${center.name}</b><br>
+            Active Projects: ${center.projects}<br>
+            <a href="#" class="text-primary">View Details</a>
+        `);
+
+        // Add circle to show research area
+        L.circle(center.coords, {
+            color: '#4361ee',
+            fillColor: '#4361ee',
+            fillOpacity: 0.2,
+            radius: 200
+        }).addTo(researchMap);
+    });
+});
+</script>

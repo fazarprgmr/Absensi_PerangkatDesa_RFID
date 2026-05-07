@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kiaalap - Modern Education Management Dashboard for Universities">
+    <meta name="keywords" content="education, dashboard, university, management, admin">
+    <meta name="author" content="Kiaalap">
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+    <link rel="preconnect" href="https://ui-avatars.com" crossorigin>
+    <link rel="dns-prefetch" href="https://flagcdn.com">
+
+    <title>Pdf viewer - Kiaalap Dashboard</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="./assets/favicon-9EIT7vLh.ico">
+
+
+    <!-- Load stylesheets -->
+
+    <!-- Diagnostic inline styles - maximum specificity -->
+    <style>.sidebar.collapsed{max-width:70px!important;min-width:70px!important;width:70px!important}.sidebar.collapsed .sidebar-brand h5{font-size:0!important}.sidebar.collapsed .nav-link span{display:none!important}</style>
+
+  <script type="module" crossorigin src="./assets/main-COwrHBJ0.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/dashboard-hMfJATH4.css">
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="visually-hidden-focusable">Skip to main content</a>
+
+    <!-- Required DOM elements for dashboard.js -->
+    <div class="search-backdrop" id="searchBackdrop"></div>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+<style>.pdf-demo-card{background:#fff;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.1);margin-bottom:24px;padding:30px}.pdf-viewer-container{background:#f8f9fa;border-radius:8px;margin-top:20px;padding:20px}.pdf-iframe{border:2px solid #e5e7eb;height:600px;width:100%}.pdf-iframe,.pdf-toolbar{background:#fff;border-radius:8px}.pdf-toolbar{box-shadow:0 1px 3px rgba(0,0,0,.1);display:flex;flex-wrap:wrap;gap:10px;margin-bottom:15px;padding:15px}.pdf-placeholder{align-items:center;background:#f8f9fa;border:2px dashed #d1d5db;border-radius:8px;display:flex;flex-direction:column;justify-content:center;min-height:500px;padding:40px;text-align:center}.pdf-placeholder i{color:#9ca3af;font-size:64px;margin-bottom:20px}.file-list{list-style:none;margin:0;padding:0}.file-item{align-items:center;border:1px solid #e5e7eb;border-radius:8px;cursor:pointer;display:flex;margin-bottom:10px;padding:15px;transition:all .2s}.file-item:hover{background:#f8f9fa;border-color:#4361ee}.file-icon{align-items:center;background:#e0e7ff;border-radius:8px;color:#4361ee;display:flex;font-size:20px;height:40px;justify-content:center;margin-right:15px;width:40px}.file-info{flex:1}.file-name{font-weight:500;margin-bottom:2px}.file-meta{color:#6b7280;font-size:12px}</style>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-brand">
+            <h5>
+                <i class="bi bi-mortarboard-fill"></i>
+                Kiaalap
+            </h5>
+            <button class="sidebar-close" id="sidebarClose">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+    </div>
+
+    <nav class="sidebar-nav">
+        <div class="menu-section">
+            <div class="menu-section-title">Main</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#dashboardSubmenu" aria-expanded="false">
+                        <i class="bi bi-speedometer2"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <ul id="dashboardSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="index.html">Dashboard v.1</a></li>
+                        <li><a class="nav-link " href="index-1.html">Dashboard v.2</a></li>
+                        <li><a class="nav-link " href="index-2.html">Dashboard v.3</a></li>
+                        <li><a class="nav-link " href="analytics.html">Analytics</a></li>
+                        <li><a class="nav-link " href="widgets.html">Widgets</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="events.html">
+                        <i class="bi bi-calendar-event"></i>
+                        <span>Events</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Academic</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#professorsSubmenu" aria-expanded="false">
+                        <i class="bi bi-person-badge"></i>
+                        <span>Professors</span>
+                    </a>
+                    <ul id="professorsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="all-professors.html">All Professors</a></li>
+                        <li><a class="nav-link " href="add-professor.html">Add Professor</a></li>
+                        <li><a class="nav-link " href="edit-professor.html">Edit Professor</a></li>
+                        <li><a class="nav-link " href="professor-profile.html">Professor Profile</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#studentsSubmenu" aria-expanded="false">
+                        <i class="bi bi-people"></i>
+                        <span>Students</span>
+                    </a>
+                    <ul id="studentsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="all-students.html">All Students</a></li>
+                        <li><a class="nav-link " href="add-student.html">Add Student</a></li>
+                        <li><a class="nav-link " href="edit-student.html">Edit Student</a></li>
+                        <li><a class="nav-link " href="student-profile.html">Student Profile</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#coursesSubmenu" aria-expanded="false">
+                        <i class="bi bi-book"></i>
+                        <span>Courses</span>
+                    </a>
+                    <ul id="coursesSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="all-courses.html">All Courses</a></li>
+                        <li><a class="nav-link " href="add-course.html">Add Course</a></li>
+                        <li><a class="nav-link " href="edit-course.html">Edit Course</a></li>
+                        <li><a class="nav-link " href="course-info.html">Course Info</a></li>
+                        <li><a class="nav-link " href="course-payment.html">Course Payment</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#librarySubmenu" aria-expanded="false">
+                        <i class="bi bi-journal-bookmark"></i>
+                        <span>Library</span>
+                    </a>
+                    <ul id="librarySubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="library-assets.html">Library Assets</a></li>
+                        <li><a class="nav-link " href="add-library-assets.html">Add Library Asset</a></li>
+                        <li><a class="nav-link " href="edit-library-assets.html">Edit Library Asset</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#departmentsSubmenu" aria-expanded="false">
+                        <i class="bi bi-building"></i>
+                        <span>Departments</span>
+                    </a>
+                    <ul id="departmentsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="departments.html">Departments List</a></li>
+                        <li><a class="nav-link " href="add-department.html">Add Department</a></li>
+                        <li><a class="nav-link " href="edit-department.html">Edit Department</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Communication</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#mailboxSubmenu" aria-expanded="false">
+                        <i class="bi bi-envelope"></i>
+                        <span>Mailbox</span>
+                    </a>
+                    <ul id="mailboxSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="mailbox.html">Inbox</a></li>
+                        <li><a class="nav-link " href="mailbox-compose.html">Compose</a></li>
+                        <li><a class="nav-link " href="mailbox-view.html">View Message</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Interface</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#componentsSubmenu" aria-expanded="false">
+                        <i class="bi bi-layout-wtf"></i>
+                        <span>Components</span>
+                    </a>
+                    <ul id="componentsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="buttons.html">Buttons</a></li>
+                        <li><a class="nav-link " href="alerts.html">Alerts</a></li>
+                        <li><a class="nav-link " href="modals.html">Modals</a></li>
+                        <li><a class="nav-link " href="tabs.html">Tabs</a></li>
+                        <li><a class="nav-link " href="accordion.html">Accordion</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#formsSubmenu" aria-expanded="false">
+                        <i class="bi bi-card-list"></i>
+                        <span>Forms</span>
+                    </a>
+                    <ul id="formsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="basic-form-element.html">Basic Forms</a></li>
+                        <li><a class="nav-link " href="advance-form-element.html">Advanced Forms</a></li>
+                        <li><a class="nav-link " href="password-meter.html">Password Meter</a></li>
+                        <li><a class="nav-link " href="multi-upload.html">File Upload</a></li>
+                        <li><a class="nav-link " href="images-cropper.html">Image Cropper</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#chartsSubmenu" aria-expanded="false">
+                        <i class="bi bi-bar-chart"></i>
+                        <span>Charts</span>
+                    </a>
+                    <ul id="chartsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="line-charts.html">Line Charts</a></li>
+                        <li><a class="nav-link " href="area-charts.html">Area Charts</a></li>
+                        <li><a class="nav-link " href="bar-charts.html">Bar Charts</a></li>
+                        <li><a class="nav-link " href="c3.html">C3 Charts</a></li>
+                        <li><a class="nav-link " href="peity.html">Peity Charts</a></li>
+                        <li><a class="nav-link " href="rounded-chart.html">Rounded Charts</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#tablesSubmenu" aria-expanded="false">
+                        <i class="bi bi-table"></i>
+                        <span>Tables</span>
+                    </a>
+                    <ul id="tablesSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="static-table.html">Static Tables</a></li>
+                        <li><a class="nav-link " href="data-table.html">Data Tables</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Developer Tools</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link " href="code-editor.html">
+                        <i class="bi bi-code-slash"></i>
+                        <span>Code Editor</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#uiToolsSubmenu" aria-expanded="false">
+                        <i class="bi bi-tools"></i>
+                        <span>UI Components</span>
+                    </a>
+                    <ul id="uiToolsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="preloader.html">Preloaders</a></li>
+                        <li><a class="nav-link " href="notifications.html">Notifications</a></li>
+                        <li><a class="nav-link " href="tree-view.html">Tree View</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#viewersSubmenu" aria-expanded="false">
+                        <i class="bi bi-eye"></i>
+                        <span>Viewers</span>
+                    </a>
+                    <ul id="viewersSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link active" href="pdf-viewer.html">PDF Viewer</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#mapsSubmenu" aria-expanded="false">
+                        <i class="bi bi-map"></i>
+                        <span>Maps</span>
+                    </a>
+                    <ul id="mapsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="google-map.html">Interactive Maps</a></li>
+                        <li><a class="nav-link " href="data-maps.html">Data Maps</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Pages</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#authSubmenu" aria-expanded="false">
+                        <i class="bi bi-shield-lock"></i>
+                        <span>Authentication</span>
+                    </a>
+                    <ul id="authSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="login.html">Login</a></li>
+                        <li><a class="nav-link " href="register.html">Register</a></li>
+                        <li><a class="nav-link " href="lock.html">Lock Screen</a></li>
+                        <li><a class="nav-link " href="password-recovery.html">Forgot Password</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#errorsSubmenu" aria-expanded="false">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        <span>Error Pages</span>
+                    </a>
+                    <ul id="errorsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="404.html">404 Error</a></li>
+                        <li><a class="nav-link " href="500.html">500 Error</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</aside>
+<!-- Main Content Wrapper -->
+<div class="main-wrapper" id="mainWrapper">
+    <!-- Header -->
+    <nav class="navbar top-navbar">
+        <div class="container-fluid d-flex align-items-center h-100">
+            <!-- Hamburger Menu -->
+            <button class="hamburger-menu" id="sidebarToggle">
+                <i class="bi bi-list"></i>
+            </button>
+    
+            <!-- Breadcrumb for desktop -->
+            <nav aria-label="breadcrumb" class="d-none d-lg-block ms-3">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active">Pdf viewer</li>
+                </ol>
+            </nav>
+    
+            <!-- Logo for mobile -->
+            <div class="navbar-brand d-lg-none fw-bold me-auto">Kiaalap</div>
+    
+            <!-- Spacer for desktop -->
+            <div class="flex-grow-1 d-none d-lg-block"></div>
+    
+            <!-- Right Actions -->
+            <div class="d-flex align-items-center gap-2">
+                <!-- Search -->
+                <div class="search-container">
+                    <button class="btn btn-light btn-icon" id="searchToggle">
+                        <i class="bi bi-search"></i>
+                    </button>
+    
+                    <form class="search-form" id="searchForm">
+                        <i class="bi bi-search search-icon"></i>
+                        <input type="text"
+                               class="form-control"
+                               id="searchInput"
+                               placeholder="Search..."
+                               data-bs-toggle="dropdown">
+                        <button type="button" class="close-search" id="closeSearch">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+    
+                        <ul class="dropdown-menu w-100 mt-2">
+                            <li><a class="dropdown-item" href="#">Student Registration</a></li>
+                            <li><a class="dropdown-item" href="#">Course Management</a></li>
+                            <li><a class="dropdown-item" href="#">Grade Submission</a></li>
+                            <li><a class="dropdown-item" href="#">Faculty Directory</a></li>
+                            <li><a class="dropdown-item" href="#">Library Resources</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Advanced Search</a></li>
+                        </ul>
+                    </form>
+                </div>
+    
+                <!-- Notifications -->
+                <div class="dropdown">
+                    <button class="btn btn-light btn-icon position-relative" data-bs-toggle="dropdown" id="notificationsToggle">
+                        <i class="bi bi-bell"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">3</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" style="width: 320px;">
+                        <li class="dropdown-header d-flex align-items-center justify-content-between">
+                            <span>Notifications</span>
+                            <small class="text-muted">3 new</small>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item py-2" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="rounded-circle bg-primary bg-opacity-10 p-2 me-3" style="width: 40px; height: 40px;">
+                                        <i class="bi bi-calendar-check text-primary"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="fw-semibold">New Event</div>
+                                        <div class="text-muted small">Science Fair on March 15</div>
+                                        <div class="text-muted small">5 minutes ago</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item py-2" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="rounded-circle bg-success bg-opacity-10 p-2 me-3" style="width: 40px; height: 40px;">
+                                        <i class="bi bi-check-circle text-success"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="fw-semibold">Assignment Submitted</div>
+                                        <div class="text-muted small">John submitted his project</div>
+                                        <div class="text-muted small">2 hours ago</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item py-2" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="rounded-circle bg-warning bg-opacity-10 p-2 me-3" style="width: 40px; height: 40px;">
+                                        <i class="bi bi-exclamation-triangle text-warning"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="fw-semibold">System Alert</div>
+                                        <div class="text-muted small">Database backup completed</div>
+                                        <div class="text-muted small">Yesterday</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item text-center" href="notifications.html">
+                                <small>View all notifications</small>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+    
+                <!-- Quick Actions -->
+                <div class="dropdown">
+                    <button class="btn btn-light btn-icon" data-bs-toggle="dropdown">
+                        <i class="bi bi-plus-lg"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="add-student.html"><i class="bi bi-person-plus me-2"></i>Add Student</a></li>
+                        <li><a class="dropdown-item" href="add-course.html"><i class="bi bi-book me-2"></i>Add Course</a></li>
+                        <li><a class="dropdown-item" href="add-professor.html"><i class="bi bi-person-badge me-2"></i>Add Professor</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-calendar-plus me-2"></i>Schedule Event</a></li>
+                    </ul>
+                </div>
+    
+                <!-- User Menu -->
+                <div class="dropdown">
+                    <button class="btn btn-light d-flex align-items-center" data-bs-toggle="dropdown">
+                        <div class="user-avatar me-2">
+                            <img src="https://ui-avatars.com/api/?name=Sarah Johnson&background=6366f1&color=fff&size=32"
+                                 alt="Sarah Johnson"
+                                 class="rounded-circle"
+                                 width="32"
+                                 height="32">
+                        </div>
+                        <span class="d-none d-md-inline">Sarah Johnson</span>
+                        <i class="bi bi-chevron-down ms-1"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Settings</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-question-circle me-2"></i>Help Center</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Main Content -->
+    <main class="dashboard-content" id="main-content">
+        <div class="container-fluid">
+            <!-- Page Header -->
+            <div class="mb-4">
+                <h1 class="h3 mb-0 text-gray-800">PDF Viewer</h1>
+                <p class="text-muted">PDF document viewer and file management (100% jQuery-free)</p>
+            </div>
+
+            <!-- PDF Viewer Section -->
+            <div class="pdf-demo-card">
+                <h5 class="mb-3">PDF Document Viewer</h5>
+                <div class="pdf-toolbar">
+                    <button class="btn btn-primary" id="uploadBtn">
+                        <i class="bi bi-cloud-upload me-2"></i>Upload PDF
+                    </button>
+                    <button class="btn btn-secondary" id="downloadBtn" disabled>
+                        <i class="bi bi-download me-2"></i>Download
+                    </button>
+                    <button class="btn btn-secondary" id="printBtn" disabled>
+                        <i class="bi bi-printer me-2"></i>Print
+                    </button>
+                    <button class="btn btn-secondary" id="zoomInBtn" disabled>
+                        <i class="bi bi-zoom-in me-2"></i>Zoom In
+                    </button>
+                    <button class="btn btn-secondary" id="zoomOutBtn" disabled>
+                        <i class="bi bi-zoom-out me-2"></i>Zoom Out
+                    </button>
+                    <input type="file" id="fileInput" accept=".pdf" style="display: none;">
+                </div>
+
+                <div class="pdf-viewer-container">
+                    <div class="pdf-placeholder" id="pdfPlaceholder">
+                        <i class="bi bi-file-pdf"></i>
+                        <h5>No PDF Loaded</h5>
+                        <p class="text-muted">Click "Upload PDF" to load a document or select from the examples below</p>
+                    </div>
+                    <iframe id="pdfViewer" class="pdf-iframe" style="display: none;"></iframe>
+                </div>
+            </div>
+
+            <!-- Sample PDF Files -->
+            <div class="pdf-demo-card">
+                <h5 class="mb-3">Sample PDF Documents</h5>
+                <p class="text-muted">Click on any document below to view it</p>
+                <ul class="file-list">
+                    <li class="file-item" data-pdf="sample1">
+                        <div class="file-icon">
+                            <i class="bi bi-file-pdf-fill"></i>
+                        </div>
+                        <div class="file-info">
+                            <div class="file-name">Course Syllabus - Computer Science 101</div>
+                            <div class="file-meta">PDF Document • 2.3 MB • Last modified: Jan 15, 2025</div>
+                        </div>
+                        <button class="btn btn-sm btn-primary">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </li>
+                    <li class="file-item" data-pdf="sample2">
+                        <div class="file-icon">
+                            <i class="bi bi-file-pdf-fill"></i>
+                        </div>
+                        <div class="file-info">
+                            <div class="file-name">Student Handbook 2025</div>
+                            <div class="file-meta">PDF Document • 5.7 MB • Last modified: Jan 10, 2025</div>
+                        </div>
+                        <button class="btn btn-sm btn-primary">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </li>
+                    <li class="file-item" data-pdf="sample3">
+                        <div class="file-icon">
+                            <i class="bi bi-file-pdf-fill"></i>
+                        </div>
+                        <div class="file-info">
+                            <div class="file-name">Research Paper - Machine Learning Applications</div>
+                            <div class="file-meta">PDF Document • 1.8 MB • Last modified: Jan 8, 2025</div>
+                        </div>
+                        <button class="btn btn-sm btn-primary">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </li>
+                    <li class="file-item" data-pdf="sample4">
+                        <div class="file-icon">
+                            <i class="bi bi-file-pdf-fill"></i>
+                        </div>
+                        <div class="file-info">
+                            <div class="file-name">Library Resource Guide</div>
+                            <div class="file-meta">PDF Document • 3.2 MB • Last modified: Jan 5, 2025</div>
+                        </div>
+                        <button class="btn btn-sm btn-primary">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- PDF Viewer Info -->
+            <div class="pdf-demo-card">
+                <h5 class="mb-3">About PDF Viewing</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6><i class="bi bi-info-circle text-primary me-2"></i>Features</h6>
+                        <ul class="text-muted">
+                            <li>Upload and view PDF documents</li>
+                            <li>Native browser PDF rendering</li>
+                            <li>Zoom controls</li>
+                            <li>Download and print capabilities</li>
+                            <li>Responsive design</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6><i class="bi bi-code-square text-primary me-2"></i>Implementation</h6>
+                        <ul class="text-muted">
+                            <li>100% Vanilla JavaScript</li>
+                            <li>No jQuery dependencies</li>
+                            <li>Bootstrap 5 styling</li>
+                            <li>File API for uploads</li>
+                            <li>Object URL for rendering</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+            <!-- Footer -->
+            <footer class="dashboard-footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="mb-0">&copy; 2026 Kiaalap. All rights reserved.</p>
+                        </div>
+                        <div class="col-md-6 text-md-end">
+                            <p class="mb-0">Built with <i class="bi bi-heart-fill text-danger"></i> for education</p>
+                        </div>
+                    </div>
+                </div>
+            </footer></div>
+
+    <!-- Load JavaScript -->
+
+</body>
+</html>
+<script>
+// PDF Viewer functionality (Vanilla JavaScript)
+document.addEventListener('DOMContentLoaded', function() {
+    const uploadBtn = document.getElementById('uploadBtn');
+    const fileInput = document.getElementById('fileInput');
+    const pdfViewer = document.getElementById('pdfViewer');
+    const pdfPlaceholder = document.getElementById('pdfPlaceholder');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const printBtn = document.getElementById('printBtn');
+    const zoomInBtn = document.getElementById('zoomInBtn');
+    const zoomOutBtn = document.getElementById('zoomOutBtn');
+    const fileItems = document.querySelectorAll('.file-item');
+
+    let currentPdfUrl = null;
+    let currentZoom = 100;
+
+    // Upload button click
+    uploadBtn.addEventListener('click', function() {
+        fileInput.click();
+    });
+
+    // File input change
+    fileInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file && file.type === 'application/pdf') {
+            loadPDF(file);
+        } else {
+            alert('Please select a valid PDF file');
+        }
+    });
+
+    // Function to load PDF
+    function loadPDF(file) {
+        // Revoke previous object URL if exists
+        if (currentPdfUrl) {
+            URL.revokeObjectURL(currentPdfUrl);
+        }
+
+        // Create new object URL
+        currentPdfUrl = URL.createObjectURL(file);
+
+        // Show PDF viewer, hide placeholder
+        pdfPlaceholder.style.display = 'none';
+        pdfViewer.style.display = 'block';
+        pdfViewer.src = currentPdfUrl;
+
+        // Enable toolbar buttons
+        downloadBtn.disabled = false;
+        printBtn.disabled = false;
+        zoomInBtn.disabled = false;
+        zoomOutBtn.disabled = false;
+    }
+
+    // Function to load demo PDF
+    function loadDemoPDF() {
+        pdfPlaceholder.style.display = 'none';
+        pdfViewer.style.display = 'block';
+
+        // Show a sample PDF message
+        pdfViewer.srcdoc = `
+            <html>
+            <head>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 100vh;
+                        margin: 0;
+                        background: #f8f9fa;
+                    }
+                    .content {
+                        text-align: center;
+                        padding: 40px;
+                        background: white;
+                        border-radius: 8px;
+                        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                    }
+                    h2 { color: #4361ee; margin-bottom: 15px; }
+                    p { color: #6b7280; line-height: 1.6; }
+                    .icon { font-size: 48px; margin-bottom: 20px; }
+                </style>
+            </head>
+            <body>
+                <div class="content">
+                    <div class="icon">📄</div>
+                    <h2>Sample PDF Document</h2>
+                    <p>This is a demo representation of a PDF document.</p>
+                    <p>In a production environment, the actual PDF would be loaded here.</p>
+                    <p style="margin-top: 20px; font-size: 14px; color: #9ca3af;">
+                        To view real PDFs, upload a file using the "Upload PDF" button above.
+                    </p>
+                </div>
+            </body>
+            </html>
+        `;
+
+        downloadBtn.disabled = false;
+        printBtn.disabled = false;
+        zoomInBtn.disabled = false;
+        zoomOutBtn.disabled = false;
+    }
+
+    // Sample file items click
+    fileItems.forEach(item => {
+        item.addEventListener('click', function() {
+            loadDemoPDF();
+        });
+    });
+
+    // Download button
+    downloadBtn.addEventListener('click', function() {
+        if (currentPdfUrl) {
+            const a = document.createElement('a');
+            a.href = currentPdfUrl;
+            a.download = 'document.pdf';
+            a.click();
+        }
+    });
+
+    // Print button
+    printBtn.addEventListener('click', function() {
+        if (pdfViewer.style.display !== 'none') {
+            pdfViewer.contentWindow.print();
+        }
+    });
+
+    // Zoom buttons (note: iframe zoom is limited without PDF.js)
+    zoomInBtn.addEventListener('click', function() {
+        currentZoom += 10;
+        pdfViewer.style.transform = `scale(${currentZoom / 100})`;
+        pdfViewer.style.transformOrigin = 'top left';
+    });
+
+    zoomOutBtn.addEventListener('click', function() {
+        if (currentZoom > 50) {
+            currentZoom -= 10;
+            pdfViewer.style.transform = `scale(${currentZoom / 100})`;
+            pdfViewer.style.transformOrigin = 'top left';
+        }
+    });
+});
+</script>

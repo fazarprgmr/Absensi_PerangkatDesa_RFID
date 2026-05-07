@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kiaalap - Modern Education Management Dashboard for Universities">
+    <meta name="keywords" content="education, dashboard, university, management, admin">
+    <meta name="author" content="Kiaalap">
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+    <link rel="preconnect" href="https://ui-avatars.com" crossorigin>
+    <link rel="dns-prefetch" href="https://flagcdn.com">
+
+    <title>Sparkline Charts - Kiaalap Dashboard</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="./assets/favicon-9EIT7vLh.ico">
+
+
+    <!-- Load stylesheets -->
+
+    <!-- Diagnostic inline styles - maximum specificity -->
+    <style>.sidebar.collapsed{max-width:70px!important;min-width:70px!important;width:70px!important}.sidebar.collapsed .sidebar-brand h5{font-size:0!important}.sidebar.collapsed .nav-link span{display:none!important}</style>
+
+  <script type="module" crossorigin src="./assets/main-COwrHBJ0.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/dashboard-hMfJATH4.css">
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="visually-hidden-focusable">Skip to main content</a>
+
+    <!-- Required DOM elements for dashboard.js -->
+    <div class="search-backdrop" id="searchBackdrop"></div>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+<style>*{box-sizing:border-box;margin:0;padding:0}body{background:#f5f7fa;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif}.sidebar{background:#1f2937;height:100vh;left:0;position:fixed;top:0;width:260px;z-index:1040}.main-wrapper{margin-left:260px;min-height:100vh;transition:margin-left .3s ease}.top-navbar{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.1);height:60px;padding:0 1rem}.dashboard-content{padding:24px}@keyframes pulse{0%,to{opacity:1}50%{opacity:.5}}.loading{animation:pulse 2s cubic-bezier(.4,0,.6,1) infinite;background:#e5e7eb}.sparkline-grid{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-bottom:2rem}.sparkline-card{background:#fff;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.1);display:flex;flex-direction:column;gap:.75rem;padding:1.25rem}.sparkline-header{align-items:flex-start;display:flex;justify-content:space-between}.sparkline-info{flex:1}.sparkline-label{color:#6b7280;font-size:.875rem;font-weight:500;margin-bottom:.25rem}.sparkline-value{color:#1f2937;font-size:1.875rem;font-weight:700;line-height:1}.sparkline-trend{align-items:center;border-radius:6px;display:inline-flex;font-size:.75rem;font-weight:600;gap:.25rem;padding:.25rem .5rem}.trend-up{background:#d1fae5;color:#10b981}.trend-down{background:#fee2e2;color:#ef4444}.sparkline-chart-wrapper{height:60px;margin-top:.5rem;position:relative;width:100%}.sparkline-chart-wrapper canvas{height:100%!important;left:0;position:absolute;top:0;width:100%!important}.section-header{margin-bottom:1.5rem}.section-title{color:#1f2937;font-size:1.25rem;font-weight:700;margin-bottom:.25rem}.section-subtitle{color:#6b7280;font-size:.875rem}</style>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-brand">
+            <h5>
+                <i class="bi bi-mortarboard-fill"></i>
+                Kiaalap
+            </h5>
+            <button class="sidebar-close" id="sidebarClose">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+    </div>
+
+    <nav class="sidebar-nav">
+        <div class="menu-section">
+            <div class="menu-section-title">Main</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#dashboardSubmenu" aria-expanded="false">
+                        <i class="bi bi-speedometer2"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <ul id="dashboardSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="index.html">Dashboard v.1</a></li>
+                        <li><a class="nav-link " href="index-1.html">Dashboard v.2</a></li>
+                        <li><a class="nav-link " href="index-2.html">Dashboard v.3</a></li>
+                        <li><a class="nav-link " href="analytics.html">Analytics</a></li>
+                        <li><a class="nav-link " href="widgets.html">Widgets</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="events.html">
+                        <i class="bi bi-calendar-event"></i>
+                        <span>Events</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Academic</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#professorsSubmenu" aria-expanded="false">
+                        <i class="bi bi-person-badge"></i>
+                        <span>Professors</span>
+                    </a>
+                    <ul id="professorsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="all-professors.html">All Professors</a></li>
+                        <li><a class="nav-link " href="add-professor.html">Add Professor</a></li>
+                        <li><a class="nav-link " href="edit-professor.html">Edit Professor</a></li>
+                        <li><a class="nav-link " href="professor-profile.html">Professor Profile</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#studentsSubmenu" aria-expanded="false">
+                        <i class="bi bi-people"></i>
+                        <span>Students</span>
+                    </a>
+                    <ul id="studentsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="all-students.html">All Students</a></li>
+                        <li><a class="nav-link " href="add-student.html">Add Student</a></li>
+                        <li><a class="nav-link " href="edit-student.html">Edit Student</a></li>
+                        <li><a class="nav-link " href="student-profile.html">Student Profile</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#coursesSubmenu" aria-expanded="false">
+                        <i class="bi bi-book"></i>
+                        <span>Courses</span>
+                    </a>
+                    <ul id="coursesSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="all-courses.html">All Courses</a></li>
+                        <li><a class="nav-link " href="add-course.html">Add Course</a></li>
+                        <li><a class="nav-link " href="edit-course.html">Edit Course</a></li>
+                        <li><a class="nav-link " href="course-info.html">Course Info</a></li>
+                        <li><a class="nav-link " href="course-payment.html">Course Payment</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#librarySubmenu" aria-expanded="false">
+                        <i class="bi bi-journal-bookmark"></i>
+                        <span>Library</span>
+                    </a>
+                    <ul id="librarySubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="library-assets.html">Library Assets</a></li>
+                        <li><a class="nav-link " href="add-library-assets.html">Add Library Asset</a></li>
+                        <li><a class="nav-link " href="edit-library-assets.html">Edit Library Asset</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#departmentsSubmenu" aria-expanded="false">
+                        <i class="bi bi-building"></i>
+                        <span>Departments</span>
+                    </a>
+                    <ul id="departmentsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="departments.html">Departments List</a></li>
+                        <li><a class="nav-link " href="add-department.html">Add Department</a></li>
+                        <li><a class="nav-link " href="edit-department.html">Edit Department</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Communication</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#mailboxSubmenu" aria-expanded="false">
+                        <i class="bi bi-envelope"></i>
+                        <span>Mailbox</span>
+                    </a>
+                    <ul id="mailboxSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="mailbox.html">Inbox</a></li>
+                        <li><a class="nav-link " href="mailbox-compose.html">Compose</a></li>
+                        <li><a class="nav-link " href="mailbox-view.html">View Message</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Interface</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#componentsSubmenu" aria-expanded="false">
+                        <i class="bi bi-layout-wtf"></i>
+                        <span>Components</span>
+                    </a>
+                    <ul id="componentsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="buttons.html">Buttons</a></li>
+                        <li><a class="nav-link " href="alerts.html">Alerts</a></li>
+                        <li><a class="nav-link " href="modals.html">Modals</a></li>
+                        <li><a class="nav-link " href="tabs.html">Tabs</a></li>
+                        <li><a class="nav-link " href="accordion.html">Accordion</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#formsSubmenu" aria-expanded="false">
+                        <i class="bi bi-card-list"></i>
+                        <span>Forms</span>
+                    </a>
+                    <ul id="formsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="basic-form-element.html">Basic Forms</a></li>
+                        <li><a class="nav-link " href="advance-form-element.html">Advanced Forms</a></li>
+                        <li><a class="nav-link " href="password-meter.html">Password Meter</a></li>
+                        <li><a class="nav-link " href="multi-upload.html">File Upload</a></li>
+                        <li><a class="nav-link " href="images-cropper.html">Image Cropper</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#chartsSubmenu" aria-expanded="false">
+                        <i class="bi bi-bar-chart"></i>
+                        <span>Charts</span>
+                    </a>
+                    <ul id="chartsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="line-charts.html">Line Charts</a></li>
+                        <li><a class="nav-link " href="area-charts.html">Area Charts</a></li>
+                        <li><a class="nav-link " href="bar-charts.html">Bar Charts</a></li>
+                        <li><a class="nav-link " href="c3.html">C3 Charts</a></li>
+                        <li><a class="nav-link " href="peity.html">Peity Charts</a></li>
+                        <li><a class="nav-link " href="rounded-chart.html">Rounded Charts</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#tablesSubmenu" aria-expanded="false">
+                        <i class="bi bi-table"></i>
+                        <span>Tables</span>
+                    </a>
+                    <ul id="tablesSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="static-table.html">Static Tables</a></li>
+                        <li><a class="nav-link " href="data-table.html">Data Tables</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Developer Tools</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link " href="code-editor.html">
+                        <i class="bi bi-code-slash"></i>
+                        <span>Code Editor</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#uiToolsSubmenu" aria-expanded="false">
+                        <i class="bi bi-tools"></i>
+                        <span>UI Components</span>
+                    </a>
+                    <ul id="uiToolsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="preloader.html">Preloaders</a></li>
+                        <li><a class="nav-link " href="notifications.html">Notifications</a></li>
+                        <li><a class="nav-link " href="tree-view.html">Tree View</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#viewersSubmenu" aria-expanded="false">
+                        <i class="bi bi-eye"></i>
+                        <span>Viewers</span>
+                    </a>
+                    <ul id="viewersSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="pdf-viewer.html">PDF Viewer</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#mapsSubmenu" aria-expanded="false">
+                        <i class="bi bi-map"></i>
+                        <span>Maps</span>
+                    </a>
+                    <ul id="mapsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="google-map.html">Interactive Maps</a></li>
+                        <li><a class="nav-link " href="data-maps.html">Data Maps</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Pages</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#authSubmenu" aria-expanded="false">
+                        <i class="bi bi-shield-lock"></i>
+                        <span>Authentication</span>
+                    </a>
+                    <ul id="authSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="login.html">Login</a></li>
+                        <li><a class="nav-link " href="register.html">Register</a></li>
+                        <li><a class="nav-link " href="lock.html">Lock Screen</a></li>
+                        <li><a class="nav-link " href="password-recovery.html">Forgot Password</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#errorsSubmenu" aria-expanded="false">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        <span>Error Pages</span>
+                    </a>
+                    <ul id="errorsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="404.html">404 Error</a></li>
+                        <li><a class="nav-link " href="500.html">500 Error</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</aside>
+<!-- Main Content Wrapper -->
+<div class="main-wrapper" id="mainWrapper">
+    <!-- Header -->
+    <nav class="navbar top-navbar">
+        <div class="container-fluid d-flex align-items-center h-100">
+            <!-- Hamburger Menu -->
+            <button class="hamburger-menu" id="sidebarToggle">
+                <i class="bi bi-list"></i>
+            </button>
+    
+            <!-- Breadcrumb for desktop -->
+            <nav aria-label="breadcrumb" class="d-none d-lg-block ms-3">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item"><a href="#">Charts</a></li>
+                                <li class="breadcrumb-item active">Sparkline Charts</li>
+                </ol>
+            </nav>
+    
+            <!-- Logo for mobile -->
+            <div class="navbar-brand d-lg-none fw-bold me-auto">Kiaalap</div>
+    
+            <!-- Spacer for desktop -->
+            <div class="flex-grow-1 d-none d-lg-block"></div>
+    
+            <!-- Right Actions -->
+            <div class="d-flex align-items-center gap-2">
+                <!-- Search -->
+                <div class="search-container">
+                    <button class="btn btn-light btn-icon" id="searchToggle">
+                        <i class="bi bi-search"></i>
+                    </button>
+    
+                    <form class="search-form" id="searchForm">
+                        <i class="bi bi-search search-icon"></i>
+                        <input type="text"
+                               class="form-control"
+                               id="searchInput"
+                               placeholder="Search..."
+                               data-bs-toggle="dropdown">
+                        <button type="button" class="close-search" id="closeSearch">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+    
+                        <ul class="dropdown-menu w-100 mt-2">
+                            <li><a class="dropdown-item" href="#">Student Registration</a></li>
+                            <li><a class="dropdown-item" href="#">Course Management</a></li>
+                            <li><a class="dropdown-item" href="#">Grade Submission</a></li>
+                            <li><a class="dropdown-item" href="#">Faculty Directory</a></li>
+                            <li><a class="dropdown-item" href="#">Library Resources</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Advanced Search</a></li>
+                        </ul>
+                    </form>
+                </div>
+    
+                <!-- Notifications -->
+                <div class="dropdown">
+                    <button class="btn btn-light btn-icon position-relative" data-bs-toggle="dropdown" id="notificationsToggle">
+                        <i class="bi bi-bell"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">3</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" style="width: 320px;">
+                        <li class="dropdown-header d-flex align-items-center justify-content-between">
+                            <span>Notifications</span>
+                            <small class="text-muted">3 new</small>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item py-2" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="rounded-circle bg-primary bg-opacity-10 p-2 me-3" style="width: 40px; height: 40px;">
+                                        <i class="bi bi-calendar-check text-primary"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="fw-semibold">New Event</div>
+                                        <div class="text-muted small">Science Fair on March 15</div>
+                                        <div class="text-muted small">5 minutes ago</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item py-2" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="rounded-circle bg-success bg-opacity-10 p-2 me-3" style="width: 40px; height: 40px;">
+                                        <i class="bi bi-check-circle text-success"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="fw-semibold">Assignment Submitted</div>
+                                        <div class="text-muted small">John submitted his project</div>
+                                        <div class="text-muted small">2 hours ago</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item py-2" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="rounded-circle bg-warning bg-opacity-10 p-2 me-3" style="width: 40px; height: 40px;">
+                                        <i class="bi bi-exclamation-triangle text-warning"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="fw-semibold">System Alert</div>
+                                        <div class="text-muted small">Database backup completed</div>
+                                        <div class="text-muted small">Yesterday</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item text-center" href="notifications.html">
+                                <small>View all notifications</small>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+    
+                <!-- Quick Actions -->
+                <div class="dropdown">
+                    <button class="btn btn-light btn-icon" data-bs-toggle="dropdown">
+                        <i class="bi bi-plus-lg"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="add-student.html"><i class="bi bi-person-plus me-2"></i>Add Student</a></li>
+                        <li><a class="dropdown-item" href="add-course.html"><i class="bi bi-book me-2"></i>Add Course</a></li>
+                        <li><a class="dropdown-item" href="add-professor.html"><i class="bi bi-person-badge me-2"></i>Add Professor</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-calendar-plus me-2"></i>Schedule Event</a></li>
+                    </ul>
+                </div>
+    
+                <!-- User Menu -->
+                <div class="dropdown">
+                    <button class="btn btn-light d-flex align-items-center" data-bs-toggle="dropdown">
+                        <div class="user-avatar me-2">
+                            <img src="https://ui-avatars.com/api/?name=Sarah Johnson&background=6366f1&color=fff&size=32"
+                                 alt="Sarah Johnson"
+                                 class="rounded-circle"
+                                 width="32"
+                                 height="32">
+                        </div>
+                        <span class="d-none d-md-inline">Sarah Johnson</span>
+                        <i class="bi bi-chevron-down ms-1"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Settings</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-question-circle me-2"></i>Help Center</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Main Content -->
+    <main class="dashboard-content" id="main-content">
+        <div class="container-fluid">
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb" class="breadcrumb-nav">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="index.html">
+                            <i class="bi bi-house-door"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#charts">Charts</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Sparkline Charts</li>
+                </ol>
+            </nav>
+
+            <!-- Page Header -->
+            <div class="page-header mb-4">
+                <h1 class="h3 font-bold mb-2">Sparkline Charts</h1>
+                <p class="text-muted">Compact inline charts for displaying trends and metrics at a glance</p>
+            </div>
+
+            <!-- Key Performance Metrics Section -->
+            <div class="section-header">
+                <h2 class="section-title">Key Performance Metrics</h2>
+                <p class="section-subtitle">Real-time metrics with trend indicators</p>
+            </div>
+
+            <div class="sparkline-grid">
+                <!-- Total Students -->
+                <div class="sparkline-card">
+                    <div class="sparkline-header">
+                        <div class="sparkline-info">
+                            <div class="sparkline-label">Total Students</div>
+                            <div class="sparkline-value">1,234</div>
+                        </div>
+                        <span class="sparkline-trend trend-up">
+                            <i class="bi bi-arrow-up"></i> +12%
+                        </span>
+                    </div>
+                    <div class="sparkline-chart-wrapper">
+                        <canvas id="studentsSparkline"></canvas>
+                    </div>
+                </div>
+
+                <!-- Course Completion -->
+                <div class="sparkline-card">
+                    <div class="sparkline-header">
+                        <div class="sparkline-info">
+                            <div class="sparkline-label">Course Completion</div>
+                            <div class="sparkline-value">87%</div>
+                        </div>
+                        <span class="sparkline-trend trend-up">
+                            <i class="bi bi-arrow-up"></i> +8%
+                        </span>
+                    </div>
+                    <div class="sparkline-chart-wrapper">
+                        <canvas id="completionSparkline"></canvas>
+                    </div>
+                </div>
+
+                <!-- Revenue -->
+                <div class="sparkline-card">
+                    <div class="sparkline-header">
+                        <div class="sparkline-info">
+                            <div class="sparkline-label">Revenue</div>
+                            <div class="sparkline-value">$45.2K</div>
+                        </div>
+                        <span class="sparkline-trend trend-up">
+                            <i class="bi bi-arrow-up"></i> +15%
+                        </span>
+                    </div>
+                    <div class="sparkline-chart-wrapper">
+                        <canvas id="revenueSparkline"></canvas>
+                    </div>
+                </div>
+
+                <!-- Active Professors -->
+                <div class="sparkline-card">
+                    <div class="sparkline-header">
+                        <div class="sparkline-info">
+                            <div class="sparkline-label">Active Professors</div>
+                            <div class="sparkline-value">89</div>
+                        </div>
+                        <span class="sparkline-trend trend-down">
+                            <i class="bi bi-arrow-down"></i> -3%
+                        </span>
+                    </div>
+                    <div class="sparkline-chart-wrapper">
+                        <canvas id="professorsSparkline"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Academic Performance Section -->
+            <div class="section-header">
+                <h2 class="section-title">Academic Performance</h2>
+                <p class="section-subtitle">Student achievement trends</p>
+            </div>
+
+            <div class="sparkline-grid">
+                <!-- Average GPA -->
+                <div class="sparkline-card">
+                    <div class="sparkline-header">
+                        <div class="sparkline-info">
+                            <div class="sparkline-label">Average GPA</div>
+                            <div class="sparkline-value">3.45</div>
+                        </div>
+                        <span class="sparkline-trend trend-up">
+                            <i class="bi bi-arrow-up"></i> +0.2
+                        </span>
+                    </div>
+                    <div class="sparkline-chart-wrapper">
+                        <canvas id="gpaSparkline"></canvas>
+                    </div>
+                </div>
+
+                <!-- Attendance Rate -->
+                <div class="sparkline-card">
+                    <div class="sparkline-header">
+                        <div class="sparkline-info">
+                            <div class="sparkline-label">Attendance Rate</div>
+                            <div class="sparkline-value">92%</div>
+                        </div>
+                        <span class="sparkline-trend trend-up">
+                            <i class="bi bi-arrow-up"></i> +5%
+                        </span>
+                    </div>
+                    <div class="sparkline-chart-wrapper">
+                        <canvas id="attendanceSparkline"></canvas>
+                    </div>
+                </div>
+
+                <!-- Assignment Completion -->
+                <div class="sparkline-card">
+                    <div class="sparkline-header">
+                        <div class="sparkline-info">
+                            <div class="sparkline-label">Assignment Completion</div>
+                            <div class="sparkline-value">94%</div>
+                        </div>
+                        <span class="sparkline-trend trend-up">
+                            <i class="bi bi-arrow-up"></i> +3%
+                        </span>
+                    </div>
+                    <div class="sparkline-chart-wrapper">
+                        <canvas id="assignmentSparkline"></canvas>
+                    </div>
+                </div>
+
+                <!-- Test Scores -->
+                <div class="sparkline-card">
+                    <div class="sparkline-header">
+                        <div class="sparkline-info">
+                            <div class="sparkline-label">Avg Test Score</div>
+                            <div class="sparkline-value">78.5</div>
+                        </div>
+                        <span class="sparkline-trend trend-up">
+                            <i class="bi bi-arrow-up"></i> +4.2
+                        </span>
+                    </div>
+                    <div class="sparkline-chart-wrapper">
+                        <canvas id="testScoresSparkline"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Financial Overview Section -->
+            <div class="section-header">
+                <h2 class="section-title">Financial Overview</h2>
+                <p class="section-subtitle">Revenue and cost analysis</p>
+            </div>
+
+            <div class="sparkline-grid">
+                <!-- Monthly Tuition -->
+                <div class="sparkline-card">
+                    <div class="sparkline-header">
+                        <div class="sparkline-info">
+                            <div class="sparkline-label">Monthly Tuition</div>
+                            <div class="sparkline-value">$125K</div>
+                        </div>
+                        <span class="sparkline-trend trend-up">
+                            <i class="bi bi-arrow-up"></i> +18%
+                        </span>
+                    </div>
+                    <div class="sparkline-chart-wrapper">
+                        <canvas id="tuitionSparkline"></canvas>
+                    </div>
+                </div>
+
+                <!-- Operational Costs -->
+                <div class="sparkline-card">
+                    <div class="sparkline-header">
+                        <div class="sparkline-info">
+                            <div class="sparkline-label">Operational Costs</div>
+                            <div class="sparkline-value">$78K</div>
+                        </div>
+                        <span class="sparkline-trend trend-down">
+                            <i class="bi bi-arrow-down"></i> -7%
+                        </span>
+                    </div>
+                    <div class="sparkline-chart-wrapper">
+                        <canvas id="costsSparkline"></canvas>
+                    </div>
+                </div>
+
+                <!-- Net Profit -->
+                <div class="sparkline-card">
+                    <div class="sparkline-header">
+                        <div class="sparkline-info">
+                            <div class="sparkline-label">Net Profit</div>
+                            <div class="sparkline-value">$47K</div>
+                        </div>
+                        <span class="sparkline-trend trend-up">
+                            <i class="bi bi-arrow-up"></i> +25%
+                        </span>
+                    </div>
+                    <div class="sparkline-chart-wrapper">
+                        <canvas id="profitSparkline"></canvas>
+                    </div>
+                </div>
+
+                <!-- Scholarships -->
+                <div class="sparkline-card">
+                    <div class="sparkline-header">
+                        <div class="sparkline-info">
+                            <div class="sparkline-label">Scholarships</div>
+                            <div class="sparkline-value">$15.3K</div>
+                        </div>
+                        <span class="sparkline-trend trend-up">
+                            <i class="bi bi-arrow-up"></i> +10%
+                        </span>
+                    </div>
+                    <div class="sparkline-chart-wrapper">
+                        <canvas id="scholarshipsSparkline"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+            <!-- Footer -->
+            <footer class="dashboard-footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="mb-0">&copy; 2026 Kiaalap. All rights reserved.</p>
+                        </div>
+                        <div class="col-md-6 text-md-end">
+                            <p class="mb-0">Built with <i class="bi bi-heart-fill text-danger"></i> for education</p>
+                        </div>
+                    </div>
+                </div>
+            </footer></div>
+
+    <!-- Load JavaScript -->
+
+</body>
+</html>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Sparkline configuration - fully responsive
+    const sparklineOptions = {
+        responsive: true,
+        maintainAspectRatio: false, // Allow chart to fill container
+        animation: {
+            duration: 1000,
+            easing: 'easeInOutQuart'
+        },
+        layout: {
+            padding: {
+                top: 5,
+                right: 5,
+                bottom: 5,
+                left: 5
+            }
+        },
+        scales: {
+            x: {
+                display: false,
+                grid: { display: false }
+            },
+            y: {
+                display: false,
+                grid: { display: false },
+                beginAtZero: false
+            }
+        },
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                enabled: true,
+                backgroundColor: 'rgba(0,0,0,0.8)',
+                padding: 8,
+                cornerRadius: 6,
+                displayColors: false,
+                callbacks: {
+                    title: () => '',
+                    label: (context) => {
+                        return context.parsed.y.toFixed(1);
+                    }
+                }
+            }
+        },
+        elements: {
+            point: {
+                radius: 0,
+                hitRadius: 10,
+                hoverRadius: 3
+            },
+            line: {
+                borderWidth: 2.5,
+                tension: 0.4
+            }
+        },
+        interaction: {
+            intersect: false,
+            mode: 'index'
+        }
+    };
+
+    // Generate sample sparkline data
+    function generateSparklineData(trend = 'up', points = 30, volatility = 0.3) {
+        const data = [];
+        let value = Math.random() * 50 + 25;
+
+        for (let i = 0; i < points; i++) {
+            const change = (Math.random() - 0.5) * volatility * 10;
+            const trendChange = trend === 'up' ? 0.3 : -0.3;
+            value = Math.max(5, Math.min(95, value + change + trendChange));
+            data.push(Math.round(value));
+        }
+
+        return data;
+    }
+
+    // Initialize sparkline charts
+    const sparklines = [
+        { id: 'studentsSparkline', color: '#4361ee', trend: 'up' },
+        { id: 'completionSparkline', color: '#06d6a0', trend: 'up' },
+        { id: 'revenueSparkline', color: '#f72585', trend: 'up' },
+        { id: 'professorsSparkline', color: '#ffa726', trend: 'down' },
+        { id: 'gpaSparkline', color: '#4cc9f0', trend: 'up' },
+        { id: 'attendanceSparkline', color: '#06d6a0', trend: 'up' },
+        { id: 'assignmentSparkline', color: '#7209b7', trend: 'up' },
+        { id: 'testScoresSparkline', color: '#3a0ca3', trend: 'up' },
+        { id: 'tuitionSparkline', color: '#4361ee', trend: 'up' },
+        { id: 'costsSparkline', color: '#f72585', trend: 'down' },
+        { id: 'profitSparkline', color: '#06d6a0', trend: 'up' },
+        { id: 'scholarshipsSparkline', color: '#ffa726', trend: 'up' }
+    ];
+
+    sparklines.forEach(sparkline => {
+        const canvas = document.getElementById(sparkline.id);
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            const gradient = ctx.createLinearGradient(0, 0, 0, 60);
+            gradient.addColorStop(0, sparkline.color + '40');
+            gradient.addColorStop(1, sparkline.color + '00');
+
+            new Chart(canvas, {
+                type: 'line',
+                data: {
+                    labels: Array.from({length: 30}, (_, i) => i),
+                    datasets: [{
+                        data: generateSparklineData(sparkline.trend),
+                        borderColor: sparkline.color,
+                        backgroundColor: gradient,
+                        fill: true
+                    }]
+                },
+                options: sparklineOptions
+            });
+        }
+    });
+
+    // Auto-refresh sparklines every 15 seconds
+    setInterval(() => {
+        sparklines.forEach(sparkline => {
+            const canvas = document.getElementById(sparkline.id);
+            if (canvas) {
+                const chart = Chart.getChart(canvas);
+                if (chart) {
+                    const lastValue = chart.data.datasets[0].data[29];
+                    const trendDirection = sparkline.trend === 'up' ? 0.2 : -0.2;
+                    const newValue = Math.max(5, Math.min(95, lastValue + (Math.random() - 0.5) * 8 + trendDirection));
+
+                    chart.data.datasets[0].data.push(Math.round(newValue));
+                    chart.data.datasets[0].data.shift();
+                    chart.update('none');
+                }
+            }
+        });
+    }, 15000);
+
+    // Handle window resize to ensure charts fill their containers
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(function() {
+            sparklines.forEach(sparkline => {
+                const canvas = document.getElementById(sparkline.id);
+                if (canvas) {
+                    const chart = Chart.getChart(canvas);
+                    if (chart) {
+                        chart.resize();
+                    }
+                }
+            });
+        }, 250);
+    });
+});
+</script>

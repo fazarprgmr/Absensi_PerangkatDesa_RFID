@@ -1,0 +1,83 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use App\Models\Kehadiran;
+use App\Models\PerangkatDesa;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+
+class KehadiranController extends Controller
+{
+    public function tapRFID(Request $request)
+    {
+        $request->validate([
+            'rfid_uid' => 'required|string',
+        ]);
+
+        $uid = $request->rfid_uid;
+        $perangkatDesa = PerangkatDesa::where('rfid_uid', $uid)->first();
+
+        if (! $perangkatDesa) {
+            return response()->json(['message' => 'Kartu Tidak Terdaftar!'], 404);
+        }
+
+        $hariIni = Carbon::today('Asia/Jakarta');
+        $sekarang = Carbon::now('Asia/Jakarta');
+        $jamSekarang = $sekarang->format('H:i:s');
+        $batasPulang = '14:00:00';
+
+        // Cari data absen hari ini
+        $absen = Kehadiran::where('perangkat_desa_id', $perangkatDesa->id)
+            ->where('tanggal', $hariIni)
+            ->first();
+
+        // 1. LOGIKA JIKA SUDAH ADA DATA ABSEN HARI INI
+        if ($absen) {
+            // A. Cek apakah sudah absen pulang?
+            if ($absen->jam_pulang) {
+                return response()->json([
+                    'message' => 'Sudah Absen Pulang!', // Pesan khusus
+                    'nama' => $perangkatDesa->nama,
+                ], 200);
+            }
+
+            // B. Jika belum absen pulang, cek apakah sudah masuk jam pulang (14:00)?
+            if ($jamSekarang < $batasPulang) {
+                return response()->json([
+                    'message' => 'Sudah Absen Masuk!', // Pesan agar tidak tap terus sebelum jam 2
+                    'nama' => $perangkatDesa->nama,
+                ], 200);
+            }
+
+            // C. Jika sudah jam 14:00 dan belum absen pulang -> Proses Pulang
+            $absen->update(['jam_pulang' => $jamSekarang]);
+
+            return response()->json([
+                'message' => 'Absen Pulang Berhasil!',
+                'nama' => $perangkatDesa->nama,
+                'jam_pulang' => $jamSekarang,
+            ], 200);
+        }
+
+        // 2. LOGIKA JIKA BELUM ADA DATA (ABSEN MASUK)
+        $batasTelat = '08:30:00';
+        $statusKetepatan = ($jamSekarang > $batasTelat) ? 'terlambat' : 'tepat waktu';
+
+        Kehadiran::create([
+            'perangkat_desa_id' => $perangkatDesa->id,
+            'tanggal' => $hariIni,
+            'jam_masuk' => $jamSekarang,
+            'status_kehadiran' => 'hadir',
+            'status_ketepatan' => $statusKetepatan,
+        ]);
+
+        return response()->json([
+            'message' => 'Absen Masuk Berhasil!',
+            'nama' => $perangkatDesa->nama,
+            'status_kehadiran' => 'hadir',
+            'status_ketepatan' => $statusKetepatan,
+        ], 201);
+    }
+}

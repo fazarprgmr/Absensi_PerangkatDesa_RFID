@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kiaalap - Modern Education Management Dashboard for Universities">
+    <meta name="keywords" content="education, dashboard, university, management, admin">
+    <meta name="author" content="Kiaalap">
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+    <link rel="preconnect" href="https://ui-avatars.com" crossorigin>
+    <link rel="dns-prefetch" href="https://flagcdn.com">
+
+    <title>Events - Kiaalap Dashboard</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="./assets/favicon-9EIT7vLh.ico">
+
+
+    <!-- Load stylesheets -->
+
+    <!-- Diagnostic inline styles - maximum specificity -->
+    <style>.sidebar.collapsed{max-width:70px!important;min-width:70px!important;width:70px!important}.sidebar.collapsed .sidebar-brand h5{font-size:0!important}.sidebar.collapsed .nav-link span{display:none!important}</style>
+
+  <script type="module" crossorigin src="./assets/main-COwrHBJ0.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/dashboard-hMfJATH4.css">
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="visually-hidden-focusable">Skip to main content</a>
+
+    <!-- Required DOM elements for dashboard.js -->
+    <div class="search-backdrop" id="searchBackdrop"></div>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+<style>*{box-sizing:border-box;margin:0;padding:0}body{background:#f5f7fa;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif}.sidebar{background:#1f2937;height:100vh;left:0;position:fixed;top:0;width:260px;z-index:1040}.main-wrapper{margin-left:260px;min-height:100vh;transition:margin-left .3s ease}.top-navbar{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.1);height:60px;padding:0 1rem}.dashboard-content{padding:24px}@keyframes pulse{0%,to{opacity:1}50%{opacity:.5}}.loading{animation:pulse 2s cubic-bezier(.4,0,.6,1) infinite;background:#e5e7eb}.event-card{border:none;transition:all .3s ease}.event-card:hover{box-shadow:0 8px 25px rgba(0,0,0,.1);transform:translateY(-2px)}.event-date{text-orientation:mixed;writing-mode:vertical-rl}.calendar-mini{cursor:pointer;max-width:100px;transition:transform .2s ease}.calendar-mini:hover{transform:scale(1.05)}.calendar-mini-modal{min-width:60px}.calendar-mini-small{min-width:32px}.event-status.upcoming{background:linear-gradient(45deg,#3b82f6,#1d4ed8)}.event-status.ongoing{background:linear-gradient(45deg,#10b981,#047857)}.event-status.completed{background:linear-gradient(45deg,#6b7280,#374151)}.timeline{padding-left:2rem;position:relative}.timeline:before{background:#e5e7eb;bottom:0;content:"";left:.5rem;position:absolute;top:0;width:2px}.timeline-item{margin-bottom:1.5rem;position:relative}.timeline-item:before{background:#6366f1;border-radius:50%;content:"";height:10px;left:-2rem;position:absolute;top:.25rem;width:10px}.timeline-time{color:#6366f1;font-weight:600;margin-bottom:.5rem}.timeline-content{margin-left:1rem}.stats-icon{align-items:center;border-radius:12px;display:flex;font-size:1.5rem;height:48px;justify-content:center;width:48px}</style>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-brand">
+            <h5>
+                <i class="bi bi-mortarboard-fill"></i>
+                Kiaalap
+            </h5>
+            <button class="sidebar-close" id="sidebarClose">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+    </div>
+
+    <nav class="sidebar-nav">
+        <div class="menu-section">
+            <div class="menu-section-title">Main</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#dashboardSubmenu" aria-expanded="false">
+                        <i class="bi bi-speedometer2"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <ul id="dashboardSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="index.html">Dashboard v.1</a></li>
+                        <li><a class="nav-link " href="index-1.html">Dashboard v.2</a></li>
+                        <li><a class="nav-link " href="index-2.html">Dashboard v.3</a></li>
+                        <li><a class="nav-link " href="analytics.html">Analytics</a></li>
+                        <li><a class="nav-link " href="widgets.html">Widgets</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="events.html">
+                        <i class="bi bi-calendar-event"></i>
+                        <span>Events</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Academic</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#professorsSubmenu" aria-expanded="false">
+                        <i class="bi bi-person-badge"></i>
+                        <span>Professors</span>
+                    </a>
+                    <ul id="professorsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="all-professors.html">All Professors</a></li>
+                        <li><a class="nav-link " href="add-professor.html">Add Professor</a></li>
+                        <li><a class="nav-link " href="edit-professor.html">Edit Professor</a></li>
+                        <li><a class="nav-link " href="professor-profile.html">Professor Profile</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#studentsSubmenu" aria-expanded="false">
+                        <i class="bi bi-people"></i>
+                        <span>Students</span>
+                    </a>
+                    <ul id="studentsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="all-students.html">All Students</a></li>
+                        <li><a class="nav-link " href="add-student.html">Add Student</a></li>
+                        <li><a class="nav-link " href="edit-student.html">Edit Student</a></li>
+                        <li><a class="nav-link " href="student-profile.html">Student Profile</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#coursesSubmenu" aria-expanded="false">
+                        <i class="bi bi-book"></i>
+                        <span>Courses</span>
+                    </a>
+                    <ul id="coursesSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="all-courses.html">All Courses</a></li>
+                        <li><a class="nav-link " href="add-course.html">Add Course</a></li>
+                        <li><a class="nav-link " href="edit-course.html">Edit Course</a></li>
+                        <li><a class="nav-link " href="course-info.html">Course Info</a></li>
+                        <li><a class="nav-link " href="course-payment.html">Course Payment</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#librarySubmenu" aria-expanded="false">
+                        <i class="bi bi-journal-bookmark"></i>
+                        <span>Library</span>
+                    </a>
+                    <ul id="librarySubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="library-assets.html">Library Assets</a></li>
+                        <li><a class="nav-link " href="add-library-assets.html">Add Library Asset</a></li>
+                        <li><a class="nav-link " href="edit-library-assets.html">Edit Library Asset</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#departmentsSubmenu" aria-expanded="false">
+                        <i class="bi bi-building"></i>
+                        <span>Departments</span>
+                    </a>
+                    <ul id="departmentsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="departments.html">Departments List</a></li>
+                        <li><a class="nav-link " href="add-department.html">Add Department</a></li>
+                        <li><a class="nav-link " href="edit-department.html">Edit Department</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Communication</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#mailboxSubmenu" aria-expanded="false">
+                        <i class="bi bi-envelope"></i>
+                        <span>Mailbox</span>
+                    </a>
+                    <ul id="mailboxSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="mailbox.html">Inbox</a></li>
+                        <li><a class="nav-link " href="mailbox-compose.html">Compose</a></li>
+                        <li><a class="nav-link " href="mailbox-view.html">View Message</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Interface</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#componentsSubmenu" aria-expanded="false">
+                        <i class="bi bi-layout-wtf"></i>
+                        <span>Components</span>
+                    </a>
+                    <ul id="componentsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="buttons.html">Buttons</a></li>
+                        <li><a class="nav-link " href="alerts.html">Alerts</a></li>
+                        <li><a class="nav-link " href="modals.html">Modals</a></li>
+                        <li><a class="nav-link " href="tabs.html">Tabs</a></li>
+                        <li><a class="nav-link " href="accordion.html">Accordion</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#formsSubmenu" aria-expanded="false">
+                        <i class="bi bi-card-list"></i>
+                        <span>Forms</span>
+                    </a>
+                    <ul id="formsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="basic-form-element.html">Basic Forms</a></li>
+                        <li><a class="nav-link " href="advance-form-element.html">Advanced Forms</a></li>
+                        <li><a class="nav-link " href="password-meter.html">Password Meter</a></li>
+                        <li><a class="nav-link " href="multi-upload.html">File Upload</a></li>
+                        <li><a class="nav-link " href="images-cropper.html">Image Cropper</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#chartsSubmenu" aria-expanded="false">
+                        <i class="bi bi-bar-chart"></i>
+                        <span>Charts</span>
+                    </a>
+                    <ul id="chartsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="line-charts.html">Line Charts</a></li>
+                        <li><a class="nav-link " href="area-charts.html">Area Charts</a></li>
+                        <li><a class="nav-link " href="bar-charts.html">Bar Charts</a></li>
+                        <li><a class="nav-link " href="c3.html">C3 Charts</a></li>
+                        <li><a class="nav-link " href="peity.html">Peity Charts</a></li>
+                        <li><a class="nav-link " href="rounded-chart.html">Rounded Charts</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#tablesSubmenu" aria-expanded="false">
+                        <i class="bi bi-table"></i>
+                        <span>Tables</span>
+                    </a>
+                    <ul id="tablesSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="static-table.html">Static Tables</a></li>
+                        <li><a class="nav-link " href="data-table.html">Data Tables</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Developer Tools</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link " href="code-editor.html">
+                        <i class="bi bi-code-slash"></i>
+                        <span>Code Editor</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#uiToolsSubmenu" aria-expanded="false">
+                        <i class="bi bi-tools"></i>
+                        <span>UI Components</span>
+                    </a>
+                    <ul id="uiToolsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="preloader.html">Preloaders</a></li>
+                        <li><a class="nav-link " href="notifications.html">Notifications</a></li>
+                        <li><a class="nav-link " href="tree-view.html">Tree View</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#viewersSubmenu" aria-expanded="false">
+                        <i class="bi bi-eye"></i>
+                        <span>Viewers</span>
+                    </a>
+                    <ul id="viewersSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="pdf-viewer.html">PDF Viewer</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#mapsSubmenu" aria-expanded="false">
+                        <i class="bi bi-map"></i>
+                        <span>Maps</span>
+                    </a>
+                    <ul id="mapsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="google-map.html">Interactive Maps</a></li>
+                        <li><a class="nav-link " href="data-maps.html">Data Maps</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="menu-section">
+            <div class="menu-section-title">Pages</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#authSubmenu" aria-expanded="false">
+                        <i class="bi bi-shield-lock"></i>
+                        <span>Authentication</span>
+                    </a>
+                    <ul id="authSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="login.html">Login</a></li>
+                        <li><a class="nav-link " href="register.html">Register</a></li>
+                        <li><a class="nav-link " href="lock.html">Lock Screen</a></li>
+                        <li><a class="nav-link " href="password-recovery.html">Forgot Password</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#errorsSubmenu" aria-expanded="false">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        <span>Error Pages</span>
+                    </a>
+                    <ul id="errorsSubmenu" class="submenu collapse  list-unstyled">
+                        <li><a class="nav-link " href="404.html">404 Error</a></li>
+                        <li><a class="nav-link " href="500.html">500 Error</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</aside>
+<!-- Main Content Wrapper -->
+<div class="main-wrapper" id="mainWrapper">
+    <!-- Header -->
+    <nav class="navbar top-navbar">
+        <div class="container-fluid d-flex align-items-center h-100">
+            <!-- Hamburger Menu -->
+            <button class="hamburger-menu" id="sidebarToggle">
+                <i class="bi bi-list"></i>
+            </button>
+    
+            <!-- Breadcrumb for desktop -->
+            <nav aria-label="breadcrumb" class="d-none d-lg-block ms-3">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active">Events</li>
+                </ol>
+            </nav>
+    
+            <!-- Logo for mobile -->
+            <div class="navbar-brand d-lg-none fw-bold me-auto">Kiaalap</div>
+    
+            <!-- Spacer for desktop -->
+            <div class="flex-grow-1 d-none d-lg-block"></div>
+    
+            <!-- Right Actions -->
+            <div class="d-flex align-items-center gap-2">
+                <!-- Search -->
+                <div class="search-container">
+                    <button class="btn btn-light btn-icon" id="searchToggle">
+                        <i class="bi bi-search"></i>
+                    </button>
+    
+                    <form class="search-form" id="searchForm">
+                        <i class="bi bi-search search-icon"></i>
+                        <input type="text"
+                               class="form-control"
+                               id="searchInput"
+                               placeholder="Search..."
+                               data-bs-toggle="dropdown">
+                        <button type="button" class="close-search" id="closeSearch">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+    
+                        <ul class="dropdown-menu w-100 mt-2">
+                            <li><a class="dropdown-item" href="#">Student Registration</a></li>
+                            <li><a class="dropdown-item" href="#">Course Management</a></li>
+                            <li><a class="dropdown-item" href="#">Grade Submission</a></li>
+                            <li><a class="dropdown-item" href="#">Faculty Directory</a></li>
+                            <li><a class="dropdown-item" href="#">Library Resources</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Advanced Search</a></li>
+                        </ul>
+                    </form>
+                </div>
+    
+                <!-- Notifications -->
+                <div class="dropdown">
+                    <button class="btn btn-light btn-icon position-relative" data-bs-toggle="dropdown" id="notificationsToggle">
+                        <i class="bi bi-bell"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">3</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" style="width: 320px;">
+                        <li class="dropdown-header d-flex align-items-center justify-content-between">
+                            <span>Notifications</span>
+                            <small class="text-muted">3 new</small>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item py-2" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="rounded-circle bg-primary bg-opacity-10 p-2 me-3" style="width: 40px; height: 40px;">
+                                        <i class="bi bi-calendar-check text-primary"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="fw-semibold">New Event</div>
+                                        <div class="text-muted small">Science Fair on March 15</div>
+                                        <div class="text-muted small">5 minutes ago</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item py-2" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="rounded-circle bg-success bg-opacity-10 p-2 me-3" style="width: 40px; height: 40px;">
+                                        <i class="bi bi-check-circle text-success"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="fw-semibold">Assignment Submitted</div>
+                                        <div class="text-muted small">John submitted his project</div>
+                                        <div class="text-muted small">2 hours ago</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item py-2" href="#">
+                                <div class="d-flex align-items-center">
+                                    <div class="rounded-circle bg-warning bg-opacity-10 p-2 me-3" style="width: 40px; height: 40px;">
+                                        <i class="bi bi-exclamation-triangle text-warning"></i>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="fw-semibold">System Alert</div>
+                                        <div class="text-muted small">Database backup completed</div>
+                                        <div class="text-muted small">Yesterday</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item text-center" href="notifications.html">
+                                <small>View all notifications</small>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+    
+                <!-- Quick Actions -->
+                <div class="dropdown">
+                    <button class="btn btn-light btn-icon" data-bs-toggle="dropdown">
+                        <i class="bi bi-plus-lg"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="add-student.html"><i class="bi bi-person-plus me-2"></i>Add Student</a></li>
+                        <li><a class="dropdown-item" href="add-course.html"><i class="bi bi-book me-2"></i>Add Course</a></li>
+                        <li><a class="dropdown-item" href="add-professor.html"><i class="bi bi-person-badge me-2"></i>Add Professor</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-calendar-plus me-2"></i>Schedule Event</a></li>
+                    </ul>
+                </div>
+    
+                <!-- User Menu -->
+                <div class="dropdown">
+                    <button class="btn btn-light d-flex align-items-center" data-bs-toggle="dropdown">
+                        <div class="user-avatar me-2">
+                            <img src="https://ui-avatars.com/api/?name=Sarah Johnson&background=6366f1&color=fff&size=32"
+                                 alt="Sarah Johnson"
+                                 class="rounded-circle"
+                                 width="32"
+                                 height="32">
+                        </div>
+                        <span class="d-none d-md-inline">Sarah Johnson</span>
+                        <i class="bi bi-chevron-down ms-1"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Settings</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-question-circle me-2"></i>Help Center</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Main Content -->
+    <main class="dashboard-content" id="main-content">
+        <div class="container-fluid">
+            <!-- Page Header -->
+            <div class="mb-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h1 class="h3 mb-0 text-gray-800">Events Management</h1>
+                        <p class="text-muted mb-0">Manage and track institutional events and activities</p>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-secondary" id="calendarViewBtn">
+                            <i class="bi bi-calendar-month me-1"></i> Calendar View
+                        </button>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addEventModal">
+                            <i class="bi bi-calendar-plus me-1"></i> Add Event
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event Stats -->
+            <div class="dashboard-row">
+                <h2 class="h5 fw-semibold text-gray-800 mb-4">Event Overview</h2>
+                <div class="dashboard-grid grid-cols-4">
+                    <div class="dashboard-card">
+                        <div class="dashboard-card-body p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div>
+                                    <p class="text-muted mb-1 small">Total Events</p>
+                                    <h4 class="mb-0">28</h4>
+                                </div>
+                                <div class="stats-icon bg-primary bg-opacity-10 text-primary">
+                                    <i class="bi bi-calendar-event-fill"></i>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <span class="badge bg-success-subtle text-success me-2">
+                                    <i class="bi bi-arrow-up"></i> 8%
+                                </span>
+                                <span class="text-muted small">vs last month</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <div class="dashboard-card-body p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div>
+                                    <p class="text-muted mb-1 small">Upcoming</p>
+                                    <h4 class="mb-0">12</h4>
+                                </div>
+                                <div class="stats-icon bg-info bg-opacity-10 text-info">
+                                    <i class="bi bi-clock-history"></i>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <span class="badge bg-info-subtle text-info me-2">
+                                    <i class="bi bi-calendar-check"></i> This month
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <div class="dashboard-card-body p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div>
+                                    <p class="text-muted mb-1 small">Ongoing</p>
+                                    <h4 class="mb-0">3</h4>
+                                </div>
+                                <div class="stats-icon bg-success bg-opacity-10 text-success">
+                                    <i class="bi bi-play-circle-fill"></i>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <span class="badge bg-success-subtle text-success me-2">
+                                    <i class="bi bi-activity"></i> Active now
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <div class="dashboard-card-body p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div>
+                                    <p class="text-muted mb-1 small">Attendees</p>
+                                    <h4 class="mb-0">1,247</h4>
+                                </div>
+                                <div class="stats-icon bg-warning bg-opacity-10 text-warning">
+                                    <i class="bi bi-people-fill"></i>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <span class="badge bg-warning-subtle text-warning me-2">
+                                    <i class="bi bi-arrow-up"></i> 23%
+                                </span>
+                                <span class="text-muted small">vs last month</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Events List and Calendar -->
+            <div class="dashboard-row">
+                <div class="dashboard-grid" style="grid-template-columns: 2fr 1fr;">
+                    <!-- Events List -->
+                    <div class="dashboard-card">
+                        <div class="dashboard-card-header py-4 px-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0">Recent Events</h6>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-light" data-bs-toggle="dropdown">
+                                        <i class="bi bi-three-dots"></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">View All</a></li>
+                                        <li><a class="dropdown-item" href="#">Export List</a></li>
+                                        <li><a class="dropdown-item" href="#">Filter Events</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dashboard-card-body p-0">
+                            <div class="event-list">
+                                <!-- Event Item 1 -->
+                                <div class="d-flex align-items-center p-4 border-bottom hover-bg-light">
+                                    <div class="calendar-mini bg-primary text-white rounded text-center me-3 flex-shrink-0 p-3">
+                                        <div class="small fw-bold">MAR</div>
+                                        <div class="h4 mb-0">15</div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1">Annual Science Fair</h6>
+                                        <p class="text-muted small mb-2">Students showcase their innovative projects and experiments</p>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <span class="badge bg-primary-subtle text-primary">Academic</span>
+                                            <small class="text-muted">
+                                                <i class="bi bi-clock me-1"></i> 9:00 AM - 5:00 PM
+                                            </small>
+                                            <small class="text-muted">
+                                                <i class="bi bi-geo-alt me-1"></i> Main Auditorium
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="text-end">
+                                        <span class="badge bg-info event-status upcoming">Upcoming</span>
+                                        <div class="mt-2">
+                                            <small class="text-muted">124 registered</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Event Item 2 -->
+                                <div class="d-flex align-items-center p-4 border-bottom hover-bg-light">
+                                    <div class="calendar-mini bg-success text-white rounded text-center me-3 flex-shrink-0 p-3">
+                                        <div class="small fw-bold">MAR</div>
+                                        <div class="h4 mb-0">12</div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1">Faculty Development Workshop</h6>
+                                        <p class="text-muted small mb-2">Professional development session on modern teaching methodologies</p>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <span class="badge bg-success-subtle text-success">Professional</span>
+                                            <small class="text-muted">
+                                                <i class="bi bi-clock me-1"></i> 2:00 PM - 4:00 PM
+                                            </small>
+                                            <small class="text-muted">
+                                                <i class="bi bi-geo-alt me-1"></i> Conference Room A
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="text-end">
+                                        <span class="badge bg-success event-status ongoing">Ongoing</span>
+                                        <div class="mt-2">
+                                            <small class="text-muted">45 attending</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Event Item 3 -->
+                                <div class="d-flex align-items-center p-4 border-bottom hover-bg-light">
+                                    <div class="calendar-mini bg-warning text-white rounded text-center me-3 flex-shrink-0 p-3">
+                                        <div class="small fw-bold">MAR</div>
+                                        <div class="h4 mb-0">18</div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1">Student Council Elections</h6>
+                                        <p class="text-muted small mb-2">Annual elections for student representatives</p>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <span class="badge bg-warning-subtle text-warning">Student Life</span>
+                                            <small class="text-muted">
+                                                <i class="bi bi-clock me-1"></i> 8:00 AM - 6:00 PM
+                                            </small>
+                                            <small class="text-muted">
+                                                <i class="bi bi-geo-alt me-1"></i> Campus Wide
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="text-end">
+                                        <span class="badge bg-info event-status upcoming">Upcoming</span>
+                                        <div class="mt-2">
+                                            <small class="text-muted">All students eligible</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Event Item 4 -->
+                                <div class="d-flex align-items-center p-4 border-bottom hover-bg-light">
+                                    <div class="calendar-mini bg-info text-white rounded text-center me-3 flex-shrink-0 p-3">
+                                        <div class="small fw-bold">MAR</div>
+                                        <div class="h4 mb-0">22</div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1">Alumni Networking Event</h6>
+                                        <p class="text-muted small mb-2">Connect current students with successful alumni</p>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <span class="badge bg-info-subtle text-info">Networking</span>
+                                            <small class="text-muted">
+                                                <i class="bi bi-clock me-1"></i> 6:00 PM - 9:00 PM
+                                            </small>
+                                            <small class="text-muted">
+                                                <i class="bi bi-geo-alt me-1"></i> Student Center
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="text-end">
+                                        <span class="badge bg-info event-status upcoming">Upcoming</span>
+                                        <div class="mt-2">
+                                            <small class="text-muted">67 registered</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Event Item 5 -->
+                                <div class="d-flex align-items-center p-4">
+                                    <div class="calendar-mini bg-secondary text-white rounded text-center me-3 flex-shrink-0 p-3">
+                                        <div class="small fw-bold">MAR</div>
+                                        <div class="h4 mb-0">08</div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1">International Women's Day Celebration</h6>
+                                        <p class="text-muted small mb-2">Honoring achievements of women in academia and research</p>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <span class="badge bg-secondary-subtle text-secondary">Cultural</span>
+                                            <small class="text-muted">
+                                                <i class="bi bi-clock me-1"></i> 1:00 PM - 4:00 PM
+                                            </small>
+                                            <small class="text-muted">
+                                                <i class="bi bi-geo-alt me-1"></i> Grand Hall
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="text-end">
+                                        <span class="badge bg-secondary event-status completed">Completed</span>
+                                        <div class="mt-2">
+                                            <small class="text-muted">89 attended</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mini Calendar and Quick Actions -->
+                    <div class="d-flex flex-column gap-4">
+                        <!-- Mini Calendar -->
+                        <div class="dashboard-card">
+                            <div class="dashboard-card-header py-3 px-4">
+                                <h6 class="mb-0">March 2024</h6>
+                            </div>
+                            <div class="dashboard-card-body px-4 py-3">
+                                <div class="calendar-grid">
+                                    <div class="d-grid gap-1" style="grid-template-columns: repeat(7, 1fr);">
+                                        <div class="text-center small text-muted fw-bold">S</div>
+                                        <div class="text-center small text-muted fw-bold">M</div>
+                                        <div class="text-center small text-muted fw-bold">T</div>
+                                        <div class="text-center small text-muted fw-bold">W</div>
+                                        <div class="text-center small text-muted fw-bold">T</div>
+                                        <div class="text-center small text-muted fw-bold">F</div>
+                                        <div class="text-center small text-muted fw-bold">S</div>
+
+                                        <div class="text-center small text-muted">26</div>
+                                        <div class="text-center small text-muted">27</div>
+                                        <div class="text-center small text-muted">28</div>
+                                        <div class="text-center small text-muted">29</div>
+                                        <div class="text-center small">1</div>
+                                        <div class="text-center small">2</div>
+                                        <div class="text-center small">3</div>
+
+                                        <div class="text-center small">4</div>
+                                        <div class="text-center small">5</div>
+                                        <div class="text-center small">6</div>
+                                        <div class="text-center small">7</div>
+                                        <div class="text-center small bg-secondary text-white rounded">8</div>
+                                        <div class="text-center small">9</div>
+                                        <div class="text-center small">10</div>
+
+                                        <div class="text-center small">11</div>
+                                        <div class="text-center small bg-success text-white rounded">12</div>
+                                        <div class="text-center small bg-primary text-white rounded fw-bold">13</div>
+                                        <div class="text-center small">14</div>
+                                        <div class="text-center small bg-primary text-white rounded">15</div>
+                                        <div class="text-center small">16</div>
+                                        <div class="text-center small">17</div>
+
+                                        <div class="text-center small bg-warning text-white rounded">18</div>
+                                        <div class="text-center small">19</div>
+                                        <div class="text-center small">20</div>
+                                        <div class="text-center small">21</div>
+                                        <div class="text-center small bg-info text-white rounded">22</div>
+                                        <div class="text-center small">23</div>
+                                        <div class="text-center small">24</div>
+
+                                        <div class="text-center small">25</div>
+                                        <div class="text-center small">26</div>
+                                        <div class="text-center small">27</div>
+                                        <div class="text-center small">28</div>
+                                        <div class="text-center small">29</div>
+                                        <div class="text-center small">30</div>
+                                        <div class="text-center small">31</div>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="bg-primary rounded me-2" style="width: 12px; height: 12px;"></div>
+                                        <small>Academic Events</small>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="bg-success rounded me-2" style="width: 12px; height: 12px;"></div>
+                                        <small>Professional Development</small>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-warning rounded me-2" style="width: 12px; height: 12px;"></div>
+                                        <small>Student Activities</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="dashboard-card">
+                            <div class="dashboard-card-header py-3 px-4">
+                                <h6 class="mb-0">Quick Actions</h6>
+                            </div>
+                            <div class="dashboard-card-body px-4 py-3">
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addEventModal">
+                                        <i class="bi bi-calendar-plus me-1"></i> Schedule Event
+                                    </button>
+                                    <button class="btn btn-outline-success btn-sm">
+                                        <i class="bi bi-people me-1"></i> Manage Attendees
+                                    </button>
+                                    <button class="btn btn-outline-info btn-sm">
+                                        <i class="bi bi-geo-alt me-1"></i> Book Venues
+                                    </button>
+                                    <button class="btn btn-outline-warning btn-sm">
+                                        <i class="bi bi-bell me-1"></i> Send Reminders
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+            <!-- Footer -->
+            <footer class="dashboard-footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="mb-0">&copy; 2026 Kiaalap. All rights reserved.</p>
+                        </div>
+                        <div class="col-md-6 text-md-end">
+                            <p class="mb-0">Built with <i class="bi bi-heart-fill text-danger"></i> for education</p>
+                        </div>
+                    </div>
+                </div>
+            </footer></div>
+
+<!-- Event Details Modal -->
+<div class="modal fade" id="eventDetailsModal" tabindex="-1" aria-labelledby="eventDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <div class="d-flex align-items-center">
+                    <div class="calendar-mini-modal bg-white text-primary rounded text-center me-3 p-2">
+                        <div class="small fw-bold" id="modalEventMonth">MAR</div>
+                        <div class="h5 mb-0" id="modalEventDay">15</div>
+                    </div>
+                    <div>
+                        <h5 class="modal-title mb-0" id="eventDetailsModalLabel">Annual Science Fair</h5>
+                        <small class="opacity-75" id="modalEventTime">9:00 AM - 5:00 PM</small>
+                    </div>
+                </div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="mb-4">
+                            <h6 class="text-muted mb-2">Event Description</h6>
+                            <p id="modalEventDescription" class="mb-0">Students showcase their innovative projects and experiments in this annual celebration of scientific achievement and discovery.</p>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-sm-6">
+                                <h6 class="text-muted mb-2">Location</h6>
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-geo-alt text-primary me-2"></i>
+                                    <span id="modalEventLocation">Main Auditorium</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <h6 class="text-muted mb-2">Category</h6>
+                                <span class="badge bg-primary-subtle text-primary" id="modalEventCategory">Academic</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h6 class="text-muted mb-2">Event Agenda</h6>
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-time">9:00 AM</div>
+                                    <div class="timeline-content">
+                                        <strong>Registration & Welcome</strong>
+                                        <p class="text-muted small mb-0">Check-in and morning refreshments</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-time">10:00 AM</div>
+                                    <div class="timeline-content">
+                                        <strong>Opening Ceremony</strong>
+                                        <p class="text-muted small mb-0">Welcome address by Dean of Sciences</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-time">11:00 AM</div>
+                                    <div class="timeline-content">
+                                        <strong>Project Presentations</strong>
+                                        <p class="text-muted small mb-0">Student project demonstrations and displays</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-time">3:00 PM</div>
+                                    <div class="timeline-content">
+                                        <strong>Awards Ceremony</strong>
+                                        <p class="text-muted small mb-0">Recognition of outstanding projects</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <h6 class="text-muted mb-2">Event Organizers</h6>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="d-flex align-items-center">
+                                    <img src="https://ui-avatars.com/api/?name=Dr+Sarah+Johnson&background=6366f1&color=fff&size=32"
+                                         class="rounded-circle me-2" width="32" height="32" alt="Dr. Sarah Johnson">
+                                    <div>
+                                        <div class="fw-semibold small">Dr. Sarah Johnson</div>
+                                        <div class="text-muted small">Science Department Head</div>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <img src="https://ui-avatars.com/api/?name=Prof+Michael+Chen&background=10b981&color=fff&size=32"
+                                         class="rounded-circle me-2" width="32" height="32" alt="Prof. Michael Chen">
+                                    <div>
+                                        <div class="fw-semibold small">Prof. Michael Chen</div>
+                                        <div class="text-muted small">Event Coordinator</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card bg-light border-0">
+                            <div class="card-header bg-transparent border-0">
+                                <h6 class="mb-0">Event Status</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <span>Registration Status</span>
+                                    <span class="badge bg-success" id="modalEventStatus">Upcoming</span>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <span>Registered</span>
+                                    <span class="fw-bold" id="modalEventRegistered">124 / 200</span>
+                                </div>
+                                <div class="progress mb-3" style="height: 8px;">
+                                    <div class="progress-bar bg-success" style="width: 62%" id="modalEventProgress"></div>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-primary btn-sm">
+                                        <i class="bi bi-calendar-plus me-1"></i> Add to Calendar
+                                    </button>
+                                    <button class="btn btn-outline-secondary btn-sm">
+                                        <i class="bi bi-share me-1"></i> Share Event
+                                    </button>
+                                    <button class="btn btn-outline-info btn-sm">
+                                        <i class="bi bi-people me-1"></i> View Attendees
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <h6 class="text-muted mb-3">Related Events</h6>
+                            <div class="small">
+                                <div class="d-flex align-items-center mb-2 p-2 bg-light rounded">
+                                    <div class="calendar-mini-small bg-info text-white rounded text-center me-2 p-1">
+                                        <div style="font-size: 0.6rem;">MAR</div>
+                                        <div style="font-size: 0.8rem;">22</div>
+                                    </div>
+                                    <div>
+                                        <div class="fw-semibold">Alumni Networking</div>
+                                        <div class="text-muted" style="font-size: 0.75rem;">6:00 PM</div>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center p-2 bg-light rounded">
+                                    <div class="calendar-mini-small bg-warning text-white rounded text-center me-2 p-1">
+                                        <div style="font-size: 0.6rem;">MAR</div>
+                                        <div style="font-size: 0.8rem;">18</div>
+                                    </div>
+                                    <div>
+                                        <div class="fw-semibold">Student Elections</div>
+                                        <div class="text-muted" style="font-size: 0.75rem;">8:00 AM</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-warning">
+                    <i class="bi bi-pencil me-1"></i> Edit Event
+                </button>
+                <button type="button" class="btn btn-primary">
+                    <i class="bi bi-person-plus me-1"></i> Register for Event
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Event Modal -->
+<div class="modal fade" id="addEventModal" tabindex="-1" aria-labelledby="addEventModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addEventModalLabel">Create New Event</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addEventForm">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="mb-3">
+                                <label for="eventTitle" class="form-label">Event Title</label>
+                                <input type="text" class="form-control" id="eventTitle" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="eventCategory" class="form-label">Category</label>
+                                <select class="form-select" id="eventCategory" required>
+                                    <option value="">Select Category</option>
+                                    <option value="academic">Academic</option>
+                                    <option value="professional">Professional</option>
+                                    <option value="student-life">Student Life</option>
+                                    <option value="networking">Networking</option>
+                                    <option value="cultural">Cultural</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="eventDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="eventDescription" rows="3"></textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="eventDate" class="form-label">Date</label>
+                                <input type="date" class="form-control" id="eventDate" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label for="eventStartTime" class="form-label">Start Time</label>
+                                <input type="time" class="form-control" id="eventStartTime" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label for="eventEndTime" class="form-label">End Time</label>
+                                <input type="time" class="form-control" id="eventEndTime" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="eventLocation" class="form-label">Location</label>
+                                <input type="text" class="form-control" id="eventLocation" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="eventCapacity" class="form-label">Capacity</label>
+                                <input type="number" class="form-control" id="eventCapacity" min="1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="registrationRequired">
+                            <label class="form-check-label" for="registrationRequired">
+                                Registration Required
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Create Event</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Load JavaScript -->
+
+</body>
+</html>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Event data for demonstration
+    const eventData = {
+        '15': {
+            title: 'Annual Science Fair',
+            month: 'MAR',
+            day: '15',
+            time: '9:00 AM - 5:00 PM',
+            description: 'Students showcase their innovative projects and experiments in this annual celebration of scientific achievement and discovery.',
+            location: 'Main Auditorium',
+            category: 'Academic',
+            categoryClass: 'bg-primary-subtle text-primary',
+            status: 'Upcoming',
+            statusClass: 'bg-info',
+            registered: '124 / 200',
+            progress: '62%',
+            headerClass: 'bg-primary'
+        },
+        '12': {
+            title: 'Faculty Development Workshop',
+            month: 'MAR',
+            day: '12',
+            time: '2:00 PM - 4:00 PM',
+            description: 'Professional development session on modern teaching methodologies and innovative educational technologies.',
+            location: 'Conference Room A',
+            category: 'Professional',
+            categoryClass: 'bg-success-subtle text-success',
+            status: 'Ongoing',
+            statusClass: 'bg-success',
+            registered: '45 / 50',
+            progress: '90%',
+            headerClass: 'bg-success'
+        },
+        '18': {
+            title: 'Student Council Elections',
+            month: 'MAR',
+            day: '18',
+            time: '8:00 AM - 6:00 PM',
+            description: 'Annual elections for student representatives across all departments and academic levels.',
+            location: 'Campus Wide',
+            category: 'Student Life',
+            categoryClass: 'bg-warning-subtle text-warning',
+            status: 'Upcoming',
+            statusClass: 'bg-info',
+            registered: 'All students eligible',
+            progress: '0%',
+            headerClass: 'bg-warning'
+        },
+        '22': {
+            title: 'Alumni Networking Event',
+            month: 'MAR',
+            day: '22',
+            time: '6:00 PM - 9:00 PM',
+            description: 'Connect current students with successful alumni from various industries and career paths.',
+            location: 'Student Center',
+            category: 'Networking',
+            categoryClass: 'bg-info-subtle text-info',
+            status: 'Upcoming',
+            statusClass: 'bg-info',
+            registered: '67 / 100',
+            progress: '67%',
+            headerClass: 'bg-info'
+        },
+        '08': {
+            title: 'International Women\'s Day Celebration',
+            month: 'MAR',
+            day: '08',
+            time: '1:00 PM - 4:00 PM',
+            description: 'Honoring achievements of women in academia and research with inspiring talks and panel discussions.',
+            location: 'Grand Hall',
+            category: 'Cultural',
+            categoryClass: 'bg-secondary-subtle text-secondary',
+            status: 'Completed',
+            statusClass: 'bg-secondary',
+            registered: '89 attended',
+            progress: '100%',
+            headerClass: 'bg-secondary'
+        }
+    };
+
+    // Event management functionality
+    const addEventForm = document.getElementById('addEventForm');
+    const calendarViewBtn = document.getElementById('calendarViewBtn');
+    const eventDetailsModal = new bootstrap.Modal(document.getElementById('eventDetailsModal'));
+
+    // Handle clicking on calendar mini elements
+    const calendarMinis = document.querySelectorAll('.calendar-mini');
+    calendarMinis.forEach(mini => {
+        mini.addEventListener('click', function() {
+            // Extract day from the calendar mini element
+            const dayElement = this.querySelector('.h4');
+            const day = dayElement.textContent.trim();
+
+            // Get event data for this day
+            const event = eventData[day];
+            if (event) {
+                // Populate modal with event data
+                document.getElementById('modalEventMonth').textContent = event.month;
+                document.getElementById('modalEventDay').textContent = event.day;
+                document.getElementById('eventDetailsModalLabel').textContent = event.title;
+                document.getElementById('modalEventTime').textContent = event.time;
+                document.getElementById('modalEventDescription').textContent = event.description;
+                document.getElementById('modalEventLocation').textContent = event.location;
+                document.getElementById('modalEventCategory').textContent = event.category;
+                document.getElementById('modalEventCategory').className = `badge ${event.categoryClass}`;
+                document.getElementById('modalEventStatus').textContent = event.status;
+                document.getElementById('modalEventStatus').className = `badge ${event.statusClass}`;
+                document.getElementById('modalEventRegistered').textContent = event.registered;
+                document.getElementById('modalEventProgress').style.width = event.progress;
+
+                // Update modal header color
+                const modalHeader = document.querySelector('#eventDetailsModal .modal-header');
+                modalHeader.className = `modal-header ${event.headerClass} text-white`;
+
+                // Show the modal
+                eventDetailsModal.show();
+            }
+        });
+    });
+
+    // Handle event form submission
+    if (addEventForm) {
+        const createEventBtn = document.querySelector('#addEventModal .btn-primary');
+        createEventBtn.addEventListener('click', function() {
+            const formData = new FormData(addEventForm);
+
+            // Basic validation
+            const title = document.getElementById('eventTitle').value;
+            const category = document.getElementById('eventCategory').value;
+            const date = document.getElementById('eventDate').value;
+            const startTime = document.getElementById('eventStartTime').value;
+            const location = document.getElementById('eventLocation').value;
+
+            if (!title || !category || !date || !startTime || !location) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            // Here you would typically send the data to your backend
+            console.log('Creating event:', {
+                title,
+                category,
+                date,
+                startTime,
+                location
+            });
+
+            // Close modal and reset form
+            const modal = bootstrap.Modal.getInstance(document.getElementById('addEventModal'));
+            modal.hide();
+            addEventForm.reset();
+
+            // Show success message
+            alert('Event created successfully!');
+        });
+    }
+
+    // Calendar view toggle (placeholder)
+    if (calendarViewBtn) {
+        calendarViewBtn.addEventListener('click', function() {
+            alert('Calendar view would be implemented here');
+        });
+    }
+
+    // Event card hover effects
+    const eventItems = document.querySelectorAll('.event-list > div');
+    eventItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.backgroundColor = '#f8f9fa';
+        });
+
+        item.addEventListener('mouseleave', function() {
+            this.style.backgroundColor = '';
+        });
+    });
+
+    // Mini calendar date clicks in the calendar widget
+    const calendarDates = document.querySelectorAll('.calendar-grid .text-center:not(.text-muted)');
+    calendarDates.forEach(date => {
+        if (date.classList.contains('bg-primary') || date.classList.contains('bg-success') ||
+            date.classList.contains('bg-warning') || date.classList.contains('bg-info') ||
+            date.classList.contains('bg-secondary')) {
+            date.style.cursor = 'pointer';
+            date.addEventListener('click', function() {
+                const day = this.textContent.trim();
+                const event = eventData[day];
+                if (event) {
+                    // Populate and show modal just like clicking on calendar mini
+                    document.getElementById('modalEventMonth').textContent = event.month;
+                    document.getElementById('modalEventDay').textContent = event.day;
+                    document.getElementById('eventDetailsModalLabel').textContent = event.title;
+                    document.getElementById('modalEventTime').textContent = event.time;
+                    document.getElementById('modalEventDescription').textContent = event.description;
+                    document.getElementById('modalEventLocation').textContent = event.location;
+                    document.getElementById('modalEventCategory').textContent = event.category;
+                    document.getElementById('modalEventCategory').className = `badge ${event.categoryClass}`;
+                    document.getElementById('modalEventStatus').textContent = event.status;
+                    document.getElementById('modalEventStatus').className = `badge ${event.statusClass}`;
+                    document.getElementById('modalEventRegistered').textContent = event.registered;
+                    document.getElementById('modalEventProgress').style.width = event.progress;
+
+                    // Update modal header color
+                    const modalHeader = document.querySelector('#eventDetailsModal .modal-header');
+                    modalHeader.className = `modal-header ${event.headerClass} text-white`;
+
+                    eventDetailsModal.show();
+                } else {
+                    alert(`No events scheduled for March ${day}`);
+                }
+            });
+        }
+    });
+});
+</script>
