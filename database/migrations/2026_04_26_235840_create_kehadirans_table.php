@@ -17,8 +17,9 @@ return new class extends Migration
             $table->date('tanggal');
             $table->time('jam_masuk')->nullable();
             $table->time('jam_pulang')->nullable();
-            $table->enum('status_kehadiran', ['hadir', 'izin', 'sakit', 'alpha'])->default('hadir');
+            $table->enum('status_kehadiran', ['hadir', 'izin', 'sakit', 'alpa'])->default('hadir');
             $table->enum('status_ketepatan', ['tepat waktu', 'terlambat'])->nullable();
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }

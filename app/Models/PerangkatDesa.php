@@ -12,6 +12,9 @@ class PerangkatDesa extends Model
         'nama',
         'jabatan_id',
         'alamat_id',
+        'jenis_kelamin',
+        'no_hp',
+        'foto',
         'rfid_uid'
     ];
 

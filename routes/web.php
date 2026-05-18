@@ -5,10 +5,11 @@ use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KehadiranController;
 use App\Http\Controllers\PerangkatDesaController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('dashboard');
 });
 
 Route::get('/dashboard', function () {
@@ -24,6 +25,15 @@ Route::middleware('auth')->group(function () {
     Route::resource('jabatan', JabatanController::class);
     Route::resource('alamat', AlamatController::class);
     Route::resource('kehadiran', KehadiranController::class);
+
+    Route::get('/get-temp-rfid', function () {
+        return response()->json(['rfid_uid' => Cache::get('temp_rfid')]);
+    });
+
+    Route::get('/clear-temp-rfid', function () {
+        Cache::forget('temp_rfid');
+        return response()->json(['message' => 'Cache cleared']);
+    });
 });
 
 require __DIR__.'/auth.php';

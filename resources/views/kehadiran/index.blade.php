@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Perangkat Desa')
+@section('title', 'Kehadiran')
 
 @push('styles')
     <link rel="stylesheet" crossorigin href="{{ asset('template/assets/data-table-D3bj5bdn.css') }}">
@@ -19,7 +19,7 @@
             </div>
         </div>
 
-        <!-- Student DataTable -->
+        <!-- Kehadiran DataTable -->
         <div class="dashboard-card">
             <div class="dashboard-card-header py-4 px-4">
                 <h5 class="mb-0">Daftar Kehadiran</h5>
@@ -28,7 +28,7 @@
                 </small>
             </div>
             <div class="text-center dashboard-card-body px-4 py-4">
-                <table id="studentTable" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                <table id="dataTableDesa" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -37,6 +37,7 @@
                             <th>Jam Pulang</th>
                             <th>Kehadiran</th>
                             <th>Ketepatan</th>
+                            <th>Keterangan</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -52,7 +53,7 @@
                                         'hadir' => 'bg-success',
                                         'sakit' => 'bg-warning',
                                         'izin' => 'bg-info',
-                                        'alpha' => 'bg-danger',
+                                        'alpa' => 'bg-danger',
                                         default => 'bg-secondary',
                                     };
 
@@ -76,6 +77,7 @@
                                     <span>-</span>
                                     @endif
                                 </td>
+                                <td>{{ $kehadiran->keterangan ?? '-' }}</td>
                                 <td>
                                     <button class="btn-action btn-view" title="View"><i class="bi bi-eye"></i></button>
                                     <button class="btn-action btn-edit" title="Edit"><i class="bi bi-pencil"></i></button>
@@ -93,5 +95,5 @@
 @endsection
 
 @push('scripts')
-    {{-- <script type="module" crossorigin src="{{ asset('template/assets/data-table-DNS4anqs.js') }}"></script> --}}
+    <script type="module" crossorigin src="{{ asset('template/assets/data-table-DNS4anqs.js') }}"></script>
 @endpush

@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Tambah Perangkat Desa')
+@section('title', 'Edit Perangkat Desa')
 
 @section('content')
     <div class="container-fluid">
         <!-- Page Header -->
         <div class="dashboard-row">
             <div class="dashboard-grid grid-cols-1">
-                <h4 class="page-title">Tambah Perangkat Desa</h4>
-                <p class="text-muted">Isi informasi di bawah ini untuk menambahkan perangkat desa baru ke dalam sistem</p>
+                <h4 class="page-title">Edit Perangkat Desa</h4>
+                <p class="text-muted">Isi informasi di bawah ini untuk mengedit perangkat desa yang sudah ada</p>
             </div>
         </div>
 
@@ -24,8 +24,10 @@
                             <div class="tab-pane fade show active" id="basic" role="tabpanel"
                                 aria-labelledby="basic-tab">
                                 <form class="needs-validation" novalidate method="POST"
-                                    action="{{ route('perangkat-desa.store') }}" enctype="multipart/form-data">
+                                    action="{{ route('perangkat-desa.update', $perangkatDesa->id) }}"
+                                    enctype="multipart/form-data">
                                     @csrf
+                                    @method('PUT')
                                     <div class="row gx-4 gy-3">
                                         <div class="col-md-6 px-2">
                                             <div class="mb-4">
@@ -33,7 +35,8 @@
                                                         class="text-danger">*</span></label>
                                                 <input type="text" name="nik"
                                                     class="form-control @error('nik') is-invalid @enderror" id="nik"
-                                                    placeholder="Masukkan NIK" value="{{ old('nik') }}" required>
+                                                    placeholder="Masukkan NIK" value="{{ old('nik', $perangkatDesa->nik) }}"
+                                                    required>
                                                 @error('nik')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -47,7 +50,8 @@
                                                         class="text-danger">*</span></label>
                                                 <input type="text" name="nama"
                                                     class="form-control @error('nama') is-invalid @enderror" id="nama"
-                                                    placeholder="Masukkan nama" value="{{ old('nama') }}" required>
+                                                    placeholder="Masukkan nama"
+                                                    value="{{ old('nama', $perangkatDesa->nama) }}" required>
                                                 @error('nama')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -60,19 +64,19 @@
                                             <div class="mb-4">
                                                 <label for="rfid_uid" class="form-label">RFID UID <span
                                                         class="text-danger">*</span></label>
-
                                                 <div class="input-group">
                                                     <input type="text" name="rfid_uid"
                                                         class="form-control @error('rfid_uid') is-invalid @enderror"
-                                                        id="rfid_uid" placeholder="Tap Kartu ke alat pembaca..."
-                                                        value="{{ old('rfid_uid') }}" readonly required>
+                                                        id="rfid_uid" placeholder="Masukkan RFID UID"
+                                                        value="{{ old('rfid_uid', $perangkatDesa->rfid_uid) }}" readonly
+                                                        required>
                                                     <button class="btn btn-warning" type="button" id="btn-reset-rfid"
                                                         onclick="clearRFID()">
                                                         <i class="bi bi-arrow-clockwise"></i>Reset
                                                     </button>
                                                 </div>
                                                 @error('rfid_uid')
-                                                    <div class="invalid-feedback d-block">
+                                                    <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
                                                 @enderror
@@ -89,7 +93,7 @@
 
                                                     @foreach ($jabatans as $jabatan)
                                                         <option value="{{ $jabatan->id }}"
-                                                            {{ old('jabatan_id') == $jabatan->id ? 'selected' : '' }}>
+                                                            {{ old('jabatan_id', $perangkatDesa->jabatan_id) == $jabatan->id ? 'selected' : '' }}>
                                                             {{ $jabatan->nama_jabatan }}
                                                         </option>
                                                     @endforeach
@@ -111,7 +115,7 @@
                                                     <option value="" selected disabled>Pilih Alamat</option>
                                                     @foreach ($alamats as $alamat)
                                                         <option value="{{ $alamat->id }}"
-                                                            {{ old('alamat_id') == $alamat->id ? 'selected' : '' }}>
+                                                            {{ old('alamat_id', $perangkatDesa->alamat_id) == $alamat->id ? 'selected' : '' }}>
                                                             {{ $alamat->dusun }}
                                                         </option>
                                                     @endforeach
@@ -129,7 +133,8 @@
                                                         class="text-danger">*</span></label>
                                                 <input type="tel" name="no_hp"
                                                     class="form-control @error('no_hp') is-invalid @enderror" id="no_hp"
-                                                    placeholder="Enter phone number" value="{{ old('no_hp') }}" required>
+                                                    placeholder="Enter phone number"
+                                                    value="{{ old('no_hp', $perangkatDesa->no_hp) }}" required>
                                                 @error('no_hp')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -146,10 +151,10 @@
                                                     id="jenis_kelamin" required>
                                                     <option value="" selected disabled>Pilih Jenis Kelamin</option>
                                                     <option value="Laki-laki"
-                                                        {{ old('jenis_kelamin') == 'Laki-laki' ? 'selected' : '' }}>
+                                                        {{ old('jenis_kelamin', $perangkatDesa->jenis_kelamin) == 'Laki-laki' ? 'selected' : '' }}>
                                                         Laki-Laki</option>
                                                     <option value="Perempuan"
-                                                        {{ old('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>
+                                                        {{ old('jenis_kelamin', $perangkatDesa->jenis_kelamin) == 'Perempuan' ? 'selected' : '' }}>
                                                         Perempuan</option>
                                                 </select>
                                                 @error('jenis_kelamin')
@@ -191,21 +196,6 @@
 @endsection
 
 @push('scripts')
-    {{-- <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const forms = document.querySelectorAll('.needs-validation');
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        });
-    </script> --}}
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {

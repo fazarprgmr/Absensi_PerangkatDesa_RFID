@@ -7,6 +7,7 @@ use App\Models\Kehadiran;
 use App\Models\PerangkatDesa;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class KehadiranController extends Controller
 {
@@ -17,6 +18,10 @@ class KehadiranController extends Controller
         ]);
 
         $uid = $request->rfid_uid;
+
+        // Simpan UID ke cache selama 1 menit untuk form pendaftaran
+        Cache::put('temp_rfid', $uid, now()->addMinutes(1));
+
         $perangkatDesa = PerangkatDesa::where('rfid_uid', $uid)->first();
 
         if (! $perangkatDesa) {
@@ -71,6 +76,7 @@ class KehadiranController extends Controller
             'jam_masuk' => $jamSekarang,
             'status_kehadiran' => 'hadir',
             'status_ketepatan' => $statusKetepatan,
+            'keterangan' => null,
         ]);
 
         return response()->json([
@@ -78,6 +84,7 @@ class KehadiranController extends Controller
             'nama' => $perangkatDesa->nama,
             'status_kehadiran' => 'hadir',
             'status_ketepatan' => $statusKetepatan,
+            'keterangan' => null,
         ], 201);
     }
 }

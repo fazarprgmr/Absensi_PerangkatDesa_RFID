@@ -19,12 +19,12 @@
             </div>
         </div>
 
-        <!-- Student DataTable -->
+        <!-- Perangkat Desa DataTable -->
         <div class="dashboard-card">
             <div class="dashboard-card-header py-4 px-4 d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">Daftar Perangkat Desa</h5>
                 <a href="{{ route('perangkat-desa.create') }}" class="btn btn-sm btn-primary">
-                    <i class="bi bi-plus me-1"></i>Tambah Jabatan
+                    <i class="bi bi-plus me-1"></i>Tambah
                 </a>
             </div>
             <div class="dashboard-card-body px-4 py-4">
@@ -50,9 +50,16 @@
                                 <td>{{ $pd->rfid_uid }}</td>
                                 <td>
                                     <button class="btn-action btn-view" title="View"><i class="bi bi-eye"></i></button>
-                                    <button class="btn-action btn-edit" title="Edit"><i class="bi bi-pencil"></i></button>
-                                    <button class="btn-action btn-delete" title="Delete"><i
-                                            class="bi bi-trash"></i></button>
+                                    <a href="{{ route('perangkat-desa.edit', $pd->id) }}" class="btn-action btn-edit"
+                                        title="Edit"><i class="bi bi-pencil"></i></a>
+                                    <form id="delete-form-{{ $pd->id }}" method="POST"
+                                        action="{{ route('perangkat-desa.destroy', $pd->id) }}" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" onclick="confirmDelete({{ $pd->id }})"
+                                        class="btn-action btn-delete" title="Delete"><i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
@@ -66,4 +73,31 @@
 
 @push('scripts')
     <script type="module" crossorigin src="{{ asset('template/assets/data-table-DNS4anqs.js') }}"></script>
+
+    <script>
+        function confirmDelete(id) {
+            Swal.fire({
+                title: "Apakah Anda yakin?",
+                text: "Data yang dihapus tidak dapat dikembalikan!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Ya, hapus!",
+                cancelButtonText: "Batal"
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    Swal.fire({
+                        title: "Menghapus data...",
+                        text: "Mohon tunggu sebentar...",
+                        allowOutsideClick: false,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
+
+                    document.getElementById('delete-form-' + id).submit();
+                }
+            });
+        }
+    </script>
 @endpush
