@@ -27,9 +27,11 @@
                                     <div class="row gx-4 gy-3">
                                         <div class="col-md-12 px-2">
                                             <div class="mb-4">
-                                                <label for="dusun" class="form-label">Nama Dusun <span class="text-danger">*</span></label>
-                                                <input type="text" name="dusun" class="form-control @error('dusun') is-invalid @enderror"
-                                                    id="dusun" placeholder="Masukan Nama Dusun" value="{{ old('dusun') }}" required>
+                                                <label for="dusun" class="form-label">Nama Dusun <span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" name="dusun"
+                                                    class="form-control @error('dusun') is-invalid @enderror" id="dusun"
+                                                    placeholder="Masukan Nama Dusun" value="{{ old('dusun') }}" required>
 
                                                 @error('dusun')
                                                     <div class="invalid-feedback">
@@ -47,7 +49,7 @@
                                             </button>
                                             <button type="button" class="btn btn-secondary ms-2"
                                                 onclick="window.location.href='{{ route('alamat.index') }}'">
-                                                <i class="bi bi-x-circle me-2"></i>Cancel
+                                                <i class="bi bi-x-circle me-2"></i>Batal
                                             </button>
                                         </div>
                                     </div>
@@ -59,3 +61,20 @@
             </div>
         </div>
     @endsection
+
+    @push('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const forms = document.querySelectorAll('.needs-validation');
+                Array.from(forms).forEach(form => {
+                    form.addEventListener('submit', event => {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            });
+        </script>
+    @endpush

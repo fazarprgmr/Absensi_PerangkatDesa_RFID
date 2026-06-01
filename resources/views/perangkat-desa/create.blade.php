@@ -176,7 +176,7 @@
                                             </button>
                                             <button type="button" class="btn btn-secondary ms-2"
                                                 onclick="window.location.href='{{ route('perangkat-desa.index') }}'">
-                                                <i class="bi bi-x-circle me-2"></i>Cancel
+                                                <i class="bi bi-x-circle me-2"></i>Batal
                                             </button>
                                         </div>
                                     </div>
@@ -191,7 +191,7 @@
 @endsection
 
 @push('scripts')
-    {{-- <script>
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             const forms = document.querySelectorAll('.needs-validation');
             Array.from(forms).forEach(form => {
@@ -204,7 +204,7 @@
                 }, false);
             });
         });
-    </script> --}}
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>

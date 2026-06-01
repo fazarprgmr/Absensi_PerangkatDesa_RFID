@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,14 +19,31 @@
     <link rel="icon" type="image/x-icon" href="./assets/favicon-9EIT7vLh.ico">
 
 
-    <!-- Load stylesheets -->
+    <!-- Load stylesheets -->
+
+
 
     <!-- Diagnostic inline styles - maximum specificity -->
-    <style>.sidebar.collapsed{max-width:70px!important;min-width:70px!important;width:70px!important}.sidebar.collapsed .sidebar-brand h5{font-size:0!important}.sidebar.collapsed .nav-link span{display:none!important}</style>
+    <style>
+        .sidebar.collapsed {
+            max-width: 70px !important;
+            min-width: 70px !important;
+            width: 70px !important
+        }
 
-  <script type="module" crossorigin src="./assets/main-COwrHBJ0.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/dashboard-hMfJATH4.css">
+        .sidebar.collapsed .sidebar-brand h5 {
+            font-size: 0 !important
+        }
+
+        .sidebar.collapsed .nav-link span {
+            display: none !important
+        }
+    </style>
+
+    <script type="module" crossorigin src="./assets/main-COwrHBJ0.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/dashboard-hMfJATH4.css">
 </head>
+
 <body>
     <!-- Skip to main content for accessibility -->
     <a href="#main-content" class="visually-hidden-focusable">Skip to main content</a>
@@ -33,416 +51,486 @@
     <!-- Required DOM elements for dashboard.js -->
     <div class="search-backdrop" id="searchBackdrop"></div>
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
-<style>*{box-sizing:border-box;margin:0;padding:0}body{background:#f5f7fa;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif}.sidebar{background:#1f2937;height:100vh;left:0;position:fixed;top:0;width:260px;z-index:1040}.main-wrapper{margin-left:260px;min-height:100vh;transition:margin-left .3s ease}.top-navbar{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.1);height:60px;padding:0 1rem}.dashboard-content{padding:24px}</style>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
 
-<!-- Sidebar -->
-<aside class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-        <div class="sidebar-brand">
-            <h5>
-                <i class="bi bi-mortarboard-fill"></i>
-                Kiaalap
-            </h5>
-            <button class="sidebar-close" id="sidebarClose">
-                <i class="bi bi-x-lg"></i>
-            </button>
-        </div>
-    </div>
+        body {
+            background: #f5f7fa;
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif
+        }
 
-    <nav class="sidebar-nav">
-        <div class="menu-section">
-            <div class="menu-section-title">Main</div>
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#dashboardSubmenu" aria-expanded="false">
-                        <i class="bi bi-speedometer2"></i>
-                        <span>Dashboard</span>
-                    </a>
-                    <ul id="dashboardSubmenu" class="submenu collapse  list-unstyled">
-                        <li><a class="nav-link " href="index.html">Dashboard v.1</a></li>
-                        <li><a class="nav-link " href="index-1.html">Dashboard v.2</a></li>
-                        <li><a class="nav-link " href="index-2.html">Dashboard v.3</a></li>
-                        <li><a class="nav-link " href="analytics.html">Analytics</a></li>
-                        <li><a class="nav-link " href="widgets.html">Widgets</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " href="events.html">
-                        <i class="bi bi-calendar-event"></i>
-                        <span>Events</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
+        .sidebar {
+            background: #1f2937;
+            height: 100vh;
+            left: 0;
+            position: fixed;
+            top: 0;
+            width: 260px;
+            z-index: 1040
+        }
 
-        <div class="menu-section">
-            <div class="menu-section-title">Academic</div>
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#professorsSubmenu" aria-expanded="false">
-                        <i class="bi bi-person-badge"></i>
-                        <span>Professors</span>
-                    </a>
-                    <ul id="professorsSubmenu" class="submenu collapse  list-unstyled">
-                        <li><a class="nav-link " href="all-professors.html">All Professors</a></li>
-                        <li><a class="nav-link " href="add-professor.html">Add Professor</a></li>
-                        <li><a class="nav-link " href="edit-professor.html">Edit Professor</a></li>
-                        <li><a class="nav-link " href="professor-profile.html">Professor Profile</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#studentsSubmenu" aria-expanded="false">
-                        <i class="bi bi-people"></i>
-                        <span>Students</span>
-                    </a>
-                    <ul id="studentsSubmenu" class="submenu collapse  list-unstyled">
-                        <li><a class="nav-link " href="all-students.html">All Students</a></li>
-                        <li><a class="nav-link active" href="add-student.html">Add Student</a></li>
-                        <li><a class="nav-link " href="edit-student.html">Edit Student</a></li>
-                        <li><a class="nav-link " href="student-profile.html">Student Profile</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#coursesSubmenu" aria-expanded="false">
-                        <i class="bi bi-book"></i>
-                        <span>Courses</span>
-                    </a>
-                    <ul id="coursesSubmenu" class="submenu collapse  list-unstyled">
-                        <li><a class="nav-link " href="all-courses.html">All Courses</a></li>
-                        <li><a class="nav-link " href="add-course.html">Add Course</a></li>
-                        <li><a class="nav-link " href="edit-course.html">Edit Course</a></li>
-                        <li><a class="nav-link " href="course-info.html">Course Info</a></li>
-                        <li><a class="nav-link " href="course-payment.html">Course Payment</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#librarySubmenu" aria-expanded="false">
-                        <i class="bi bi-journal-bookmark"></i>
-                        <span>Library</span>
-                    </a>
-                    <ul id="librarySubmenu" class="submenu collapse  list-unstyled">
-                        <li><a class="nav-link " href="library-assets.html">Library Assets</a></li>
-                        <li><a class="nav-link " href="add-library-assets.html">Add Library Asset</a></li>
-                        <li><a class="nav-link " href="edit-library-assets.html">Edit Library Asset</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#departmentsSubmenu" aria-expanded="false">
-                        <i class="bi bi-building"></i>
-                        <span>Departments</span>
-                    </a>
-                    <ul id="departmentsSubmenu" class="submenu collapse  list-unstyled">
-                        <li><a class="nav-link " href="departments.html">Departments List</a></li>
-                        <li><a class="nav-link " href="add-department.html">Add Department</a></li>
-                        <li><a class="nav-link " href="edit-department.html">Edit Department</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+        .main-wrapper {
+            margin-left: 260px;
+            min-height: 100vh;
+            transition: margin-left .3s ease
+        }
 
-        <div class="menu-section">
-            <div class="menu-section-title">Communication</div>
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#mailboxSubmenu" aria-expanded="false">
-                        <i class="bi bi-envelope"></i>
-                        <span>Mailbox</span>
-                    </a>
-                    <ul id="mailboxSubmenu" class="submenu collapse  list-unstyled">
-                        <li><a class="nav-link " href="mailbox.html">Inbox</a></li>
-                        <li><a class="nav-link " href="mailbox-compose.html">Compose</a></li>
-                        <li><a class="nav-link " href="mailbox-view.html">View Message</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+        .top-navbar {
+            background: #fff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
+            height: 60px;
+            padding: 0 1rem
+        }
 
-        <div class="menu-section">
-            <div class="menu-section-title">Interface</div>
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#componentsSubmenu" aria-expanded="false">
-                        <i class="bi bi-layout-wtf"></i>
-                        <span>Components</span>
-                    </a>
-                    <ul id="componentsSubmenu" class="submenu collapse  list-unstyled">
-                        <li><a class="nav-link " href="buttons.html">Buttons</a></li>
-                        <li><a class="nav-link " href="alerts.html">Alerts</a></li>
-                        <li><a class="nav-link " href="modals.html">Modals</a></li>
-                        <li><a class="nav-link " href="tabs.html">Tabs</a></li>
-                        <li><a class="nav-link " href="accordion.html">Accordion</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#formsSubmenu" aria-expanded="false">
-                        <i class="bi bi-card-list"></i>
-                        <span>Forms</span>
-                    </a>
-                    <ul id="formsSubmenu" class="submenu collapse  list-unstyled">
-                        <li><a class="nav-link " href="basic-form-element.html">Basic Forms</a></li>
-                        <li><a class="nav-link " href="advance-form-element.html">Advanced Forms</a></li>
-                        <li><a class="nav-link " href="password-meter.html">Password Meter</a></li>
-                        <li><a class="nav-link " href="multi-upload.html">File Upload</a></li>
-                        <li><a class="nav-link " href="images-cropper.html">Image Cropper</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#chartsSubmenu" aria-expanded="false">
-                        <i class="bi bi-bar-chart"></i>
-                        <span>Charts</span>
-                    </a>
-                    <ul id="chartsSubmenu" class="submenu collapse  list-unstyled">
-                        <li><a class="nav-link " href="line-charts.html">Line Charts</a></li>
-                        <li><a class="nav-link " href="area-charts.html">Area Charts</a></li>
-                        <li><a class="nav-link " href="bar-charts.html">Bar Charts</a></li>
-                        <li><a class="nav-link " href="c3.html">C3 Charts</a></li>
-                        <li><a class="nav-link " href="peity.html">Peity Charts</a></li>
-                        <li><a class="nav-link " href="rounded-chart.html">Rounded Charts</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#tablesSubmenu" aria-expanded="false">
-                        <i class="bi bi-table"></i>
-                        <span>Tables</span>
-                    </a>
-                    <ul id="tablesSubmenu" class="submenu collapse  list-unstyled">
-                        <li><a class="nav-link " href="static-table.html">Static Tables</a></li>
-                        <li><a class="nav-link " href="data-table.html">Data Tables</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+        .dashboard-content {
+            padding: 24px
+        }
+    </style>
 
-        <div class="menu-section">
-            <div class="menu-section-title">Developer Tools</div>
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link " href="code-editor.html">
-                        <i class="bi bi-code-slash"></i>
-                        <span>Code Editor</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#uiToolsSubmenu" aria-expanded="false">
-                        <i class="bi bi-tools"></i>
-                        <span>UI Components</span>
-                    </a>
-                    <ul id="uiToolsSubmenu" class="submenu collapse  list-unstyled">
-                        <li><a class="nav-link " href="preloader.html">Preloaders</a></li>
-                        <li><a class="nav-link " href="notifications.html">Notifications</a></li>
-                        <li><a class="nav-link " href="tree-view.html">Tree View</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#viewersSubmenu" aria-expanded="false">
-                        <i class="bi bi-eye"></i>
-                        <span>Viewers</span>
-                    </a>
-                    <ul id="viewersSubmenu" class="submenu collapse  list-unstyled">
-                        <li><a class="nav-link " href="pdf-viewer.html">PDF Viewer</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#mapsSubmenu" aria-expanded="false">
-                        <i class="bi bi-map"></i>
-                        <span>Maps</span>
-                    </a>
-                    <ul id="mapsSubmenu" class="submenu collapse  list-unstyled">
-                        <li><a class="nav-link " href="google-map.html">Interactive Maps</a></li>
-                        <li><a class="nav-link " href="data-maps.html">Data Maps</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-
-        <div class="menu-section">
-            <div class="menu-section-title">Pages</div>
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#authSubmenu" aria-expanded="false">
-                        <i class="bi bi-shield-lock"></i>
-                        <span>Authentication</span>
-                    </a>
-                    <ul id="authSubmenu" class="submenu collapse  list-unstyled">
-                        <li><a class="nav-link " href="login.html">Login</a></li>
-                        <li><a class="nav-link " href="register.html">Register</a></li>
-                        <li><a class="nav-link " href="lock.html">Lock Screen</a></li>
-                        <li><a class="nav-link " href="password-recovery.html">Forgot Password</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#errorsSubmenu" aria-expanded="false">
-                        <i class="bi bi-exclamation-triangle"></i>
-                        <span>Error Pages</span>
-                    </a>
-                    <ul id="errorsSubmenu" class="submenu collapse  list-unstyled">
-                        <li><a class="nav-link " href="404.html">404 Error</a></li>
-                        <li><a class="nav-link " href="500.html">500 Error</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</aside>
-<!-- Main Content Wrapper -->
-<div class="main-wrapper" id="mainWrapper">
-    <!-- Header -->
-    <nav class="navbar top-navbar">
-        <div class="container-fluid d-flex align-items-center h-100">
-            <!-- Hamburger Menu -->
-            <button class="hamburger-menu" id="sidebarToggle">
-                <i class="bi bi-list"></i>
-            </button>
-    
-            <!-- Breadcrumb for desktop -->
-            <nav aria-label="breadcrumb" class="d-none d-lg-block ms-3">
-                <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                <li class="breadcrumb-item active">Add student</li>
-                </ol>
-            </nav>
-    
-            <!-- Logo for mobile -->
-            <div class="navbar-brand d-lg-none fw-bold me-auto">Kiaalap</div>
-    
-            <!-- Spacer for desktop -->
-            <div class="flex-grow-1 d-none d-lg-block"></div>
-    
-            <!-- Right Actions -->
-            <div class="d-flex align-items-center gap-2">
-                <!-- Search -->
-                <div class="search-container">
-                    <button class="btn btn-light btn-icon" id="searchToggle">
-                        <i class="bi bi-search"></i>
-                    </button>
-    
-                    <form class="search-form" id="searchForm">
-                        <i class="bi bi-search search-icon"></i>
-                        <input type="text"
-                               class="form-control"
-                               id="searchInput"
-                               placeholder="Search..."
-                               data-bs-toggle="dropdown">
-                        <button type="button" class="close-search" id="closeSearch">
-                            <i class="bi bi-x-lg"></i>
-                        </button>
-    
-                        <ul class="dropdown-menu w-100 mt-2">
-                            <li><a class="dropdown-item" href="#">Student Registration</a></li>
-                            <li><a class="dropdown-item" href="#">Course Management</a></li>
-                            <li><a class="dropdown-item" href="#">Grade Submission</a></li>
-                            <li><a class="dropdown-item" href="#">Faculty Directory</a></li>
-                            <li><a class="dropdown-item" href="#">Library Resources</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Advanced Search</a></li>
-                        </ul>
-                    </form>
-                </div>
-    
-                <!-- Notifications -->
-                <div class="dropdown">
-                    <button class="btn btn-light btn-icon position-relative" data-bs-toggle="dropdown" id="notificationsToggle">
-                        <i class="bi bi-bell"></i>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">3</span>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end" style="width: 320px;">
-                        <li class="dropdown-header d-flex align-items-center justify-content-between">
-                            <span>Notifications</span>
-                            <small class="text-muted">3 new</small>
-                        </li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <a class="dropdown-item py-2" href="#">
-                                <div class="d-flex align-items-center">
-                                    <div class="rounded-circle bg-primary bg-opacity-10 p-2 me-3" style="width: 40px; height: 40px;">
-                                        <i class="bi bi-calendar-check text-primary"></i>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <div class="fw-semibold">New Event</div>
-                                        <div class="text-muted small">Science Fair on March 15</div>
-                                        <div class="text-muted small">5 minutes ago</div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item py-2" href="#">
-                                <div class="d-flex align-items-center">
-                                    <div class="rounded-circle bg-success bg-opacity-10 p-2 me-3" style="width: 40px; height: 40px;">
-                                        <i class="bi bi-check-circle text-success"></i>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <div class="fw-semibold">Assignment Submitted</div>
-                                        <div class="text-muted small">John submitted his project</div>
-                                        <div class="text-muted small">2 hours ago</div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item py-2" href="#">
-                                <div class="d-flex align-items-center">
-                                    <div class="rounded-circle bg-warning bg-opacity-10 p-2 me-3" style="width: 40px; height: 40px;">
-                                        <i class="bi bi-exclamation-triangle text-warning"></i>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <div class="fw-semibold">System Alert</div>
-                                        <div class="text-muted small">Database backup completed</div>
-                                        <div class="text-muted small">Yesterday</div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <a class="dropdown-item text-center" href="notifications.html">
-                                <small>View all notifications</small>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-    
-                <!-- Quick Actions -->
-                <div class="dropdown">
-                    <button class="btn btn-light btn-icon" data-bs-toggle="dropdown">
-                        <i class="bi bi-plus-lg"></i>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="add-student.html"><i class="bi bi-person-plus me-2"></i>Add Student</a></li>
-                        <li><a class="dropdown-item" href="add-course.html"><i class="bi bi-book me-2"></i>Add Course</a></li>
-                        <li><a class="dropdown-item" href="add-professor.html"><i class="bi bi-person-badge me-2"></i>Add Professor</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-calendar-plus me-2"></i>Schedule Event</a></li>
-                    </ul>
-                </div>
-    
-                <!-- User Menu -->
-                <div class="dropdown">
-                    <button class="btn btn-light d-flex align-items-center" data-bs-toggle="dropdown">
-                        <div class="user-avatar me-2">
-                            <img src="https://ui-avatars.com/api/?name=Sarah Johnson&background=6366f1&color=fff&size=32"
-                                 alt="Sarah Johnson"
-                                 class="rounded-circle"
-                                 width="32"
-                                 height="32">
-                        </div>
-                        <span class="d-none d-md-inline">Sarah Johnson</span>
-                        <i class="bi bi-chevron-down ms-1"></i>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Profile</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Settings</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-question-circle me-2"></i>Help Center</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
-                    </ul>
-                </div>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-brand">
+                <h5>
+                    <i class="bi bi-mortarboard-fill"></i>
+                    Kiaalap
+                </h5>
+                <button class="sidebar-close" id="sidebarClose">
+                    <i class="bi bi-x-lg"></i>
+                </button>
             </div>
         </div>
-    </nav>
-    <!-- Main Content -->
-    <main class="dashboard-content" id="main-content">
-        <div class="container-fluid">
+
+        <nav class="sidebar-nav">
+            <div class="menu-section">
+                <div class="menu-section-title">Main</div>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse"
+                            data-bs-target="#dashboardSubmenu" aria-expanded="false">
+                            <i class="bi bi-speedometer2"></i>
+                            <span>Dashboard</span>
+                        </a>
+                        <ul id="dashboardSubmenu" class="submenu collapse  list-unstyled">
+                            <li><a class="nav-link " href="index.html">Dashboard v.1</a></li>
+                            <li><a class="nav-link " href="index-1.html">Dashboard v.2</a></li>
+                            <li><a class="nav-link " href="index-2.html">Dashboard v.3</a></li>
+                            <li><a class="nav-link " href="analytics.html">Analytics</a></li>
+                            <li><a class="nav-link " href="widgets.html">Widgets</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="events.html">
+                            <i class="bi bi-calendar-event"></i>
+                            <span>Events</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="menu-section">
+                <div class="menu-section-title">Academic</div>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse"
+                            data-bs-target="#professorsSubmenu" aria-expanded="false">
+                            <i class="bi bi-person-badge"></i>
+                            <span>Professors</span>
+                        </a>
+                        <ul id="professorsSubmenu" class="submenu collapse  list-unstyled">
+                            <li><a class="nav-link " href="all-professors.html">All Professors</a></li>
+                            <li><a class="nav-link " href="add-professor.html">Add Professor</a></li>
+                            <li><a class="nav-link " href="edit-professor.html">Edit Professor</a></li>
+                            <li><a class="nav-link " href="professor-profile.html">Professor Profile</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse"
+                            data-bs-target="#studentsSubmenu" aria-expanded="false">
+                            <i class="bi bi-people"></i>
+                            <span>Students</span>
+                        </a>
+                        <ul id="studentsSubmenu" class="submenu collapse  list-unstyled">
+                            <li><a class="nav-link " href="all-students.html">All Students</a></li>
+                            <li><a class="nav-link active" href="add-student.html">Add Student</a></li>
+                            <li><a class="nav-link " href="edit-student.html">Edit Student</a></li>
+                            <li><a class="nav-link " href="student-profile.html">Student Profile</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse"
+                            data-bs-target="#coursesSubmenu" aria-expanded="false">
+                            <i class="bi bi-book"></i>
+                            <span>Courses</span>
+                        </a>
+                        <ul id="coursesSubmenu" class="submenu collapse  list-unstyled">
+                            <li><a class="nav-link " href="all-courses.html">All Courses</a></li>
+                            <li><a class="nav-link " href="add-course.html">Add Course</a></li>
+                            <li><a class="nav-link " href="edit-course.html">Edit Course</a></li>
+                            <li><a class="nav-link " href="course-info.html">Course Info</a></li>
+                            <li><a class="nav-link " href="course-payment.html">Course Payment</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse"
+                            data-bs-target="#librarySubmenu" aria-expanded="false">
+                            <i class="bi bi-journal-bookmark"></i>
+                            <span>Library</span>
+                        </a>
+                        <ul id="librarySubmenu" class="submenu collapse  list-unstyled">
+                            <li><a class="nav-link " href="library-assets.html">Library Assets</a></li>
+                            <li><a class="nav-link " href="add-library-assets.html">Add Library Asset</a></li>
+                            <li><a class="nav-link " href="edit-library-assets.html">Edit Library Asset</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse"
+                            data-bs-target="#departmentsSubmenu" aria-expanded="false">
+                            <i class="bi bi-building"></i>
+                            <span>Departments</span>
+                        </a>
+                        <ul id="departmentsSubmenu" class="submenu collapse  list-unstyled">
+                            <li><a class="nav-link " href="departments.html">Departments List</a></li>
+                            <li><a class="nav-link " href="add-department.html">Add Department</a></li>
+                            <li><a class="nav-link " href="edit-department.html">Edit Department</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="menu-section">
+                <div class="menu-section-title">Communication</div>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse"
+                            data-bs-target="#mailboxSubmenu" aria-expanded="false">
+                            <i class="bi bi-envelope"></i>
+                            <span>Mailbox</span>
+                        </a>
+                        <ul id="mailboxSubmenu" class="submenu collapse  list-unstyled">
+                            <li><a class="nav-link " href="mailbox.html">Inbox</a></li>
+                            <li><a class="nav-link " href="mailbox-compose.html">Compose</a></li>
+                            <li><a class="nav-link " href="mailbox-view.html">View Message</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="menu-section">
+                <div class="menu-section-title">Interface</div>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse"
+                            data-bs-target="#componentsSubmenu" aria-expanded="false">
+                            <i class="bi bi-layout-wtf"></i>
+                            <span>Components</span>
+                        </a>
+                        <ul id="componentsSubmenu" class="submenu collapse  list-unstyled">
+                            <li><a class="nav-link " href="buttons.html">Buttons</a></li>
+                            <li><a class="nav-link " href="alerts.html">Alerts</a></li>
+                            <li><a class="nav-link " href="modals.html">Modals</a></li>
+                            <li><a class="nav-link " href="tabs.html">Tabs</a></li>
+                            <li><a class="nav-link " href="accordion.html">Accordion</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse"
+                            data-bs-target="#formsSubmenu" aria-expanded="false">
+                            <i class="bi bi-card-list"></i>
+                            <span>Forms</span>
+                        </a>
+                        <ul id="formsSubmenu" class="submenu collapse  list-unstyled">
+                            <li><a class="nav-link " href="basic-form-element.html">Basic Forms</a></li>
+                            <li><a class="nav-link " href="advance-form-element.html">Advanced Forms</a></li>
+                            <li><a class="nav-link " href="password-meter.html">Password Meter</a></li>
+                            <li><a class="nav-link " href="multi-upload.html">File Upload</a></li>
+                            <li><a class="nav-link " href="images-cropper.html">Image Cropper</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse"
+                            data-bs-target="#chartsSubmenu" aria-expanded="false">
+                            <i class="bi bi-bar-chart"></i>
+                            <span>Charts</span>
+                        </a>
+                        <ul id="chartsSubmenu" class="submenu collapse  list-unstyled">
+                            <li><a class="nav-link " href="line-charts.html">Line Charts</a></li>
+                            <li><a class="nav-link " href="area-charts.html">Area Charts</a></li>
+                            <li><a class="nav-link " href="bar-charts.html">Bar Charts</a></li>
+                            <li><a class="nav-link " href="c3.html">C3 Charts</a></li>
+                            <li><a class="nav-link " href="peity.html">Peity Charts</a></li>
+                            <li><a class="nav-link " href="rounded-chart.html">Rounded Charts</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse"
+                            data-bs-target="#tablesSubmenu" aria-expanded="false">
+                            <i class="bi bi-table"></i>
+                            <span>Tables</span>
+                        </a>
+                        <ul id="tablesSubmenu" class="submenu collapse  list-unstyled">
+                            <li><a class="nav-link " href="static-table.html">Static Tables</a></li>
+                            <li><a class="nav-link " href="data-table.html">Data Tables</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="menu-section">
+                <div class="menu-section-title">Developer Tools</div>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link " href="code-editor.html">
+                            <i class="bi bi-code-slash"></i>
+                            <span>Code Editor</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse"
+                            data-bs-target="#uiToolsSubmenu" aria-expanded="false">
+                            <i class="bi bi-tools"></i>
+                            <span>UI Components</span>
+                        </a>
+                        <ul id="uiToolsSubmenu" class="submenu collapse  list-unstyled">
+                            <li><a class="nav-link " href="preloader.html">Preloaders</a></li>
+                            <li><a class="nav-link " href="notifications.html">Notifications</a></li>
+                            <li><a class="nav-link " href="tree-view.html">Tree View</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse"
+                            data-bs-target="#viewersSubmenu" aria-expanded="false">
+                            <i class="bi bi-eye"></i>
+                            <span>Viewers</span>
+                        </a>
+                        <ul id="viewersSubmenu" class="submenu collapse  list-unstyled">
+                            <li><a class="nav-link " href="pdf-viewer.html">PDF Viewer</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse"
+                            data-bs-target="#mapsSubmenu" aria-expanded="false">
+                            <i class="bi bi-map"></i>
+                            <span>Maps</span>
+                        </a>
+                        <ul id="mapsSubmenu" class="submenu collapse  list-unstyled">
+                            <li><a class="nav-link " href="google-map.html">Interactive Maps</a></li>
+                            <li><a class="nav-link " href="data-maps.html">Data Maps</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="menu-section">
+                <div class="menu-section-title">Pages</div>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse"
+                            data-bs-target="#authSubmenu" aria-expanded="false">
+                            <i class="bi bi-shield-lock"></i>
+                            <span>Authentication</span>
+                        </a>
+                        <ul id="authSubmenu" class="submenu collapse  list-unstyled">
+                            <li><a class="nav-link " href="login.html">Login</a></li>
+                            <li><a class="nav-link " href="register.html">Register</a></li>
+                            <li><a class="nav-link " href="lock.html">Lock Screen</a></li>
+                            <li><a class="nav-link " href="password-recovery.html">Forgot Password</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link has-submenu " href="javascript:void(0)" data-bs-toggle="collapse"
+                            data-bs-target="#errorsSubmenu" aria-expanded="false">
+                            <i class="bi bi-exclamation-triangle"></i>
+                            <span>Error Pages</span>
+                        </a>
+                        <ul id="errorsSubmenu" class="submenu collapse  list-unstyled">
+                            <li><a class="nav-link " href="404.html">404 Error</a></li>
+                            <li><a class="nav-link " href="500.html">500 Error</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </aside>
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper" id="mainWrapper">
+        <!-- Header -->
+        <nav class="navbar top-navbar">
+            <div class="container-fluid d-flex align-items-center h-100">
+                <!-- Hamburger Menu -->
+                <button class="hamburger-menu" id="sidebarToggle">
+                    <i class="bi bi-list"></i>
+                </button>
+
+                <!-- Breadcrumb for desktop -->
+                <nav aria-label="breadcrumb" class="d-none d-lg-block ms-3">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item active">Add student</li>
+                    </ol>
+                </nav>
+
+                <!-- Logo for mobile -->
+                <div class="navbar-brand d-lg-none fw-bold me-auto">Kiaalap</div>
+
+                <!-- Spacer for desktop -->
+                <div class="flex-grow-1 d-none d-lg-block"></div>
+
+                <!-- Right Actions -->
+                <div class="d-flex align-items-center gap-2">
+                    <!-- Search -->
+                    <div class="search-container">
+                        <button class="btn btn-light btn-icon" id="searchToggle">
+                            <i class="bi bi-search"></i>
+                        </button>
+
+                        <form class="search-form" id="searchForm">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" class="form-control" id="searchInput" placeholder="Search..."
+                                data-bs-toggle="dropdown">
+                            <button type="button" class="close-search" id="closeSearch">
+                                <i class="bi bi-x-lg"></i>
+                            </button>
+
+                            <ul class="dropdown-menu w-100 mt-2">
+                                <li><a class="dropdown-item" href="#">Student Registration</a></li>
+                                <li><a class="dropdown-item" href="#">Course Management</a></li>
+                                <li><a class="dropdown-item" href="#">Grade Submission</a></li>
+                                <li><a class="dropdown-item" href="#">Faculty Directory</a></li>
+                                <li><a class="dropdown-item" href="#">Library Resources</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Advanced Search</a></li>
+                            </ul>
+                        </form>
+                    </div>
+
+                    <!-- Notifications -->
+                    <div class="dropdown">
+                        <button class="btn btn-light btn-icon position-relative" data-bs-toggle="dropdown"
+                            id="notificationsToggle">
+                            <i class="bi bi-bell"></i>
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                style="font-size: 0.6rem;">3</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" style="width: 320px;">
+                            <li class="dropdown-header d-flex align-items-center justify-content-between">
+                                <span>Notifications</span>
+                                <small class="text-muted">3 new</small>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item py-2" href="#">
+                                    <div class="d-flex align-items-center">
+                                        <div class="rounded-circle bg-primary bg-opacity-10 p-2 me-3"
+                                            style="width: 40px; height: 40px;">
+                                            <i class="bi bi-calendar-check text-primary"></i>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div class="fw-semibold">New Event</div>
+                                            <div class="text-muted small">Science Fair on March 15</div>
+                                            <div class="text-muted small">5 minutes ago</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item py-2" href="#">
+                                    <div class="d-flex align-items-center">
+                                        <div class="rounded-circle bg-success bg-opacity-10 p-2 me-3"
+                                            style="width: 40px; height: 40px;">
+                                            <i class="bi bi-check-circle text-success"></i>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div class="fw-semibold">Assignment Submitted</div>
+                                            <div class="text-muted small">John submitted his project</div>
+                                            <div class="text-muted small">2 hours ago</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item py-2" href="#">
+                                    <div class="d-flex align-items-center">
+                                        <div class="rounded-circle bg-warning bg-opacity-10 p-2 me-3"
+                                            style="width: 40px; height: 40px;">
+                                            <i class="bi bi-exclamation-triangle text-warning"></i>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div class="fw-semibold">System Alert</div>
+                                            <div class="text-muted small">Database backup completed</div>
+                                            <div class="text-muted small">Yesterday</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item text-center" href="notifications.html">
+                                    <small>View all notifications</small>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="dropdown">
+                        <button class="btn btn-light btn-icon" data-bs-toggle="dropdown">
+                            <i class="bi bi-plus-lg"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="add-student.html"><i
+                                        class="bi bi-person-plus me-2"></i>Add Student</a></li>
+                            <li><a class="dropdown-item" href="add-course.html"><i class="bi bi-book me-2"></i>Add
+                                    Course</a></li>
+                            <li><a class="dropdown-item" href="add-professor.html"><i
+                                        class="bi bi-person-badge me-2"></i>Add Professor</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-calendar-plus me-2"></i>Schedule
+                                    Event</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- User Menu -->
+                    <div class="dropdown">
+                        <button class="btn btn-light d-flex align-items-center" data-bs-toggle="dropdown">
+                            <div class="user-avatar me-2">
+                                <img src="https://ui-avatars.com/api/?name=Sarah Johnson&background=6366f1&color=fff&size=32"
+                                    alt="Sarah Johnson" class="rounded-circle" width="32" height="32">
+                            </div>
+                            <span class="d-none d-md-inline">Sarah Johnson</span>
+                            <i class="bi bi-chevron-down ms-1"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Profile</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Settings</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-question-circle me-2"></i>Help
+                                    Center</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right me-2"></i>Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- Main Content -->
+        <main class="dashboard-content" id="main-content">
+            <div class="container-fluid">
                 <!-- Page Header -->
                 <div class="dashboard-row">
                     <div class="dashboard-grid grid-cols-1">
@@ -459,17 +547,23 @@
                                 <!-- Tab Navigation -->
                                 <ul class="nav nav-tabs mb-4" id="studentFormTabs" role="tablist">
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link active" id="basic-tab" data-bs-toggle="tab" data-bs-target="#basic" type="button" role="tab" aria-controls="basic" aria-selected="true">
+                                        <button class="nav-link active" id="basic-tab" data-bs-toggle="tab"
+                                            data-bs-target="#basic" type="button" role="tab" aria-controls="basic"
+                                            aria-selected="true">
                                             <i class="bi bi-person-circle me-2"></i>Basic Information
                                         </button>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="account-tab" data-bs-toggle="tab" data-bs-target="#account" type="button" role="tab" aria-controls="account" aria-selected="false">
+                                        <button class="nav-link" id="account-tab" data-bs-toggle="tab"
+                                            data-bs-target="#account" type="button" role="tab" aria-controls="account"
+                                            aria-selected="false">
                                             <i class="bi bi-shield-lock me-2"></i>Account Information
                                         </button>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="social-tab" data-bs-toggle="tab" data-bs-target="#social" type="button" role="tab" aria-controls="social" aria-selected="false">
+                                        <button class="nav-link" id="social-tab" data-bs-toggle="tab"
+                                            data-bs-target="#social" type="button" role="tab" aria-controls="social"
+                                            aria-selected="false">
                                             <i class="bi bi-share me-2"></i>Social Information
                                         </button>
                                     </li>
@@ -478,13 +572,16 @@
                                 <!-- Tab Content -->
                                 <div class="tab-content" id="studentFormTabContent">
                                     <!-- Basic Information Tab -->
-                                    <div class="tab-pane fade show active" id="basic" role="tabpanel" aria-labelledby="basic-tab">
+                                    <div class="tab-pane fade show active" id="basic" role="tabpanel"
+                                        aria-labelledby="basic-tab">
                                         <form class="needs-validation" novalidate>
                                             <div class="row gx-4 gy-3">
                                                 <div class="col-md-6 px-2">
                                                     <div class="mb-4">
-                                                        <label for="fullName" class="form-label">Full Name <span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control" id="fullName" placeholder="Enter full name" required>
+                                                        <label for="fullName" class="form-label">Full Name <span
+                                                                class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" id="fullName"
+                                                            placeholder="Enter full name" required>
                                                         <div class="invalid-feedback">
                                                             Please provide a valid name.
                                                         </div>
@@ -492,8 +589,10 @@
                                                 </div>
                                                 <div class="col-md-6 px-2">
                                                     <div class="mb-4">
-                                                        <label for="studentId" class="form-label">Student ID <span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control" id="studentId" placeholder="Enter student ID" required>
+                                                        <label for="studentId" class="form-label">Student ID <span
+                                                                class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" id="studentId"
+                                                            placeholder="Enter student ID" required>
                                                         <div class="invalid-feedback">
                                                             Please provide a student ID.
                                                         </div>
@@ -501,9 +600,11 @@
                                                 </div>
                                                 <div class="col-md-6 px-2">
                                                     <div class="mb-4">
-                                                        <label for="department" class="form-label">Department <span class="text-danger">*</span></label>
+                                                        <label for="department" class="form-label">Department <span
+                                                                class="text-danger">*</span></label>
                                                         <select class="form-select" id="department" required>
-                                                            <option value="" selected disabled>Select Department</option>
+                                                            <option value="" selected disabled>Select Department
+                                                            </option>
                                                             <option value="cs">Computer Science</option>
                                                             <option value="eng">Engineering</option>
                                                             <option value="bus">Business Administration</option>
@@ -518,13 +619,16 @@
                                                 <div class="col-md-6 px-2">
                                                     <div class="mb-4">
                                                         <label for="course" class="form-label">Course</label>
-                                                        <input type="text" class="form-control" id="course" placeholder="Enter course name">
+                                                        <input type="text" class="form-control" id="course"
+                                                            placeholder="Enter course name">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 px-2">
                                                     <div class="mb-4">
-                                                        <label for="dateOfBirth" class="form-label">Date of Birth <span class="text-danger">*</span></label>
-                                                        <input type="date" class="form-control" id="dateOfBirth" required>
+                                                        <label for="dateOfBirth" class="form-label">Date of Birth <span
+                                                                class="text-danger">*</span></label>
+                                                        <input type="date" class="form-control" id="dateOfBirth"
+                                                            required>
                                                         <div class="invalid-feedback">
                                                             Please provide date of birth.
                                                         </div>
@@ -532,7 +636,8 @@
                                                 </div>
                                                 <div class="col-md-6 px-2">
                                                     <div class="mb-4">
-                                                        <label for="gender" class="form-label">Gender <span class="text-danger">*</span></label>
+                                                        <label for="gender" class="form-label">Gender <span
+                                                                class="text-danger">*</span></label>
                                                         <select class="form-select" id="gender" required>
                                                             <option value="" selected disabled>Select Gender</option>
                                                             <option value="male">Male</option>
@@ -546,8 +651,10 @@
                                                 </div>
                                                 <div class="col-md-6 px-2">
                                                     <div class="mb-4">
-                                                        <label for="phone" class="form-label">Phone Number <span class="text-danger">*</span></label>
-                                                        <input type="tel" class="form-control" id="phone" placeholder="Enter phone number" required>
+                                                        <label for="phone" class="form-label">Phone Number <span
+                                                                class="text-danger">*</span></label>
+                                                        <input type="tel" class="form-control" id="phone"
+                                                            placeholder="Enter phone number" required>
                                                         <div class="invalid-feedback">
                                                             Please provide a phone number.
                                                         </div>
@@ -555,39 +662,48 @@
                                                 </div>
                                                 <div class="col-md-6 px-2">
                                                     <div class="mb-4">
-                                                        <label for="parentPhone" class="form-label">Parent/Guardian Phone</label>
-                                                        <input type="tel" class="form-control" id="parentPhone" placeholder="Enter parent phone">
+                                                        <label for="parentPhone" class="form-label">Parent/Guardian
+                                                            Phone</label>
+                                                        <input type="tel" class="form-control" id="parentPhone"
+                                                            placeholder="Enter parent phone">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 px-2">
                                                     <div class="mb-4">
                                                         <label for="address" class="form-label">Address</label>
-                                                        <textarea class="form-control" id="address" rows="3" placeholder="Enter address"></textarea>
+                                                        <textarea class="form-control" id="address" rows="3"
+                                                            placeholder="Enter address"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 px-2">
                                                     <div class="mb-4">
                                                         <label for="city" class="form-label">City</label>
-                                                        <input type="text" class="form-control" id="city" placeholder="Enter city">
+                                                        <input type="text" class="form-control" id="city"
+                                                            placeholder="Enter city">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 px-2">
                                                     <div class="mb-4">
                                                         <label for="state" class="form-label">State/Province</label>
-                                                        <input type="text" class="form-control" id="state" placeholder="Enter state">
+                                                        <input type="text" class="form-control" id="state"
+                                                            placeholder="Enter state">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 px-2">
                                                     <div class="mb-4">
                                                         <label for="postalCode" class="form-label">Postal Code</label>
-                                                        <input type="text" class="form-control" id="postalCode" placeholder="Enter postal code">
+                                                        <input type="text" class="form-control" id="postalCode"
+                                                            placeholder="Enter postal code">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 px-2">
                                                     <div class="mb-4">
-                                                        <label for="profileImage" class="form-label">Profile Image</label>
-                                                        <input class="form-control" type="file" id="profileImage" accept="image/*">
-                                                        <div class="form-text">Accepted formats: JPG, PNG, GIF (Max 2MB)</div>
+                                                        <label for="profileImage" class="form-label">Profile
+                                                            Image</label>
+                                                        <input class="form-control" type="file" id="profileImage"
+                                                            accept="image/*">
+                                                        <div class="form-text">Accepted formats: JPG, PNG, GIF (Max 2MB)
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -596,7 +712,8 @@
                                                     <button type="submit" class="btn btn-primary">
                                                         <i class="bi bi-check-circle me-2"></i>Save Basic Information
                                                     </button>
-                                                    <button type="button" class="btn btn-secondary ms-2" onclick="window.location.href='all-students.html'">
+                                                    <button type="button" class="btn btn-secondary ms-2"
+                                                        onclick="window.location.href='all-students.html'">
                                                         <i class="bi bi-x-circle me-2"></i>Cancel
                                                     </button>
                                                 </div>
@@ -605,13 +722,16 @@
                                     </div>
 
                                     <!-- Account Information Tab -->
-                                    <div class="tab-pane fade" id="account" role="tabpanel" aria-labelledby="account-tab">
+                                    <div class="tab-pane fade" id="account" role="tabpanel"
+                                        aria-labelledby="account-tab">
                                         <form class="needs-validation" novalidate>
                                             <div class="row gx-4 gy-3">
                                                 <div class="col-md-6 px-2">
                                                     <div class="mb-4">
-                                                        <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
-                                                        <input type="email" class="form-control" id="email" placeholder="Enter email address" required>
+                                                        <label for="email" class="form-label">Email Address <span
+                                                                class="text-danger">*</span></label>
+                                                        <input type="email" class="form-control" id="email"
+                                                            placeholder="Enter email address" required>
                                                         <div class="invalid-feedback">
                                                             Please provide a valid email.
                                                         </div>
@@ -619,8 +739,10 @@
                                                 </div>
                                                 <div class="col-md-6 px-2">
                                                     <div class="mb-4">
-                                                        <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control" id="username" placeholder="Enter username" required>
+                                                        <label for="username" class="form-label">Username <span
+                                                                class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" id="username"
+                                                            placeholder="Enter username" required>
                                                         <div class="invalid-feedback">
                                                             Please provide a username.
                                                         </div>
@@ -628,8 +750,10 @@
                                                 </div>
                                                 <div class="col-md-6 px-2">
                                                     <div class="mb-4">
-                                                        <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
-                                                        <input type="password" class="form-control" id="password" placeholder="Enter password" required>
+                                                        <label for="password" class="form-label">Password <span
+                                                                class="text-danger">*</span></label>
+                                                        <input type="password" class="form-control" id="password"
+                                                            placeholder="Enter password" required>
                                                         <div class="invalid-feedback">
                                                             Please provide a password.
                                                         </div>
@@ -637,8 +761,10 @@
                                                 </div>
                                                 <div class="col-md-6 px-2">
                                                     <div class="mb-4">
-                                                        <label for="confirmPassword" class="form-label">Confirm Password <span class="text-danger">*</span></label>
-                                                        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm password" required>
+                                                        <label for="confirmPassword" class="form-label">Confirm Password
+                                                            <span class="text-danger">*</span></label>
+                                                        <input type="password" class="form-control" id="confirmPassword"
+                                                            placeholder="Confirm password" required>
                                                         <div class="invalid-feedback">
                                                             Passwords must match.
                                                         </div>
@@ -646,7 +772,8 @@
                                                 </div>
                                                 <div class="col-md-6 px-2">
                                                     <div class="mb-4">
-                                                        <label for="accountStatus" class="form-label">Account Status</label>
+                                                        <label for="accountStatus" class="form-label">Account
+                                                            Status</label>
                                                         <select class="form-select" id="accountStatus">
                                                             <option value="active" selected>Active</option>
                                                             <option value="inactive">Inactive</option>
@@ -684,10 +811,13 @@
                                             <div class="row gx-4 gy-3">
                                                 <div class="col-md-6 px-2">
                                                     <div class="mb-4">
-                                                        <label for="facebook" class="form-label">Facebook Profile</label>
+                                                        <label for="facebook" class="form-label">Facebook
+                                                            Profile</label>
                                                         <div class="input-group">
-                                                            <span class="input-group-text"><i class="bi bi-facebook"></i></span>
-                                                            <input type="url" class="form-control" id="facebook" placeholder="https://facebook.com/username">
+                                                            <span class="input-group-text"><i
+                                                                    class="bi bi-facebook"></i></span>
+                                                            <input type="url" class="form-control" id="facebook"
+                                                                placeholder="https://facebook.com/username">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -695,26 +825,34 @@
                                                     <div class="mb-4">
                                                         <label for="twitter" class="form-label">Twitter Profile</label>
                                                         <div class="input-group">
-                                                            <span class="input-group-text"><i class="bi bi-twitter"></i></span>
-                                                            <input type="url" class="form-control" id="twitter" placeholder="https://twitter.com/username">
+                                                            <span class="input-group-text"><i
+                                                                    class="bi bi-twitter"></i></span>
+                                                            <input type="url" class="form-control" id="twitter"
+                                                                placeholder="https://twitter.com/username">
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 px-2">
                                                     <div class="mb-4">
-                                                        <label for="linkedin" class="form-label">LinkedIn Profile</label>
+                                                        <label for="linkedin" class="form-label">LinkedIn
+                                                            Profile</label>
                                                         <div class="input-group">
-                                                            <span class="input-group-text"><i class="bi bi-linkedin"></i></span>
-                                                            <input type="url" class="form-control" id="linkedin" placeholder="https://linkedin.com/in/username">
+                                                            <span class="input-group-text"><i
+                                                                    class="bi bi-linkedin"></i></span>
+                                                            <input type="url" class="form-control" id="linkedin"
+                                                                placeholder="https://linkedin.com/in/username">
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 px-2">
                                                     <div class="mb-4">
-                                                        <label for="instagram" class="form-label">Instagram Profile</label>
+                                                        <label for="instagram" class="form-label">Instagram
+                                                            Profile</label>
                                                         <div class="input-group">
-                                                            <span class="input-group-text"><i class="bi bi-instagram"></i></span>
-                                                            <input type="url" class="form-control" id="instagram" placeholder="https://instagram.com/username">
+                                                            <span class="input-group-text"><i
+                                                                    class="bi bi-instagram"></i></span>
+                                                            <input type="url" class="form-control" id="instagram"
+                                                                placeholder="https://instagram.com/username">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -722,8 +860,10 @@
                                                     <div class="mb-4">
                                                         <label for="website" class="form-label">Personal Website</label>
                                                         <div class="input-group">
-                                                            <span class="input-group-text"><i class="bi bi-globe"></i></span>
-                                                            <input type="url" class="form-control" id="website" placeholder="https://example.com">
+                                                            <span class="input-group-text"><i
+                                                                    class="bi bi-globe"></i></span>
+                                                            <input type="url" class="form-control" id="website"
+                                                                placeholder="https://example.com">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -731,8 +871,10 @@
                                                     <div class="mb-4">
                                                         <label for="github" class="form-label">GitHub Profile</label>
                                                         <div class="input-group">
-                                                            <span class="input-group-text"><i class="bi bi-github"></i></span>
-                                                            <input type="url" class="form-control" id="github" placeholder="https://github.com/username">
+                                                            <span class="input-group-text"><i
+                                                                    class="bi bi-github"></i></span>
+                                                            <input type="url" class="form-control" id="github"
+                                                                placeholder="https://github.com/username">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -742,7 +884,8 @@
                                                     <button type="submit" class="btn btn-primary">
                                                         <i class="bi bi-check-circle me-2"></i>Save Social Information
                                                     </button>
-                                                    <button type="button" class="btn btn-success ms-2" onclick="window.location.href='all-students.html'">
+                                                    <button type="button" class="btn btn-success ms-2"
+                                                        onclick="window.location.href='all-students.html'">
                                                         <i class="bi bi-check-all me-2"></i>Complete Registration
                                                     </button>
                                                 </div>
@@ -755,37 +898,40 @@
                     </div>
                 </div>
             </div>
-    </main>
+        </main>
 
-            <!-- Footer -->
-            <footer class="dashboard-footer">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p class="mb-0">&copy; 2026 Kiaalap. All rights reserved.</p>
-                        </div>
-                        <div class="col-md-6 text-md-end">
-                            <p class="mb-0">Built with <i class="bi bi-heart-fill text-danger"></i> for education</p>
-                        </div>
+        <!-- Footer -->
+        <footer class="dashboard-footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="mb-0">&copy; 2026 Kiaalap. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <p class="mb-0">Built with <i class="bi bi-heart-fill text-danger"></i> for education</p>
                     </div>
                 </div>
-            </footer></div>
+            </div>
+        </footer>
+    </div>
 
-    <!-- Load JavaScript -->
+    <!-- Load JavaScript -->
+
 
 </body>
+
 </html>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-            const forms = document.querySelectorAll('.needs-validation');
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
+    document.addEventListener('DOMContentLoaded', function () {
+        const forms = document.querySelectorAll('.needs-validation');
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
         });
+    });
 </script>

@@ -181,7 +181,7 @@
                                             </button>
                                             <button type="button" class="btn btn-secondary ms-2"
                                                 onclick="window.location.href='{{ route('perangkat-desa.index') }}'">
-                                                <i class="bi bi-x-circle me-2"></i>Cancel
+                                                <i class="bi bi-x-circle me-2"></i>Batal
                                             </button>
                                         </div>
                                     </div>

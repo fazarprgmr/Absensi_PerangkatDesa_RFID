@@ -29,8 +29,10 @@
                                             <div class="mb-4">
                                                 <label for="nama_jabatan" class="form-label">Nama
                                                     Jabatan <span class="text-danger">*</span></label>
-                                                <input type="text" name="nama_jabatan" class="form-control @error('nama_jabatan') is-invalid @enderror"
-                                                    id="nama_jabatan" placeholder="Masukan Nama Jabatan" value="{{ old('nama_jabatan') }}" required>
+                                                <input type="text" name="nama_jabatan"
+                                                    class="form-control @error('nama_jabatan') is-invalid @enderror"
+                                                    id="nama_jabatan" placeholder="Masukan Nama Jabatan"
+                                                    value="{{ old('nama_jabatan') }}" required>
 
                                                 @error('nama_jabatan')
                                                     <div class="invalid-feedback">
@@ -48,7 +50,7 @@
                                             </button>
                                             <button type="button" class="btn btn-secondary ms-2"
                                                 onclick="window.location.href='{{ route('jabatan.index') }}'">
-                                                <i class="bi bi-x-circle me-2"></i>Cancel
+                                                <i class="bi bi-x-circle me-2"></i>Batal
                                             </button>
                                         </div>
                                     </div>
@@ -60,3 +62,21 @@
             </div>
         </div>
     @endsection
+
+
+    @push('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const forms = document.querySelectorAll('.needs-validation');
+                Array.from(forms).forEach(form => {
+                    form.addEventListener('submit', event => {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            });
+        </script>
+    @endpush

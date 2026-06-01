@@ -21,14 +21,25 @@
 
         <!-- Kehadiran DataTable -->
         <div class="dashboard-card">
-            <div class="dashboard-card-header py-4 px-4">
-                <h5 class="mb-0">Daftar Kehadiran</h5>
-                <small class="mb-0">
-                    {{ \Carbon\Carbon::now()->locale('id')->translatedFormat('l / d-m-Y') }}
-                </small>
+            <div class="dashboard-card-header py-4 px-4 d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="mb-0">Daftar Kehadiran</h5>
+                    <small class="mb-0">
+                        {{ \Carbon\Carbon::now()->locale('id')->translatedFormat('l / d-m-Y') }}
+                    </small>
+                </div>
+                <div class="d-flex gap-2">
+                    <a href="{{ route('kehadiran.cetak') }}" class="btn btn-sm btn-outline-danger">
+                        <i class="bi bi-file-earmark-pdf me-1"></i> Cetak PDF
+                    </a>
+                    <a href="{{ route('kehadiran.create') }}" class="btn btn-sm btn-primary">
+                        <i class="bi bi-plus me-1"></i>Tambah Data
+                    </a>
+                </div>
             </div>
             <div class="text-center dashboard-card-body px-4 py-4">
-                <table id="dataTableDesa" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+                <table id="dataTableDesa" class="table table-striped table-bordered dt-responsive nowrap"
+                    style="width:100%">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -69,20 +80,26 @@
                                     </span>
                                 </td>
                                 <td class="text-capitalize">
-                                    @if ($kehadiran->status_ketepatan)  
-                                    <span class="status-badge {{ $statusKetepatanClass }}">
-                                        {{ $kehadiran->status_ketepatan }}
-                                    </span>
+                                    @if ($kehadiran->status_ketepatan)
+                                        <span class="status-badge {{ $statusKetepatanClass }}">
+                                            {{ $kehadiran->status_ketepatan }}
+                                        </span>
                                     @else
-                                    <span>-</span>
+                                        <span>-</span>
                                     @endif
                                 </td>
                                 <td>{{ $kehadiran->keterangan ?? '-' }}</td>
                                 <td>
-                                    <button class="btn-action btn-view" title="View"><i class="bi bi-eye"></i></button>
-                                    <button class="btn-action btn-edit" title="Edit"><i class="bi bi-pencil"></i></button>
-                                    <button class="btn-action btn-delete" title="Delete"><i
-                                            class="bi bi-trash"></i></button>
+                                    <a href="{{ route('kehadiran.edit', $kehadiran->id) }}" class="btn-action btn-edit"
+                                        title="Edit"><i class="bi bi-pencil"></i></a>
+                                    <form id="delete-form-{{ $kehadiran->id }}" method="POST"
+                                        action="{{ route('kehadiran.destroy', $kehadiran->id) }}" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" onclick="confirmDelete({{ $kehadiran->id }})"
+                                            class="btn-action btn-delete" title="Delete"><i
+                                                class="bi bi-trash"></i></button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
@@ -96,4 +113,31 @@
 
 @push('scripts')
     <script type="module" crossorigin src="{{ asset('template/assets/data-table-DNS4anqs.js') }}"></script>
+
+    <script>
+        function confirmDelete(id) {
+            Swal.fire({
+                title: "Apakah Anda yakin?",
+                text: "Data yang dihapus tidak dapat dikembalikan!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Ya, hapus!",
+                cancelButtonText: "Batal"
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    Swal.fire({
+                        title: "Menghapus data...",
+                        text: "Mohon tunggu sebentar...",
+                        allowOutsideClick: false,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
+
+                    document.getElementById('delete-form-' + id).submit();
+                }
+            });
+        }
+    </script>
 @endpush

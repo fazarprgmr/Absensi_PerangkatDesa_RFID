@@ -24,7 +24,7 @@
             <div class="dashboard-card-header py-4 px-4 d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">Daftar Perangkat Desa</h5>
                 <a href="{{ route('perangkat-desa.create') }}" class="btn btn-sm btn-primary">
-                    <i class="bi bi-plus me-1"></i>Tambah
+                    <i class="bi bi-plus me-1"></i>Tambah Data
                 </a>
             </div>
             <div class="dashboard-card-body px-4 py-4">
@@ -57,7 +57,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="button" onclick="confirmDelete({{ $pd->id }})"
-                                        class="btn-action btn-delete" title="Delete"><i class="bi bi-trash"></i>
+                                            class="btn-action btn-delete" title="Delete"><i class="bi bi-trash"></i>
                                         </button>
                                     </form>
                                 </td>

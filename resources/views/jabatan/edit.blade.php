@@ -8,7 +8,7 @@
         <div class="dashboard-row">
             <div class="dashboard-grid grid-cols-1">
                 <h4 class="page-title">Edit Jabatan</h4>
-                <p class="text-muted">Isi informasi di bawah ini untuk mengedit jabatan</p>
+                <p class="text-muted">Isi informasi di bawah ini untuk mengedit jabatan yang sudah ada</p>
             </div>
         </div>
         <!-- Form Tabs -->
@@ -49,7 +49,7 @@
                                             </button>
                                             <button type="button" class="btn btn-secondary ms-2"
                                                 onclick="window.location.href='{{ route('jabatan.index') }}'">
-                                                <i class="bi bi-x-circle me-2"></i>Cancel
+                                                <i class="bi bi-x-circle me-2"></i>Batal
                                             </button>
                                         </div>
                                     </div>

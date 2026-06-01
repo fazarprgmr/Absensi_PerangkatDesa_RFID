@@ -21,8 +21,21 @@
                     <i class="bi bi-plus-lg"></i>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="add-student.html"><i class="bi bi-person-plus me-2"></i>Tambah
+                    <li><a class="dropdown-item" href="{{ route('perangkat-desa.create') }}"><i class="bi bi-person-plus me-2"></i>Tambah
+                            Data
                             Perangkat Desa</a></li>
+                    <li>
+                    <li><a class="dropdown-item" href="{{ route('jabatan.create') }}"><i class="bi bi-person-plus me-2"></i>Tambah
+                            Data Jabatan</a></li>
+                    <li>
+                    <li><a class="dropdown-item" href="{{ route('alamat.create') }}"><i class="bi bi-person-plus me-2"></i>Tambah
+                            Data Alamat</a></li>
+                    <li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="{{ route('kehadiran.create') }}"><i class="bi bi-person-plus me-2"></i>Tambah
+                             Kehadiran</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>

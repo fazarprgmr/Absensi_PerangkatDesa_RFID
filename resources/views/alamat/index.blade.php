@@ -24,7 +24,7 @@
             <div class="dashboard-card-header py-4 px-4 d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">Daftar Alamat</h5>
                 <a href="{{ route('alamat.create') }}" class="btn btn-sm btn-primary">
-                    <i class="bi bi-plus me-1"></i>Tambah Alamat
+                    <i class="bi bi-plus me-1"></i>Tambah Data
                 </a>
             </div>
             <div class="dashboard-card-body px-4 py-4">

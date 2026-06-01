@@ -66,7 +66,13 @@
         <div class="auth-card">
             @yield('content')
         </div>
+        <div class="text-center mt-4">
+            <p class="text-white-50 small">
+                &copy; 2026 Sistem Absensi Perangkat Desa | v1.0. All rights reserved. |
+            </p>
+        </div>
     </div>
+
 </body>
 
 </html>
