@@ -9,9 +9,15 @@
                 <h1 class="h3 mb-0 text-gray-800">Detail Riwayat Kehadiran</h1>
                 <p class="text-muted mb-0 font-14">Periode: {{ $namaBulan }} {{ $tahun }}</p>
             </div>
-            <a href="{{ route('rekap.index', ['bulan' => $bulan, 'tahun' => $tahun]) }}" class="btn btn-secondary btn-sm">
-                <i class="bi bi-arrow-left me-1"></i> Kembali ke Rekap
-            </a>
+            <div class="d-flex gap-2">
+                <a href="{{ route('rekap.cetakDetail', ['id' => $perangkatDesa->id, 'bulan' => $bulan, 'tahun' => $tahun]) }}"
+                    class="btn btn-sm btn-outline-danger">
+                    <i class="bi bi-file-earmark-pdf me-1"></i> Cetak PDF Detail
+                </a>
+                <a href="{{ route('rekap.index', ['bulan' => $bulan, 'tahun' => $tahun]) }}" class="btn btn-secondary btn-sm">
+                    <i class="bi bi-arrow-left me-1"></i> Kembali ke Rekap
+                </a>
+            </div>
         </div>
 
         <div class="dashboard-card mb-4 border-left-primary">
@@ -57,7 +63,7 @@
                                                 $color = 'bg-info';
                                             }
                                             if ($k->status_kehadiran == 'sakit') {
-                                                $color = 'bg-warning text-dark';
+                                                $color = 'bg-warning';
                                             }
                                             if ($k->status_kehadiran == 'alpa') {
                                                 $color = 'bg-danger';
@@ -68,7 +74,8 @@
                                             {{ $k->status_kehadiran }}
                                         </span>
                                         @if ($k->status_ketepatan == 'terlambat')
-                                            <br><span class="badge bg-danger mt-1" style="font-size: 10px;">Terlambat</span>
+                                            <br><span class="badge bg-warning mt-1"
+                                                style="font-size: 10px;">Terlambat</span>
                                         @endif
                                     </td>
                                     <td class="px-4 py-3">{{ $k->keterangan ?? '-' }}</td>

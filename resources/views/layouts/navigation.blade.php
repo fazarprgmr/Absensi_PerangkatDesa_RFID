@@ -58,6 +58,9 @@
                     <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i
                                 class="bi bi-person me-2"></i>Profile</a></li>
                     <li>
+                    <li><a class="dropdown-item" href="{{ route('pengaturan.index') }}"><i
+                                class="bi bi-gear me-2"></i>Pengaturan</a></li>
+                    <li>
                         <hr class="dropdown-divider">
                     </li>
                     <li>

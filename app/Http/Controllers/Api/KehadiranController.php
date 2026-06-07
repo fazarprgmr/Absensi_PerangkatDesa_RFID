@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Kehadiran;
+use App\Models\Pengaturan;
 use App\Models\PerangkatDesa;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -28,10 +29,12 @@ class KehadiranController extends Controller
             return response()->json(['message' => 'Kartu Tidak Terdaftar!'], 404);
         }
 
+        $standarJamMasuk = Pengaturan::first();
+
         $hariIni = Carbon::today('Asia/Jakarta');
         $sekarang = Carbon::now('Asia/Jakarta');
         $jamSekarang = $sekarang->format('H:i:s');
-        $batasPulang = '14:00:00';
+        $batasPulang = $standarJamMasuk->jam_pulang;
 
         // Cari data absen hari ini
         $absen = Kehadiran::where('perangkat_desa_id', $perangkatDesa->id)
@@ -56,7 +59,7 @@ class KehadiranController extends Controller
                 ], 200);
             }
 
-            // C. Jika sudah jam 14:00 dan belum absen pulang -> Proses Pulang
+            // C. Jika sudah waktunya dan belum absen pulang -> Proses Pulang
             $absen->update(['jam_pulang' => $jamSekarang]);
 
             return response()->json([
@@ -67,7 +70,7 @@ class KehadiranController extends Controller
         }
 
         // 2. LOGIKA JIKA BELUM ADA DATA (ABSEN MASUK)
-        $batasTelat = '08:30:00';
+        $batasTelat = $standarJamMasuk->jam_toleransi;
         $statusKetepatan = ($jamSekarang > $batasTelat) ? 'terlambat' : 'tepat waktu';
 
         Kehadiran::create([

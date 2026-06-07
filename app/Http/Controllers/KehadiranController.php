@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kehadiran;
+use App\Models\Pengaturan;
 use App\Models\PerangkatDesa;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
@@ -132,11 +133,13 @@ class KehadiranController extends Controller
             ->orderBy('jam_masuk', 'desc')
             ->get();
 
+        $pengaturan = Pengaturan::first();
+
         // Load view khusus PDF dan set ukuran kertas ke A4 Potrait
-        $pdf = Pdf::loadView('kehadiran.cetak', compact('kehadirans', 'hariIni'))
+        $pdf = Pdf::loadView('kehadiran.cetak', compact('kehadirans', 'hariIni', 'pengaturan'))
             ->setPaper('a4', 'portrait');
 
         // Otomatis download file dengan nama Laporan-Harian-[tanggal].pdf
-        return $pdf->download('Laporan-Harian-'.$hariIni->format('Y-m-d').'.pdf');
+        return $pdf->download('Laporan Absensi '.$hariIni->translatedFormat('l, d F Y').'.pdf');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kehadiran;
+use App\Models\Pengaturan;
 use App\Models\PerangkatDesa;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -106,8 +107,10 @@ class RekapController extends Controller
 
         $namaBulan = $listBulan[$bulan];
 
+        $pengaturan = Pengaturan::first();
+
         // Set ukuran kertas Lanscape (Tiduran) agar tabel rekap yang panjang muat dengan sempurna
-        $pdf = Pdf::loadView('rekap.cetak', compact('rekaps', 'namaBulan', 'tahun'))
+        $pdf = Pdf::loadView('rekap.cetak', compact('rekaps', 'namaBulan', 'tahun', 'pengaturan'))
             ->setPaper('a4', 'landscape');
 
         return $pdf->download("Laporan-Rekap-Absensi-{$namaBulan}-{$tahun}.pdf");
@@ -136,5 +139,38 @@ class RekapController extends Controller
         $namaBulan = $listBulan[$bulan];
 
         return view('rekap.show', compact('perangkatDesa', 'kehadirans', 'bulan', 'tahun', 'namaBulan'));
+    }
+
+    public function cetakDetail($id, Request $request)
+    {
+        // Tangkap filter bulan dan tahun dari halaman sebelumnya
+        $bulan = $request->input('bulan', date('m'));
+        $tahun = $request->input('tahun', date('Y'));
+
+        // Cari data perangkat desa berdasarkan ID
+        $perangkatDesa = PerangkatDesa::findOrFail($id);
+
+        // Ambil riwayat absen spesifik HANYA untuk orang ini di bulan & tahun yang dipilih
+        $kehadirans = Kehadiran::where('perangkat_desa_id', $id)
+            ->whereMonth('tanggal', $bulan)
+            ->whereYear('tanggal', $tahun)
+            ->orderBy('tanggal', 'asc')
+            ->get();
+
+        $listBulan = [
+            '01' => 'Januari', '02' => 'Februari', '03' => 'Maret', '04' => 'April',
+            '05' => 'Mei', '06' => 'Juni', '07' => 'Juli', '08' => 'Agustus',
+            '09' => 'September', '10' => 'Oktober', '11' => 'November', '12' => 'Desember',
+        ];
+        $namaBulan = $listBulan[$bulan];
+
+        $pengaturan = Pengaturan::first();
+
+        // Load view PDF khusus detail per orang (Kertas A4 Portrait)
+        $pdf = Pdf::loadView('rekap.cetak-detail', compact('perangkatDesa', 'kehadirans', 'bulan', 'tahun', 'namaBulan', 'pengaturan'))
+            ->setPaper('a4', 'portrait');
+
+        // Otomatis download dengan nama file yang rapi
+        return $pdf->download("Laporan-Detail-Absensi-{$perangkatDesa->nama}-{$namaBulan}-{$tahun}.pdf");
     }
 }

@@ -96,14 +96,14 @@
                     <td style="border: none; padding: 2px 10px 2px 0;">TANGGAL</td>
                     <td style="border: none; padding: 2px;">:</td>
                     <td style="border: none; padding: 2px;">
-                        {{ $hariIni->locale('id')->translatedFormat('d F Y') }}
+                        {{ $hariIni->translatedFormat('d F Y') }}
                     </td>
                 </tr>
                 <tr>
                     <td style="border: none; padding: 2px 10px 2px 0;">HARI</td>
                     <td style="border: none; padding: 2px;">:</td>
                     <td style="border: none; padding: 2px;">
-                        {{ $hariIni->locale('id')->translatedFormat('l') }}
+                        {{ $hariIni->translatedFormat('l') }}
                     </td>
                 </tr>
             </table>
@@ -134,13 +134,17 @@
             @endforeach
         </tbody>
     </table>
-
+    
     <div class="ttd-container">
-        <p>CIASEM TENGAH, {{ $hariIni->locale('id')->translatedFormat('F Y') }}</p>
-        <p><strong>KEPALA DESA CIASEM TENGAH</strong></p>
+        <p>CIASEM TENGAH, {{ $hariIni->translatedFormat('d F Y') }}</p>
+        <p><strong>Kepala Desa Ciasem Tengah</strong></p>
         <div class="ttd-space"></div>
-        <p><u><strong>MISTA RANGUN</strong></u></p>
+        <p><u><strong>{{ $pengaturan->nama_kades }}</strong></u></p>
+        @if ($pengaturan->nip_kades != '-' && $pengaturan->nip_kades != null)
+            <p style="margin-top: 2px;">NIP. {{ $pengaturan->nip_kades }}</p>
+        @endif
     </div>
+    
 </body>
 
 </html>

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Laporan Rekap Bulanan</title>
+    <title>Laporan Riwayat Kehadiran Perangkat Desa</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -32,24 +32,34 @@
             text-align: center;
             font-size: 14px;
             font-weight: bold;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             text-transform: uppercase;
         }
 
-        table {
+        .biodata {
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .biodata td {
+            padding: 4px;
+            font-size: 13px;
+        }
+
+        table.data-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 10px;
         }
 
-        th,
-        td {
+        table.data-table th,
+        table.data-table td {
             border: 1px solid #000;
             padding: 7px;
             text-align: center;
         }
 
-        th {
+        table.data-table th {
             background-color: #f2f2f2;
             font-weight: bold;
         }
@@ -61,7 +71,7 @@
         .ttd-container {
             margin-top: 40px;
             float: right;
-            width: 200px;
+            width: 220px;
             text-align: center;
         }
 
@@ -80,39 +90,64 @@
     </div>
 
     <div class="title">
-        Laporan Rekapitulasi Absensi<br>
-        Perangkat Desa Ciasem Tengah Kecamatan Ciasem Kab. Subang<br>
+        Laporan Riwayat Kehadiran Harian Perangkat Desa<br>
         Periode Bulan: {{ $namaBulan }} {{ $tahun }}
     </div>
 
-    <table>
+    <!-- Informasi Perangkat Desa yang dicetak -->
+    <table class="biodata">
+        <tr>
+            <td width="15%"><strong>Nama</strong></td>
+            <td width="2%">:</td>
+            <td><strong>{{ $perangkatDesa->nama }}</strong></td>
+        </tr>
+        <tr>
+            <td><strong>NIK</strong></td>
+            <td>:</td>
+            <td>{{ $perangkatDesa->nik ?? '-' }}</td>
+        </tr>
+        <tr>
+            <td><strong>Jabatan</strong></td>
+            <td>:</td>
+            <td>{{ $perangkatDesa->jabatan->nama_jabatan ?? '-' }}</td>
+        </tr>
+    </table>
+
+    <table class="data-table">
         <thead>
             <tr>
                 <th width="5%">No</th>
-                <th>Nama Perangkat</th>
-                <th>Total Hari Aktif</th>
-                <th style="color: green;">Hadir (Tepat)</th>
-                <th style="color: orange;">Terlambat</th>
-                <th style="color: blue;">Izin</th>
-                <th style="color: cyan;">Sakit</th>
-                <th style="color: red;">Alpa</th>
-                <th>Persentase</th>
+                <th width="35%">Tanggal</th>
+                <th width="15%">Jam Masuk</th>
+                <th width="15%">Jam Pulang</th>
+                <th width="15%">Status</th>
+                <th width="15%">Keterangan</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($rekaps as $key => $rekap)
+            @forelse($kehadirans as $key => $k)
                 <tr>
                     <td>{{ $key + 1 }}</td>
-                    <td style="font-weight: bold;">{{ $rekap->nama }}</td>
-                    <td>{{ $rekap->total_hari }} Hari</td>
-                    <td>{{ $rekap->hadir }}</td>
-                    <td>{{ $rekap->terlambat }}</td>
-                    <td>{{ $rekap->izin }}</td>
-                    <td>{{ $rekap->sakit }}</td>
-                    <td>{{ $rekap->alpa }}</td>
-                    <td style="font-weight: bold;">{{ $rekap->persentase }}%</td>
+                    <td class="text-left">
+                        {{ \Carbon\Carbon::parse($k->tanggal)->locale('id')->translatedFormat('l, d F Y') }}
+                    </td>
+                    <td>{{ $k->jam_masuk ?? '-' }}</td>
+                    <td>{{ $k->jam_pulang ?? '-' }}</td>
+                    <td style="text-transform: capitalize;">
+                        {{ $k->status_kehadiran }}
+                        @if ($k->status_ketepatan == 'terlambat')
+                            (Terlambat)
+                        @endif
+                    </td>
+                    <td>{{ $k->keterangan ?? '-' }}</td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="6" style="padding: 20px; color: #666;">
+                        Belum ada catatan kehadiran di bulan ini.
+                    </td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 
