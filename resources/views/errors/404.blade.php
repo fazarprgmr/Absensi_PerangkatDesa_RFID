@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://ui-avatars.com" crossorigin>
     <link rel="dns-prefetch" href="https://flagcdn.com">
 
-    <title>404 - Kiaalap Dashboard</title>
+    <title>404</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="./assets/favicon-9EIT7vLh.ico">

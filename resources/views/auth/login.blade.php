@@ -19,15 +19,12 @@
                 <span class="input-group-text">
                     <i class="bi bi-envelope"></i>
                 </span>
-                <input type="email" class="form-control" id="username" name="email" placeholder="example@kiaalap.edu"
+                <input type="email" class="form-control" id="username" name="email" placeholder="Masukkan email" value="{{ old('email') }}"
                     required aria-label="Email Address" aria-describedby="emailHelp" required>
             </div>
             @if ($errors->has('email'))
                 <span class="text-danger">{{ $errors->first('email') }}</span>
             @endif
-            <small id="emailHelp" class="form-text text-muted">
-                Email Bawaan admin@gmail.com
-            </small>
         </div>
 
         <div class="mb-3">
@@ -36,15 +33,12 @@
                 <span class="input-group-text">
                     <i class="bi bi-lock"></i>
                 </span>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password"
+                <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password" value="{{ old('password') }}"
                     required aria-label="Password" aria-describedby="passwordHelp" required>
             </div>
             @if ($errors->has('password'))
                 <span class="text-danger">{{ $errors->first('password') }}</span>
             @endif
-            <small id="passwordHelp" class="form-text text-muted">
-                Password Bawaan Admin123
-            </small>
         </div>
 
         <div class="d-grid gap-2">

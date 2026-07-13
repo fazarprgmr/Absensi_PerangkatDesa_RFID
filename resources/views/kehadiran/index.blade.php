@@ -32,9 +32,11 @@
                     <a href="{{ route('kehadiran.cetak') }}" class="btn btn-sm btn-outline-danger">
                         <i class="bi bi-file-earmark-pdf me-1"></i> Cetak PDF
                     </a>
-                    <a href="{{ route('kehadiran.create') }}" class="btn btn-sm btn-primary">
-                        <i class="bi bi-plus me-1"></i>Tambah Data
-                    </a>
+                    @if (auth()->user()->role === 'admin')
+                        <a href="{{ route('kehadiran.create') }}" class="btn btn-sm btn-primary">
+                            <i class="bi bi-plus me-1"></i>Tambah Data
+                        </a>
+                    @endif
                 </div>
             </div>
             <div class="text-center dashboard-card-body px-4 py-4">
@@ -42,14 +44,13 @@
                     style="width:100%">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>Jam Masuk</th>
-                            <th>Jam Pulang</th>
-                            <th>Kehadiran</th>
-                            <th>Ketepatan</th>
-                            <th>Keterangan</th>
-                            <th>Actions</th>
+                            <th class="text-center">No</th>
+                            <th class="text-center">Nama</th>
+                            <th class="text-center">Jam Masuk</th>
+                            <th class="text-center">Jam Pulang</th>
+                            <th class="text-center">Kehadiran</th>
+                            <th class="text-center">Ketepatan</th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -88,18 +89,23 @@
                                         <span>-</span>
                                     @endif
                                 </td>
-                                <td>{{ $kehadiran->keterangan ?? '-' }}</td>
                                 <td>
-                                    <a href="{{ route('kehadiran.edit', $kehadiran->id) }}" class="btn-action btn-edit"
-                                        title="Edit"><i class="bi bi-pencil"></i></a>
-                                    <form id="delete-form-{{ $kehadiran->id }}" method="POST"
-                                        action="{{ route('kehadiran.destroy', $kehadiran->id) }}" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="button" onclick="confirmDelete({{ $kehadiran->id }})"
-                                            class="btn-action btn-delete" title="Delete"><i
-                                                class="bi bi-trash"></i></button>
-                                    </form>
+                                    <a href="{{ route('kehadiran.show', $kehadiran->id) }}" class="btn-action btn-view"
+                                        title="Lihat Detail & Foto"><i class="bi bi-eye"></i>
+                                    </a>
+                                    @if (auth()->user()->role === 'admin')
+                                        <a href="{{ route('kehadiran.edit', $kehadiran->id) }}" class="btn-action btn-edit"
+                                            title="Edit"><i class="bi bi-pencil"></i>
+                                        </a>
+                                        <form id="delete-form-{{ $kehadiran->id }}" method="POST"
+                                            action="{{ route('kehadiran.destroy', $kehadiran->id) }}" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button" onclick="confirmDelete({{ $kehadiran->id }})"
+                                                class="btn-action btn-delete" title="Delete"><i
+                                                    class="bi bi-trash"></i></button>
+                                        </form>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

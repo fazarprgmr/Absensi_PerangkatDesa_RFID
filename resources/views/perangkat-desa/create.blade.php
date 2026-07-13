@@ -31,7 +31,9 @@
                                             <div class="mb-4">
                                                 <label for="nik" class="form-label">NIK <span
                                                         class="text-danger">*</span></label>
-                                                <input type="text" name="nik"
+                                                <input type="text" name="nik" inputmode="numeric" pattern="[0-9]{16}"
+                                                    maxlength="16"
+                                                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
                                                     class="form-control @error('nik') is-invalid @enderror" id="nik"
                                                     placeholder="Masukkan NIK" value="{{ old('nik') }}" required>
                                                 @error('nik')
@@ -165,7 +167,8 @@
                                                 <input name="foto"
                                                     class="form-control @error('foto') is-invalid @enderror"
                                                     type="file" id="foto" accept="image/*">
-                                                <div class="form-text">Accepted formats: JPG, PNG (Max 2MB)</div>
+                                                <div class="form-text">Format yang didukung: JPG, JPEG, PNG. Maksimal 2MB.
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

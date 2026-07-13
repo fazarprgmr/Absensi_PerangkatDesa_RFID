@@ -24,7 +24,7 @@
                             <div class="tab-pane fade show active" id="basic" role="tabpanel"
                                 aria-labelledby="basic-tab">
                                 <form class="needs-validation" novalidate method="POST"
-                                    action="{{ route('kehadiran.update', $kehadiran->id) }}">
+                                    action="{{ route('kehadiran.update', $kehadiran->id) }}" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <div class="row gx-4 gy-3">
@@ -144,6 +144,27 @@
                                                 <textarea name="keterangan" class="form-control @error('keterangan') is-invalid @enderror" id="keterangan"
                                                     rows="3" placeholder="Masukkan Keterangan">{{ old('keterangan', $kehadiran->keterangan) }}</textarea>
                                             </div>
+                                        </div>
+                                        <div class="col-md-12 px-2 mb-4">
+                                            <label for="foto_bukti" class="form-label">Foto Bukti (Kosongkan jika tidak
+                                                ingin mengubah foto)</label>
+                                            <input type="file"
+                                                class="form-control @error('foto_bukti') is-invalid @enderror"
+                                                id="foto_bukti" name="foto_bukti" accept="image/*">
+                                            <small class="text-muted">Format yang didukung: JPG, JPEG, PNG. Maksimal
+                                                2MB.</small>
+                                            @error('foto_bukti')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+
+                                            @if ($kehadiran->foto_bukti)
+                                                <div class="mt-2">
+                                                    <p class="text-muted mb-1" style="font-size: 13px;">Foto Bukti Saat
+                                                        Ini:</p>
+                                                    <img src="{{ asset('storage/absensi/' . $kehadiran->foto_bukti) }}"
+                                                        class="img-thumbnail" style="max-height: 100px;">
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="row mt-4">

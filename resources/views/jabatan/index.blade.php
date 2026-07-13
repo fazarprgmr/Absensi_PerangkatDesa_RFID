@@ -23,7 +23,7 @@
         <div class="dashboard-card">
             <div class="dashboard-card-header py-4 px-4 d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">Daftar Data Jabatan</h5>
-                <a href="{{ route('jabatan.create') }}" class="btn btn-primary">
+                <a href="{{ route('jabatan.create') }}" class="btn btn-sm btn-primary">
                     <i class="bi bi-plus-circle me-1"></i>Tambah Data
                 </a>
             </div>
@@ -32,17 +32,21 @@
                     style="width:100%">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Nama Jabatan</th>
-                            <th>Actions</th>
+                            <th class="text-center">No</th>
+                            <th class="text-center">Nama Jabatan</th>
+                            <th class="text-center">Created At</th>
+                            <th class="text-center">Updated At</th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($jabatans as $jabatan)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td class="text-uppercase">{{ $jabatan->nama_jabatan }}</td>
-                                <td>
+                                <td class="text-center">{{ $loop->iteration }}</td>
+                                <td class="text-uppercase text-center">{{ $jabatan->nama_jabatan }}</td>
+                                <td class="text-center">{{ $jabatan->created_at }}</td>
+                                <td class="text-center">{{ $jabatan->updated_at }}</td>
+                                <td class="text-center">
                                     <a href="{{ route('jabatan.edit', $jabatan->id) }}" class="btn-action btn-edit"
                                         title="Edit"><i class="bi bi-pencil"></i></a>
                                     <form id="delete-form-{{ $jabatan->id }}" method="POST"

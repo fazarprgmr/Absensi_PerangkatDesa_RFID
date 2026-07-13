@@ -9,3 +9,5 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::post('/tap-rfid', [KehadiranController::class, 'tapRFID']);
+
+Route::post('/upload-foto', [KehadiranController::class, 'simpanFoto']);

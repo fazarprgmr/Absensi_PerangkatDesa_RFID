@@ -8,6 +8,7 @@ use App\Models\PerangkatDesa;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class KehadiranController extends Controller
 {
@@ -34,8 +35,9 @@ class KehadiranController extends Controller
     public function create()
     {
         $perangkatDesa = PerangkatDesa::all();
+        $pengaturan = Pengaturan::first();
 
-        return view('kehadiran.create', compact('perangkatDesa'));
+        return view('kehadiran.create', compact('perangkatDesa', 'pengaturan'));
     }
 
     /**
@@ -51,7 +53,20 @@ class KehadiranController extends Controller
             'status_kehadiran' => 'required',
             'status_ketepatan' => 'nullable',
             'keterangan' => 'nullable',
+            'foto_bukti' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Validasi foto manual
         ]);
+
+        // Siapkan variabel untuk menyimpan nama foto (default null)
+        $namaFoto = null;
+        
+        // Logika Upload Foto saat bikin data baru manual
+        if ($request->hasFile('foto_bukti')) {
+            $file = $request->file('foto_bukti');
+            $filename = 'foto_bukti_'.time().'.'.$file->getClientOriginalExtension();
+            $file->storeAs('absensi', $filename, 'public');
+            
+            $namaFoto = $filename;
+        }
 
         Kehadiran::create([
             'perangkat_desa_id' => $request->perangkat_desa_id,
@@ -61,6 +76,7 @@ class KehadiranController extends Controller
             'status_kehadiran' => $request->status_kehadiran,
             'status_ketepatan' => $request->status_ketepatan,
             'keterangan' => $request->keterangan,
+            'foto_bukti' => $namaFoto, // Simpan nama foto jika ada, atau null jika tidak ada
         ]);
 
         return redirect()->route('kehadiran.index')->with('success', 'Kehadiran berhasil ditambahkan.');
@@ -71,7 +87,10 @@ class KehadiranController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $perangkatDesa = PerangkatDesa::all();
+        $kehadiran = Kehadiran::findOrFail($id);
+
+        return view('kehadiran.show', compact('perangkatDesa', 'kehadiran'));
     }
 
     /**
@@ -81,8 +100,9 @@ class KehadiranController extends Controller
     {
         $perangkatDesa = PerangkatDesa::all();
         $kehadiran = Kehadiran::findOrFail($id);
+        $pengaturan = Pengaturan::first();
 
-        return view('kehadiran.edit', compact('perangkatDesa', 'kehadiran'));
+        return view('kehadiran.edit', compact('perangkatDesa', 'kehadiran', 'pengaturan'));
     }
 
     /**
@@ -98,9 +118,27 @@ class KehadiranController extends Controller
             'status_kehadiran' => 'required',
             'status_ketepatan' => 'nullable',
             'keterangan' => 'nullable',
+            'foto_bukti' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Validasi foto
         ]);
 
         $kehadiran = Kehadiran::findOrFail($id);
+
+        // Ambil nama foto lama sebagai default
+        $namaFoto = $kehadiran->foto_bukti;
+
+        // Logika Upload Foto saat mengedit data
+        if ($request->hasFile('foto_bukti')) {
+            $file = $request->file('foto_bukti');
+            $filename = 'foto_bukti_'.$kehadiran->id.'_'.time().'.'.$file->getClientOriginalExtension();
+            $file->storeAs('absensi', $filename, 'public');
+
+            // Hapus foto lama di storage jika ada agar tidak memenuhi memori
+            if ($kehadiran->foto_bukti && Storage::disk('public')->exists('absensi/'.$kehadiran->foto_bukti)) {
+                Storage::disk('public')->delete('absensi/'.$kehadiran->foto_bukti);
+            }
+
+            $namaFoto = $filename;
+        }
 
         $kehadiran->update([
             'perangkat_desa_id' => $request->perangkat_desa_id,
@@ -110,6 +148,7 @@ class KehadiranController extends Controller
             'status_kehadiran' => $request->status_kehadiran,
             'status_ketepatan' => $request->status_ketepatan,
             'keterangan' => $request->keterangan,
+            'foto_bukti' => $namaFoto ?? $kehadiran->foto_bukti, // Tetap gunakan foto lama jika tidak ada upload baru
         ]);
 
         return redirect()->route('kehadiran.index')->with('success', 'Kehadiran berhasil diupdate.');
@@ -120,7 +159,14 @@ class KehadiranController extends Controller
      */
     public function destroy(string $id)
     {
-        Kehadiran::findOrFail($id)->delete();
+        $kehadiran = Kehadiran::findOrFail($id);
+
+        // BONUS: Hapus file foto dari memori storage saat data absen dihapus!
+        if ($kehadiran->foto_bukti && Storage::disk('public')->exists('absensi/'.$kehadiran->foto_bukti)) {
+            Storage::disk('public')->delete('absensi/'.$kehadiran->foto_bukti);
+        }
+
+        $kehadiran->delete();
 
         return redirect()->route('kehadiran.index')->with('success', 'Kehadiran berhasil dihapus');
     }

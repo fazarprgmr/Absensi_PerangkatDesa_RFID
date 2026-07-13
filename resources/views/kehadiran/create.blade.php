@@ -24,7 +24,7 @@
                             <div class="tab-pane fade show active" id="basic" role="tabpanel"
                                 aria-labelledby="basic-tab">
                                 <form class="needs-validation" novalidate method="POST"
-                                    action="{{ route('kehadiran.store') }}">
+                                    action="{{ route('kehadiran.store') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row gx-4 gy-3">
                                         <div class="col-md-6 px-2">
@@ -93,6 +93,22 @@
                                         </div>
                                         <div class="col-md-6 px-2">
                                             <div class="mb-4">
+                                                <label for="jam_masuk" class="form-label">Jam Masuk</label>
+                                                <input type="time" name="jam_masuk"
+                                                    class="form-control @error('jam_masuk') is-invalid @enderror"
+                                                    id="jam_masuk" value="{{ old('jam_masuk') }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 px-2">
+                                            <div class="mb-4">
+                                                <label for="jam_pulang" class="form-label">Jam Pulang</label>
+                                                <input type="time" name="jam_pulang"
+                                                    class="form-control @error('jam_pulang') is-invalid @enderror"
+                                                    id="jam_pulang" value="{{ old('jam_pulang') }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 px-2">
+                                            <div class="mb-4">
                                                 <label for="status_ketepatan" class="form-label">Status Ketepatan</label>
                                                 <select name="status_ketepatan"
                                                     class="form-select @error('status_ketepatan') is-invalid @enderror"
@@ -115,28 +131,24 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-6 px-2">
-                                            <div class="mb-4">
-                                                <label for="jam_masuk" class="form-label">Jam Masuk</label>
-                                                <input type="time" name="jam_masuk"
-                                                    class="form-control @error('jam_masuk') is-invalid @enderror"
-                                                    id="jam_masuk" value="{{ old('jam_masuk') }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 px-2">
-                                            <div class="mb-4">
-                                                <label for="jam_pulang" class="form-label">Jam Pulang</label>
-                                                <input type="time" name="jam_pulang"
-                                                    class="form-control @error('jam_pulang') is-invalid @enderror"
-                                                    id="jam_pulang" value="{{ old('jam_pulang') }}">
-                                            </div>
-                                        </div>
                                         <div class="col-12 px-2">
                                             <div class="mb-4">
                                                 <label for="keterangan" class="form-label">Keterangan</label>
                                                 <textarea name="keterangan" class="form-control @error('keterangan') is-invalid @enderror" id="keterangan"
                                                     rows="3" placeholder="Masukkan Keterangan">{{ old('keterangan') }}</textarea>
                                             </div>
+                                        </div>
+                                        <div class="col-md-12 px-2 mb-4">
+                                            <label for="foto_bukti" class="form-label">Foto Bukti (Opsional / Surat Sakit /
+                                                Surat Izin)</label>
+                                            <input type="file"
+                                                class="form-control @error('foto_bukti') is-invalid @enderror"
+                                                id="foto_bukti" name="foto_bukti" accept="image/*">
+                                            <small class="text-muted">Format yang didukung: JPG, JPEG, PNG. Maksimal
+                                                2MB.</small>
+                                            @error('foto_bukti')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="row mt-4">
@@ -215,27 +227,29 @@
                 }
             }
 
+            // Jika format dari database adalah "08:30:00", kita potong jadi "08:30" (5 karakter pertama)
+            const batasJamMasuk = "{{ substr($pengaturan->jam_masuk ?? '08:30:00', 0, 5) }}";
+
             // Fungsi untuk otomatis set status ketepatan
             function cekKetepatanWaktu() {
                 if (jamMasuk.value) {
-                    // Batas telat kita set 08:30 (sesuai API yang pernah kita buat)
-                    if (jamMasuk.value <= '08:30') {
-                        statusKetepatan.value = 'tepat waktu';
-                    } else {
-                        statusKetepatan.value = 'terlambat';
-                    }
+                    // Logika batasnya sekarang DINAMIS mengikuti database                    if (jamMasuk.value <= '08:30') {
+                    statusKetepatan.value = 'tepat waktu';
                 } else {
-                    statusKetepatan.value = ''; // Kosongkan jika jam dihapus
+                    statusKetepatan.value = 'terlambat';
                 }
+            } else {
+                statusKetepatan.value = ''; // Kosongkan jika jam dihapus
             }
+        }
 
-            // Pasang pendengar event (Event Listener)
-            statusKehadiran.addEventListener('change', aturInputKehadiran);
-            jamMasuk.addEventListener('input', cekKetepatanWaktu);
+        // Pasang pendengar event (Event Listener)
+        statusKehadiran.addEventListener('change', aturInputKehadiran); jamMasuk.addEventListener('input',
+            cekKetepatanWaktu);
 
-            // Jalankan sekali saat halaman pertama kali dibuka
-            // (Berguna saat di halaman Edit atau saat ada error validasi old() value)
-            aturInputKehadiran();
+        // Jalankan sekali saat halaman pertama kali dibuka
+        // (Berguna saat di halaman Edit atau saat ada error validasi old() value)
+        aturInputKehadiran();
         });
     </script>
 @endpush

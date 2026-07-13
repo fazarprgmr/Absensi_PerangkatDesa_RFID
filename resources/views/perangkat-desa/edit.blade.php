@@ -166,11 +166,24 @@
                                         </div>
                                         <div class="col-12 px-2">
                                             <div class="mb-4">
-                                                <label for="foto" class="form-label">Foto</label>
+                                                <label for="foto" class="form-label">Foto <span
+                                                        class="text-muted fw-normal">(Biarkan kosong jika tidak ingin
+                                                        mengganti foto)</span></label>
                                                 <input name="foto"
                                                     class="form-control @error('foto') is-invalid @enderror"
                                                     type="file" id="foto" accept="image/*">
-                                                <div class="form-text">Accepted formats: JPG, PNG (Max 2MB)</div>
+                                                <div class="form-text">Format yang didukung: JPG, JPEG, PNG. Maksimal
+                                                2MB.</div>
+
+                                                @if ($perangkatDesa->foto)
+                                                    <div class="mt-3 p-2 border rounded d-inline-block bg-light">
+                                                        <p class="text-muted mb-2" style="font-size: 13px;"><i
+                                                                class="bi bi-image me-1"></i> Foto Saat Ini:</p>
+                                                        <img src="{{ asset('storage/perangkat_desa_profil/' . $perangkatDesa->foto) }}"
+                                                            class="img-thumbnail shadow-sm"
+                                                            style="max-height: 120px; object-fit: cover;">
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

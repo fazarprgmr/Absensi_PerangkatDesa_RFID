@@ -13,6 +13,7 @@ class Kehadiran extends Model
         'jam_pulang',
         'status_kehadiran',
         'status_ketepatan',
+        'foto_bukti',
         'keterangan',
     ];
 

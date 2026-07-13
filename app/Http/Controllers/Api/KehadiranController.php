@@ -31,8 +31,8 @@ class KehadiranController extends Controller
 
         $standarJamMasuk = Pengaturan::first();
 
-        $hariIni = Carbon::today('Asia/Jakarta');
-        $sekarang = Carbon::now('Asia/Jakarta');
+        $hariIni = Carbon::today();
+        $sekarang = Carbon::now();
         $jamSekarang = $sekarang->format('H:i:s');
         $batasPulang = $standarJamMasuk->jam_pulang;
 
@@ -89,5 +89,36 @@ class KehadiranController extends Controller
             'status_ketepatan' => $statusKetepatan,
             'keterangan' => null,
         ], 201);
+    }
+
+    // Tambahkan fungsi baru ini di bawah fungsi tapRFID
+        // Ganti fungsi simpanFoto kamu dengan yang ini:
+    public function simpanFoto(Request $request)
+    {
+        // Pastikan ada file foto yang dikirim dari ESP32-CAM bernama 'image'
+        if ($request->hasFile('image')) {
+
+            // Cari data absen yang PALING TERAKHIR dibuat/diupdate (milik orang yang baru tap)
+            $absenTerakhir = Kehadiran::latest('updated_at')->first();
+
+            if ($absenTerakhir) {
+                $file = $request->file('image');
+
+                // Beri nama foto secara unik: idabsen_jam.jpg
+                $filename = 'absen_'.$absenTerakhir->id.'_'.time().'.jpg';
+
+                // 🚀 PERBAIKAN DI SINI: Tambahkan parameter disk 'public' di belakang!
+                $file->storeAs('absensi', $filename, 'public');
+
+                // Update nama file ke database
+                $absenTerakhir->update([
+                    'foto_bukti' => $filename,
+                ]);
+
+                return response()->json(['message' => 'Foto berhasil disimpan di jalur yang benar!'], 200);
+            }
+        }
+
+        return response()->json(['message' => 'Gagal, tidak ada foto yang diterima'], 400);
     }
 }

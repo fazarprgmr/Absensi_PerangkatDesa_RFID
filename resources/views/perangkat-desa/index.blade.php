@@ -32,24 +32,25 @@
                     style="width:100%">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>Jabatan</th>
-                            <th>Alamat</th>
-                            <th>RFID</th>
-                            <th>Actions</th>
+                            <th class="text-center">No</th>
+                            <th class="text-center">Nama</th>
+                            <th class="text-center">Jabatan</th>
+                            <th class="text-center">Alamat</th>
+                            <th class="text-center">RFID</th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($perangkatDesa as $pd)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $pd->nama }}</td>
-                                <td>{{ $pd->jabatan->nama_jabatan }}</td>
-                                <td>{{ $pd->alamat->dusun }}</td>
-                                <td>{{ $pd->rfid_uid }}</td>
-                                <td>
-                                    <button class="btn-action btn-view" title="View"><i class="bi bi-eye"></i></button>
+                                <td class="text-center">{{ $loop->iteration }}</td>
+                                <td class="text-center">{{ $pd->nama }}</td>
+                                <td class="text-center">{{ $pd->jabatan->nama_jabatan }}</td>
+                                <td class="text-center">{{ $pd->alamat->dusun }}</td>
+                                <td class="text-center">{{ $pd->rfid_uid }}</td>
+                                <td class="text-center">
+                                    <a href="{{ route('perangkat-desa.show', $pd->id) }}" class="btn-action btn-view" 
+                                        title="View"><i class="bi bi-eye"></i></a>
                                     <a href="{{ route('perangkat-desa.edit', $pd->id) }}" class="btn-action btn-edit"
                                         title="Edit"><i class="bi bi-pencil"></i></a>
                                     <form id="delete-form-{{ $pd->id }}" method="POST"

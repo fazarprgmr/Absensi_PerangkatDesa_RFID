@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Alamat')
+@section('title', 'User')
 
 @push('styles')
     <link rel="stylesheet" crossorigin href="{{ asset('template/assets/data-table-D3bj5bdn.css') }}">
@@ -9,21 +9,25 @@
 
 @section('content')
     <div class="container-fluid">
-        <!-- Page Header -->
         <div class="mb-4">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <h1 class="h3 mb-0 text-gray-800">Data Alamat</h1>
-                    <p class="text-muted mb-0">Kelola data alamat</p>
+                    <h1 class="h3 mb-0 text-gray-800">User</h1>
+                    <p class="text-muted mb-0">Kelola akun Admin dan Kepala Desa (Kades)</p>
                 </div>
             </div>
         </div>
+        @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="bi bi-exclamation-triangle me-1"></i> {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
 
-        <!-- Alamat DataTable -->
         <div class="dashboard-card">
             <div class="dashboard-card-header py-4 px-4 d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">Daftar Alamat</h5>
-                <a href="{{ route('alamat.create') }}" class="btn btn-sm btn-primary">
+                <h5 class="mb-0">Daftar Akun Sistem</h5>
+                <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary">
                     <i class="bi bi-plus me-1"></i>Tambah Data
                 </a>
             </div>
@@ -33,34 +37,41 @@
                     <thead>
                         <tr>
                             <th class="text-center">No</th>
-                            <th class="text-center">Nama Dusun</th>
-                            <th class="text-center">Created At</th>
-                            <th class="text-center">Updated At</th>
+                            <th class="text-center">Nama</th>
+                            <th class="text-center">Email</th>
+                            <th class="text-center">Hak Akses</th>
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($alamats as $alamat)
+                        @foreach ($users as $user)
                             <tr>
                                 <td class="text-center">{{ $loop->iteration }}</td>
-                                <td class="text-center text-uppercase">{{ $alamat->dusun }}</td>
-                                <td class="text-center">{{ $alamat->created_at }}</td>
-                                <td class="text-center">{{ $alamat->updated_at }}</td>
+                                <td class="text-center">{{ $user->name }}</td>
+                                <td class="text-center">{{ $user->email }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('alamat.edit', $alamat->id) }}" class="btn-action btn-edit"
+                                    @if($user->role === 'admin')
+                                        <span class="badge bg-success px-2 py-1 text-uppercase">Admin</span>
+                                    @else
+                                        <span class="badge bg-primary px-2 py-1 text-uppercase">Kades</span>
+                                    @endif
+                                </td>
+                                <td class="text-center">
+                                    <a href="{{ route('user.edit', $user->id) }}" class="btn-action btn-edit"
                                         title="Edit"><i class="bi bi-pencil"></i></a>
-                                    <form id="delete-form-{{ $alamat->id }}" method="POST"
-                                        action="{{ route('alamat.destroy', $alamat->id) }}" class="d-inline">
+                                    
+                                    @if($user->id !== auth()->id()) <form id="delete-form-{{ $user->id }}" method="POST"
+                                        action="{{ route('user.destroy', $user->id) }}" class="d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" onclick="confirmDelete({{ $alamat->id }})"
-                                            class="btn-action btn-delete" title="Delete"><i
-                                                class="bi bi-trash"></i></button>
+                                        <button type="button" onclick="confirmDelete({{ $user->id }})"
+                                            class="btn-action btn-delete" title="Delete"><i class="bi bi-trash"></i>
+                                        </button>
                                     </form>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
-
                     </tbody>
                 </table>
             </div>
