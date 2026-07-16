@@ -84,7 +84,7 @@
                                         </div>
                                         <div class="row mt-4">
                                             <div class="col-12 px-2">
-                                                <button class="btn btn-primary">Simpan Profil</button>
+                                                <button class="btn btn-primary">Simpan Perubahan</button>
                                             </div>
                                         </div>
                                     </form>

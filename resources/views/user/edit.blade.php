@@ -125,9 +125,10 @@
                                     <div class="row mt-4">
                                         <div class="col-12 px-2">
                                             <button type="submit" class="btn btn-primary"><i
-                                                    class="bi bi-save me-2"></i>Simpan Profil</button>
+                                                    class="bi bi-check-circle me-2"></i>Simpan Perubahan</button>
                                             <a href="{{ route('user.index') }}"
-                                                class="btn btn-outline-secondary ms-2">Batal</a>
+                                                class="btn btn-outline-secondary ms-2"><i
+                                                    class="bi bi-x-circle me-2"></i>Batal</a>
                                         </div>
                                     </div>
                                 </div>

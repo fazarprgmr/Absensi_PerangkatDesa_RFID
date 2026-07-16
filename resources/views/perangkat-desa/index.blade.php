@@ -46,7 +46,7 @@
                                 <td class="text-center">{{ $loop->iteration }}</td>
                                 <td class="text-center">{{ $pd->nama }}</td>
                                 <td class="text-center">{{ $pd->jabatan->nama_jabatan }}</td>
-                                <td class="text-center">{{ $pd->alamat->dusun }}</td>
+                                <td class="text-center">{{ $pd->dusun }}</td>
                                 <td class="text-center">{{ $pd->rfid_uid }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('perangkat-desa.show', $pd->id) }}" class="btn-action btn-view" 

@@ -23,8 +23,7 @@
                             <!-- Basic Information Tab -->
                             <div class="tab-pane fade show active" id="basic" role="tabpanel"
                                 aria-labelledby="basic-tab">
-                                <form class="needs-validation" novalidate method="POST"
-                                    action="{{ route('perangkat-desa.update', $perangkatDesa->id) }}"
+                                <form method="POST" action="{{ route('perangkat-desa.update', $perangkatDesa->id) }}"
                                     enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
@@ -35,8 +34,10 @@
                                                         class="text-danger">*</span></label>
                                                 <input type="text" name="nik"
                                                     class="form-control @error('nik') is-invalid @enderror" id="nik"
-                                                    placeholder="Masukkan NIK" value="{{ old('nik', $perangkatDesa->nik) }}"
-                                                    required>
+                                                    placeholder="Masukkan 16 digit NIK"
+                                                    value="{{ old('nik', $perangkatDesa->nik) }}" maxlength="16"
+                                                    minlength="16" inputmode="numeric"
+                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                                 @error('nik')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -107,20 +108,68 @@
                                         </div>
                                         <div class="col-md-6 px-2">
                                             <div class="mb-4">
-                                                <label for="alamat_id" class="form-label">Alamat <span
+                                                <label for="dusun" class="form-label">Dusun <span
                                                         class="text-danger">*</span></label>
-                                                <select name="alamat_id"
-                                                    class="form-select @error('alamat_id') is-invalid @enderror"
-                                                    id="alamat_id" required>
-                                                    <option value="" selected disabled>Pilih Alamat</option>
-                                                    @foreach ($alamats as $alamat)
-                                                        <option value="{{ $alamat->id }}"
-                                                            {{ old('alamat_id', $perangkatDesa->alamat_id) == $alamat->id ? 'selected' : '' }}>
-                                                            {{ $alamat->dusun }}
+                                                <select name="dusun"
+                                                    class="form-select @error('dusun') is-invalid @enderror" id="dusun"
+                                                    required>
+                                                    <option value="" selected disabled>Pilih Dusun</option>
+                                                    @foreach ($dusuns as $dusun)
+                                                        <option value="{{ $dusun }}"
+                                                            {{ old('dusun', $perangkatDesa->dusun) == $dusun ? 'selected' : '' }}>
+                                                            {{ $dusun }}
                                                         </option>
                                                     @endforeach
                                                 </select>
-                                                @error('alamat_id')
+                                                @error('dusun')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <!-- Dropdown RT -->
+                                        <div class="col-md-3 px-2">
+                                            <div class="mb-4">
+                                                <label for="rt" class="form-label">RT <span
+                                                        class="text-danger">*</span></label>
+                                                <select name="rt" class="form-select @error('rt') is-invalid @enderror"
+                                                    id="rt" required>
+                                                    <option value="" disabled>Pilih RT</option>
+                                                    @for ($i = 1; $i <= 30; $i++)
+                                                        @php $valRT = str_pad($i, 3, '0', STR_PAD_LEFT); @endphp
+                                                        <option value="{{ $valRT }}"
+                                                            {{ old('rt', $perangkatDesa->rt) == $valRT ? 'selected' : '' }}>
+                                                            {{ $valRT }}
+                                                        </option>
+                                                    @endfor
+                                                </select>
+                                                @error('rt')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <!-- Dropdown RW -->
+                                        <div class="col-md-3 px-2">
+                                            <div class="mb-4">
+                                                <label for="rw" class="form-label">RW <span
+                                                        class="text-danger">*</span></label>
+                                                <select name="rw"
+                                                    class="form-select @error('rw') is-invalid @enderror" id="rw"
+                                                    required>
+                                                    <option value="" disabled>Pilih RW</option>
+                                                    @for ($i = 1; $i <= 9; $i++)
+                                                        @php $valRW = str_pad($i, 3, '0', STR_PAD_LEFT); @endphp
+                                                        <option value="{{ $valRW }}"
+                                                            {{ old('rw', $perangkatDesa->rw) == $valRW ? 'selected' : '' }}>
+                                                            {{ $valRW }}
+                                                        </option>
+                                                    @endfor
+                                                </select>
+                                                @error('rw')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
@@ -132,9 +181,11 @@
                                                 <label for="no_hp" class="form-label">Nomor HP <span
                                                         class="text-danger">*</span></label>
                                                 <input type="tel" name="no_hp"
-                                                    class="form-control @error('no_hp') is-invalid @enderror" id="no_hp"
-                                                    placeholder="Enter phone number"
-                                                    value="{{ old('no_hp', $perangkatDesa->no_hp) }}" required>
+                                                    class="form-control @error('no_hp') is-invalid @enderror"
+                                                    id="no_hp" placeholder="Masukkan nomor HP"
+                                                    value="{{ old('no_hp', $perangkatDesa->no_hp) }}" minlength="10"
+                                                    maxlength="15" inputmode="numeric"
+                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                                 @error('no_hp')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -173,7 +224,7 @@
                                                     class="form-control @error('foto') is-invalid @enderror"
                                                     type="file" id="foto" accept="image/*">
                                                 <div class="form-text">Format yang didukung: JPG, JPEG, PNG. Maksimal
-                                                2MB.</div>
+                                                    2MB.</div>
 
                                                 @if ($perangkatDesa->foto)
                                                     <div class="mt-3 p-2 border rounded d-inline-block bg-light">
@@ -190,7 +241,7 @@
                                     <div class="row mt-4">
                                         <div class="col-12 px-2">
                                             <button type="submit" class="btn btn-primary">
-                                                <i class="bi bi-check-circle me-2"></i>Simpan
+                                                <i class="bi bi-check-circle me-2"></i>Simpan Perubahan
                                             </button>
                                             <button type="button" class="btn btn-secondary ms-2"
                                                 onclick="window.location.href='{{ route('perangkat-desa.index') }}'">

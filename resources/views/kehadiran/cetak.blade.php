@@ -127,7 +127,7 @@
                     <td class="text-center">{{ $key + 1 }}</td>
                     <td>{{ $k->perangkatDesa->nama }}</td>
                     <td class="text-center">{{ $k->perangkatDesa->jabatan->nama_jabatan ?? '-' }}</td>
-                    <td class="text-center">{{ $k->perangkatDesa->alamat->dusun ?? '-' }}</td>
+                    <td class="text-center">{{ $k->perangkatDesa->dusun ?? '-' }}</td>
                     <td class="text-center">{{ $k->status_kehadiran }}</td>
                     <td class="text-center">{{ $k->keterangan ?? '-' }}</td>
                 </tr>

@@ -86,7 +86,7 @@
                                 <th class="py-3 text-muted">Alamat Tempat Tinggal</th>
                                 <td class="py-3">:</td>
                                 <td class="py-3 fw-semibold text-primary">
-                                    {{ $perangkatDesa->alamat->dusun ?? '-' }}
+                                    {{ $perangkatDesa->dusun ?? '-' }} RT {{ $perangkatDesa->rt ?? '-' }} / RW {{ $perangkatDesa->rw ?? '-' }}
                                 </td>
                             </tr>
                             <tr>

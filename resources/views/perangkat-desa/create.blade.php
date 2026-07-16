@@ -23,8 +23,8 @@
                             <!-- Basic Information Tab -->
                             <div class="tab-pane fade show active" id="basic" role="tabpanel"
                                 aria-labelledby="basic-tab">
-                                <form class="needs-validation" novalidate method="POST"
-                                    action="{{ route('perangkat-desa.store') }}" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('perangkat-desa.store') }}"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="row gx-4 gy-3">
                                         <div class="col-md-6 px-2">
@@ -32,9 +32,10 @@
                                                 <label for="nik" class="form-label">NIK <span
                                                         class="text-danger">*</span></label>
                                                 <input type="text" name="nik" inputmode="numeric" pattern="[0-9]{16}"
-                                                    maxlength="16"
-                                                    onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                                                    class="form-control @error('nik') is-invalid @enderror" id="nik"
+                                                    maxlength="16" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                                    class="form-control @error('nik')
+is-invalid
+@enderror" id="nik"
                                                     placeholder="Masukkan NIK" value="{{ old('nik') }}" required>
                                                 @error('nik')
                                                     <div class="invalid-feedback">
@@ -105,20 +106,14 @@
                                         </div>
                                         <div class="col-md-6 px-2">
                                             <div class="mb-4">
-                                                <label for="alamat_id" class="form-label">Alamat <span
+                                                <label for="no_hp" class="form-label">Nomor HP <span
                                                         class="text-danger">*</span></label>
-                                                <select name="alamat_id"
-                                                    class="form-select @error('alamat_id') is-invalid @enderror"
-                                                    id="alamat_id" required>
-                                                    <option value="" selected disabled>Pilih Alamat</option>
-                                                    @foreach ($alamats as $alamat)
-                                                        <option value="{{ $alamat->id }}"
-                                                            {{ old('alamat_id') == $alamat->id ? 'selected' : '' }}>
-                                                            {{ $alamat->dusun }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                                @error('alamat_id')
+                                                <input type="tel" name="no_hp"
+                                                    class="form-control @error('no_hp') is-invalid @enderror" id="no_hp"
+                                                    placeholder="Masukkan nomor HP" value="{{ old('no_hp') }}"
+                                                    minlength="10" maxlength="15" inputmode="numeric"
+                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                                @error('no_hp')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
@@ -127,12 +122,74 @@
                                         </div>
                                         <div class="col-md-6 px-2">
                                             <div class="mb-4">
-                                                <label for="no_hp" class="form-label">Nomor HP <span
+                                                <label for="dusun" class="form-label">Dusun <span
                                                         class="text-danger">*</span></label>
-                                                <input type="tel" name="no_hp"
-                                                    class="form-control @error('no_hp') is-invalid @enderror" id="no_hp"
-                                                    placeholder="Enter phone number" value="{{ old('no_hp') }}" required>
-                                                @error('no_hp')
+                                                <select name="dusun"
+                                                    class="form-select @error('dusun') is-invalid @enderror" id="dusun"
+                                                    required>
+                                                    <option value="" selected disabled>Pilih Dusun</option>
+
+                                                    @foreach ($dusuns as $dusun)
+                                                        <option value="{{ $dusun }}"
+                                                            {{ old('dusun') == $dusun ? 'selected' : '' }}>
+                                                            {{ $dusun }}
+                                                        </option>
+                                                    @endforeach
+
+                                                </select>
+                                                @error('dusun')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <!-- Input RT -->
+                                        <div class="col-md-3 px-2">
+                                            <div class="mb-4">
+                                                <label for="rt" class="form-label">RT <span
+                                                        class="text-danger">*</span></label>
+                                                <select name="rt"
+                                                    class="form-select @error('rt') is-invalid @enderror" id="rt"
+                                                    required>
+                                                    <option value="" selected disabled>Pilih RT</option>
+                                                    <!-- Trik Blade: Generate otomatis angka 001 sampai 015 -->
+                                                    @for ($i = 1; $i <= 30; $i++)
+                                                        @php $valRT = str_pad($i, 3, '0', STR_PAD_LEFT); @endphp
+                                                        <option value="{{ $valRT }}"
+                                                            {{ old('rt', $perangkatDesa->rt ?? '') == $valRT ? 'selected' : '' }}>
+                                                            {{ $valRT }}
+                                                        </option>
+                                                    @endfor
+                                                </select>
+                                                @error('rt')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <!-- Input RW -->
+                                        <div class="col-md-3 px-2">
+                                            <div class="mb-4">
+                                                <label for="rw" class="form-label">RW <span
+                                                        class="text-danger">*</span></label>
+                                                <select name="rw"
+                                                    class="form-select @error('rw') is-invalid @enderror" id="rw"
+                                                    required>
+                                                    <option value="" selected disabled>Pilih RW</option>
+                                                    <!-- Trik Blade: Generate otomatis angka 001 sampai 010 -->
+                                                    @for ($i = 1; $i <= 9; $i++)
+                                                        @php $valRW = str_pad($i, 3, '0', STR_PAD_LEFT); @endphp
+                                                        <option value="{{ $valRW }}"
+                                                            {{ old('rw', $perangkatDesa->rw ?? '') == $valRW ? 'selected' : '' }}>
+                                                            {{ $valRW }}
+                                                        </option>
+                                                    @endfor
+                                                </select>
+                                                @error('rw')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
@@ -194,21 +251,6 @@
 @endsection
 
 @push('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const forms = document.querySelectorAll('.needs-validation');
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        });
-    </script>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {

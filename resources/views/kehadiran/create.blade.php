@@ -23,8 +23,7 @@
                             <!-- Basic Information Tab -->
                             <div class="tab-pane fade show active" id="basic" role="tabpanel"
                                 aria-labelledby="basic-tab">
-                                <form class="needs-validation" novalidate method="POST"
-                                    action="{{ route('kehadiran.store') }}" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('kehadiran.store') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row gx-4 gy-3">
                                         <div class="col-md-6 px-2">
@@ -54,7 +53,7 @@
                                                         class="text-danger">*</span></label>
                                                 <input type="date" name="tanggal"
                                                     class="form-control @error('tanggal') is-invalid @enderror"
-                                                    id="tanggal" value="{{ old('tanggal') }}" required>
+                                                    id="tanggal" value="{{ old('tanggal', date('Y-m-d')) }}" required>
                                                 @error('tanggal')
                                                     <div class="invalid-feedback d-block">
                                                         {{ $message }}
@@ -173,83 +172,76 @@
 @endsection
 
 @push('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // 1. Validasi Bawaan Bootstrap
-            const forms = document.querySelectorAll('.needs-validation');
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault();
-                        event.stopPropagation();
+    @push('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+
+                // LOGIKA CUSTOM UNTUK FORM KEHADIRAN
+                const statusKehadiran = document.getElementById('status_kehadiran');
+                const jamMasuk = document.getElementById('jam_masuk');
+                const jamPulang = document.getElementById('jam_pulang');
+                const statusKetepatan = document.getElementById('status_ketepatan');
+
+                // Ambil batas jam toleransi dari database (Default: 08:30)
+                const batasJamMasuk = "{{ substr($pengaturan->jam_toleransi ?? '08:30:00', 0, 5) }}";
+
+                // Fungsi untuk mengatur form berdasarkan status kehadiran
+                function aturInputKehadiran() {
+                    const status = statusKehadiran.value;
+
+                    // Jika statusnya Izin, Sakit, atau Alpa
+                    if (status === 'izin' || status === 'sakit' || status === 'alpa') {
+                        // Disable input waktu dan ketepatan
+                        jamMasuk.readOnly = true;
+                        jamPulang.readOnly = true;
+
+                        jamMasuk.style.backgroundColor = '#e9ecef';
+                        jamPulang.style.backgroundColor = '#e9ecef';
+
+                        // Pakai teknik CSS pointer-events agar dropdown terlihat disable tapi nilainya bisa kosong
+                        statusKetepatan.style.pointerEvents = 'none';
+                        statusKetepatan.style.backgroundColor = '#e9ecef'; // Warna abu-abu ala bootstrap
+
+                        // Kosongkan nilainya
+                        jamMasuk.value = '';
+                        jamPulang.value = '';
+                        statusKetepatan.value = '';
+                    } else {
+                        // Jika statusnya Hadir (atau belum milih)
+                        jamMasuk.readOnly = false;
+                        jamPulang.readOnly = false;
+
+                        jamMasuk.style.backgroundColor = '#fff';
+                        jamPulang.style.backgroundColor = '#fff';
+
+                        statusKetepatan.style.pointerEvents = 'auto';
+                        statusKetepatan.style.backgroundColor = '#fff';
                     }
-                    form.classList.add('was-validated');
-                }, false);
+                }
+
+                // Fungsi untuk otomatis set status ketepatan
+                function cekKetepatanWaktu() {
+                    if (jamMasuk.value) {
+                        // Logika batasnya sekarang DINAMIS mengikuti database
+                        if (jamMasuk.value <= batasJamMasuk) {
+                            statusKetepatan.value = 'tepat waktu';
+                        } else {
+                            statusKetepatan.value = 'terlambat';
+                        }
+                    } else {
+                        statusKetepatan.value = ''; // Kosongkan jika jam dihapus
+                    }
+                }
+
+                // Pasang pendengar event (Event Listener)
+                statusKehadiran.addEventListener('change', aturInputKehadiran);
+                jamMasuk.addEventListener('input', cekKetepatanWaktu);
+
+                // Jalankan sekali saat halaman pertama kali dibuka
+                // (Berguna saat di halaman Edit atau saat ada error validasi old() value)
+                aturInputKehadiran();
+                cekKetepatanWaktu(); // <-- TAMBAHAN PENTING UNTUK EDIT: agar mengecek status saat data dimuat
             });
-
-            // 2. LOGIKA CUSTOM UNTUK FORM KEHADIRAN
-            const statusKehadiran = document.getElementById('status_kehadiran');
-            const jamMasuk = document.getElementById('jam_masuk');
-            const jamPulang = document.getElementById('jam_pulang');
-            const statusKetepatan = document.getElementById('status_ketepatan');
-
-            // Fungsi untuk mengatur form berdasarkan status kehadiran
-            function aturInputKehadiran() {
-                const status = statusKehadiran.value;
-
-                // Jika statusnya Izin, Sakit, atau Alpa
-                if (status === 'izin' || status === 'sakit' || status === 'alpa') {
-                    // Disable input waktu dan ketepatan
-                    jamMasuk.readOnly = true;
-                    jamPulang.readOnly = true;
-
-                    jamMasuk.style.backgroundColor = '#e9ecef';
-                    jamPulang.style.backgroundColor = '#e9ecef';
-
-                    // Kita pakai teknik CSS pointer-events agar dropdown terlihat disable tapi nilainya bisa kosong
-                    statusKetepatan.style.pointerEvents = 'none';
-                    statusKetepatan.style.backgroundColor = '#e9ecef'; // Warna abu-abu ala bootstrap
-
-                    // Kosongkan nilainya
-                    jamMasuk.value = '';
-                    jamPulang.value = '';
-                    statusKetepatan.value = '';
-                } else {
-                    // Jika statusnya Hadir (atau belum milih)
-                    jamMasuk.readOnly = false;
-                    jamPulang.readOnly = false;
-
-                    jamMasuk.style.backgroundColor = '#fff';
-                    jamPulang.style.backgroundColor = '#fff';
-
-                    statusKetepatan.style.pointerEvents = 'auto';
-                    statusKetepatan.style.backgroundColor = '#fff';
-                }
-            }
-
-            // Jika format dari database adalah "08:30:00", kita potong jadi "08:30" (5 karakter pertama)
-            const batasJamMasuk = "{{ substr($pengaturan->jam_masuk ?? '08:30:00', 0, 5) }}";
-
-            // Fungsi untuk otomatis set status ketepatan
-            function cekKetepatanWaktu() {
-                if (jamMasuk.value) {
-                    // Logika batasnya sekarang DINAMIS mengikuti database                    if (jamMasuk.value <= '08:30') {
-                    statusKetepatan.value = 'tepat waktu';
-                } else {
-                    statusKetepatan.value = 'terlambat';
-                }
-            } else {
-                statusKetepatan.value = ''; // Kosongkan jika jam dihapus
-            }
-        }
-
-        // Pasang pendengar event (Event Listener)
-        statusKehadiran.addEventListener('change', aturInputKehadiran); jamMasuk.addEventListener('input',
-            cekKetepatanWaktu);
-
-        // Jalankan sekali saat halaman pertama kali dibuka
-        // (Berguna saat di halaman Edit atau saat ada error validasi old() value)
-        aturInputKehadiran();
-        });
-    </script>
+        </script>
+    @endpush
 @endpush

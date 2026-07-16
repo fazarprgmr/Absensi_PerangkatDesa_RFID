@@ -11,7 +11,9 @@ class PerangkatDesa extends Model
         'nik',
         'nama',
         'jabatan_id',
-        'alamat_id',
+        'dusun',
+        'rt',
+        'rw',
         'jenis_kelamin',
         'no_hp',
         'foto',
@@ -26,10 +28,5 @@ class PerangkatDesa extends Model
     public function jabatan()
     {
         return $this->belongsTo(Jabatan::class);
-    }
-
-    public function alamat()
-    {
-        return $this->belongsTo(Alamat::class);
     }
 }

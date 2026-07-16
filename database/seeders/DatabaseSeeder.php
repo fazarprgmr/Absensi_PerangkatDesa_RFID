@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Database\Seeders\AlamatSeeder;
 use Database\Seeders\JabatanSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -27,7 +26,10 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             JabatanSeeder::class,
-            AlamatSeeder::class
+        ]);
+
+        $this->call([
+            PengaturanSeeder::class,
         ]);
     }
 }

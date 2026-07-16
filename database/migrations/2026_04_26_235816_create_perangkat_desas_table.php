@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('nik', 16)->unique();
             $table->string('nama');
             $table->foreignId('jabatan_id')->constrained('jabatans')->onDelete('cascade');
-            $table->foreignId('alamat_id')->constrained('alamats')->onDelete('cascade');
+            $table->string('dusun');
+            $table->string('rt', 3);
+            $table->string('rw', 3);
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
             $table->string('no_hp');
             $table->string('foto')->nullable();

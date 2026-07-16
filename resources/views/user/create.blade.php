@@ -15,7 +15,7 @@
             <div class="dashboard-grid grid-cols-1">
                 <div class="dashboard-card">
                     <div class="dashboard-card-body">
-                        <form class="needs-validation" novalidate method="POST" action="{{ route('user.store') }}">
+                        <form method="POST" action="{{ route('user.store') }}">
                             @csrf
                             <div class="row gx-4 gy-3">
                                 
@@ -94,20 +94,3 @@
         </div>
     </div>
 @endsection
-
-@push('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const forms = document.querySelectorAll('.needs-validation');
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        });
-    </script>
-@endpush

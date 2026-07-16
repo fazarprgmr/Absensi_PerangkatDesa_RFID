@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AlamatController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KehadiranController;
@@ -50,7 +49,6 @@ Route::middleware('auth')->group(function () {
         // Master Data (Hanya Admin yang bisa kelola data inti desa)
         Route::resource('perangkat-desa', PerangkatDesaController::class);
         Route::resource('jabatan', JabatanController::class);
-        Route::resource('alamat', AlamatController::class);
         Route::resource('user', UserController::class);
 
         // Fitur RFID (Untuk pendaftaran Perangkat Desa baru oleh Admin)

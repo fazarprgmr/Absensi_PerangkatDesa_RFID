@@ -23,8 +23,8 @@
                             <!-- Basic Information Tab -->
                             <div class="tab-pane fade show active" id="basic" role="tabpanel"
                                 aria-labelledby="basic-tab">
-                                <form class="needs-validation" novalidate method="POST"
-                                    action="{{ route('kehadiran.update', $kehadiran->id) }}" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('kehadiran.update', $kehadiran->id) }}"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <div class="row gx-4 gy-3">
@@ -99,6 +99,23 @@
                                         </div>
                                         <div class="col-md-6 px-2">
                                             <div class="mb-4">
+                                                <label for="jam_masuk" class="form-label">Jam Masuk</label>
+                                                <input type="time" name="jam_masuk"
+                                                    class="form-control @error('jam_masuk') is-invalid @enderror"
+                                                    id="jam_masuk" value="{{ old('jam_masuk', $kehadiran->jam_masuk) }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 px-2">
+                                            <div class="mb-4">
+                                                <label for="jam_pulang" class="form-label">Jam Pulang</label>
+                                                <input type="time" name="jam_pulang"
+                                                    class="form-control @error('jam_pulang') is-invalid @enderror"
+                                                    id="jam_pulang"
+                                                    value="{{ old('jam_pulang', $kehadiran->jam_pulang) }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 px-2">
+                                            <div class="mb-4">
                                                 <label for="status_ketepatan" class="form-label">Status Ketepatan</label>
                                                 <select name="status_ketepatan"
                                                     class="form-select @error('status_ketepatan') is-invalid @enderror"
@@ -119,23 +136,6 @@
                                                         {{ $message }}
                                                     </div>
                                                 @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 px-2">
-                                            <div class="mb-4">
-                                                <label for="jam_masuk" class="form-label">Jam Masuk</label>
-                                                <input type="time" name="jam_masuk"
-                                                    class="form-control @error('jam_masuk') is-invalid @enderror"
-                                                    id="jam_masuk" value="{{ old('jam_masuk', $kehadiran->jam_masuk) }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 px-2">
-                                            <div class="mb-4">
-                                                <label for="jam_pulang" class="form-label">Jam Pulang</label>
-                                                <input type="time" name="jam_pulang"
-                                                    class="form-control @error('jam_pulang') is-invalid @enderror"
-                                                    id="jam_pulang"
-                                                    value="{{ old('jam_pulang', $kehadiran->jam_pulang) }}">
                                             </div>
                                         </div>
                                         <div class="col-12 px-2">
@@ -170,7 +170,7 @@
                                     <div class="row mt-4">
                                         <div class="col-12 px-2">
                                             <button type="submit" class="btn btn-primary">
-                                                <i class="bi bi-check-circle me-2"></i>Simpan
+                                                <i class="bi bi-check-circle me-2"></i>Simpan Perubahan
                                             </button>
                                             <button type="button" class="btn btn-secondary ms-2"
                                                 onclick="window.location.href='{{ route('kehadiran.index') }}'">
@@ -189,81 +189,76 @@
 @endsection
 
 @push('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // 1. Validasi Bawaan Bootstrap
-            const forms = document.querySelectorAll('.needs-validation');
-            Array.from(forms).forEach(form => {
-                form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
+    @push('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
 
-            // 2. LOGIKA CUSTOM UNTUK FORM KEHADIRAN
-            const statusKehadiran = document.getElementById('status_kehadiran');
-            const jamMasuk = document.getElementById('jam_masuk');
-            const jamPulang = document.getElementById('jam_pulang');
-            const statusKetepatan = document.getElementById('status_ketepatan');
+                // LOGIKA CUSTOM UNTUK FORM KEHADIRAN
+                const statusKehadiran = document.getElementById('status_kehadiran');
+                const jamMasuk = document.getElementById('jam_masuk');
+                const jamPulang = document.getElementById('jam_pulang');
+                const statusKetepatan = document.getElementById('status_ketepatan');
 
-            // Fungsi untuk mengatur form berdasarkan status kehadiran
-            function aturInputKehadiran() {
-                const status = statusKehadiran.value;
+                // Ambil batas jam toleransi dari database (Default: 08:30)
+                const batasJamMasuk = "{{ substr($pengaturan->jam_toleransi ?? '08:30:00', 0, 5) }}";
 
-                // Jika statusnya Izin, Sakit, atau Alpa
-                if (status === 'izin' || status === 'sakit' || status === 'alpa') {
-                    // Disable input waktu dan ketepatan
-                    jamMasuk.readOnly = true;
-                    jamPulang.readOnly = true;
+                // Fungsi untuk mengatur form berdasarkan status kehadiran
+                function aturInputKehadiran() {
+                    const status = statusKehadiran.value;
 
-                    jamMasuk.style.backgroundColor = '#e9ecef';
-                    jamPulang.style.backgroundColor = '#e9ecef';
+                    // Jika statusnya Izin, Sakit, atau Alpa
+                    if (status === 'izin' || status === 'sakit' || status === 'alpa') {
+                        // Disable input waktu dan ketepatan
+                        jamMasuk.readOnly = true;
+                        jamPulang.readOnly = true;
 
-                    // Kita pakai teknik CSS pointer-events agar dropdown terlihat disable tapi nilainya bisa kosong
-                    statusKetepatan.style.pointerEvents = 'none';
-                    statusKetepatan.style.backgroundColor = '#e9ecef'; // Warna abu-abu ala bootstrap
+                        jamMasuk.style.backgroundColor = '#e9ecef';
+                        jamPulang.style.backgroundColor = '#e9ecef';
 
-                    // Kosongkan nilainya
-                    jamMasuk.value = '';
-                    jamPulang.value = '';
-                    statusKetepatan.value = '';
-                } else {
-                    // Jika statusnya Hadir (atau belum milih)
-                    jamMasuk.readOnly = false;
-                    jamPulang.readOnly = false;
+                        // Pakai teknik CSS pointer-events agar dropdown terlihat disable tapi nilainya bisa kosong
+                        statusKetepatan.style.pointerEvents = 'none';
+                        statusKetepatan.style.backgroundColor = '#e9ecef'; // Warna abu-abu ala bootstrap
 
-                    jamMasuk.style.backgroundColor = '#fff';
-                    jamPulang.style.backgroundColor = '#fff';
-
-                    statusKetepatan.style.pointerEvents = 'auto';
-                    statusKetepatan.style.backgroundColor = '#fff';
-                }
-            }
-
-            // Fungsi untuk otomatis set status ketepatan
-            function cekKetepatanWaktu() {
-                if (jamMasuk.value) {
-                    // Batas telat kita set 08:30 (sesuai API yang pernah kita buat)
-                    if (jamMasuk.value <= '08:30') {
-                        statusKetepatan.value = 'tepat waktu';
+                        // Kosongkan nilainya
+                        jamMasuk.value = '';
+                        jamPulang.value = '';
+                        statusKetepatan.value = '';
                     } else {
-                        statusKetepatan.value = 'terlambat';
+                        // Jika statusnya Hadir (atau belum milih)
+                        jamMasuk.readOnly = false;
+                        jamPulang.readOnly = false;
+
+                        jamMasuk.style.backgroundColor = '#fff';
+                        jamPulang.style.backgroundColor = '#fff';
+
+                        statusKetepatan.style.pointerEvents = 'auto';
+                        statusKetepatan.style.backgroundColor = '#fff';
                     }
-                } else {
-                    statusKetepatan.value = ''; // Kosongkan jika jam dihapus
                 }
-            }
 
-            // Pasang pendengar event (Event Listener)
-            statusKehadiran.addEventListener('change', aturInputKehadiran);
-            jamMasuk.addEventListener('input', cekKetepatanWaktu);
+                // Fungsi untuk otomatis set status ketepatan
+                function cekKetepatanWaktu() {
+                    if (jamMasuk.value) {
+                        // Logika batasnya sekarang DINAMIS mengikuti database
+                        if (jamMasuk.value <= batasJamMasuk) {
+                            statusKetepatan.value = 'tepat waktu';
+                        } else {
+                            statusKetepatan.value = 'terlambat';
+                        }
+                    } else {
+                        statusKetepatan.value = ''; // Kosongkan jika jam dihapus
+                    }
+                }
 
-            // Jalankan sekali saat halaman pertama kali dibuka
-            // (Berguna saat di halaman Edit atau saat ada error validasi old() value)
-            aturInputKehadiran();
-        });
-    </script>
+                // Pasang pendengar event (Event Listener)
+                statusKehadiran.addEventListener('change', aturInputKehadiran);
+                jamMasuk.addEventListener('input', cekKetepatanWaktu);
+
+                // Jalankan sekali saat halaman pertama kali dibuka
+                // (Berguna saat di halaman Edit atau saat ada error validasi old() value)
+                aturInputKehadiran();
+                cekKetepatanWaktu(); // <-- TAMBAHAN PENTING UNTUK EDIT: agar mengecek status saat data dimuat
+            });
+        </script>
+    @endpush
 @endpush

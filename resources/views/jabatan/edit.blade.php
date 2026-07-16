@@ -21,7 +21,7 @@
                             <!-- Basic Information Tab -->
                             <div class="tab-pane fade show active" id="basic" role="tabpanel"
                                 aria-labelledby="basic-tab">
-                                <form class="needs-validation" novalidate method="POST"
+                                <form method="POST"
                                     action="{{ route('jabatan.update', $jabatan->id) }}">
                                     @csrf
                                     @method('PUT')
@@ -45,7 +45,7 @@
                                     <div class="row mt-4">
                                         <div class="col-12 px-2">
                                             <button type="submit" class="btn btn-primary">
-                                                <i class="bi bi-check-circle me-2"></i>Simpan
+                                                <i class="bi bi-check-circle me-2"></i>Simpan Perubahan
                                             </button>
                                             <button type="button" class="btn btn-secondary ms-2"
                                                 onclick="window.location.href='{{ route('jabatan.index') }}'">

@@ -12,7 +12,8 @@ class JabatanController extends Controller
      */
     public function index()
     {
-        $jabatans = Jabatan::all();
+        // Menghitung jumlah perangkat_desa di setiap jabatan
+        $jabatans = Jabatan::withCount('perangkatDesas')->get();
 
         return view('jabatan.index', compact('jabatans'));
     }
@@ -62,7 +63,7 @@ class JabatanController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'nama_jabatan' => 'required|unique:jabatans,nama_jabatan,' . $id,
+            'nama_jabatan' => 'required|unique:jabatans,nama_jabatan,'.$id,
         ]);
 
         $jabatan = Jabatan::findOrFail($id);

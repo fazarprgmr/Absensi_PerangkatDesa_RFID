@@ -2,7 +2,7 @@
     <div class="sidebar-header">
         <div class="sidebar-brand">
             <h5>
-                <i class="bi bi-mortarboard-fill"></i>
+                <i class="bi bi-check2-circle"></i>
                 ABSENSI DESA
             </h5>
             <button class="sidebar-close" id="sidebarClose">
@@ -47,8 +47,7 @@
                         @php
                             $isMaster =
                                 request()->is('perangkat-desa*') ||
-                                request()->is('jabatan*') ||
-                                request()->is('alamat*');
+                                request()->is('jabatan*');
                         @endphp
 
                         <a class="nav-link has-submenu {{ $isMaster ? 'active' : '' }}" href="javascript:void(0)"
@@ -61,8 +60,6 @@
                                     href="{{ route('perangkat-desa.index') }}">Perangkat Desa</a></li>
                             <li><a class="nav-link {{ request()->is('jabatan*') ? 'active' : '' }}"
                                     href="{{ route('jabatan.index') }}">Jabatan</a></li>
-                            <li><a class="nav-link {{ request()->is('alamat') ? 'active' : '' }}"
-                                    href="{{ route('alamat.index') }}">Alamat</a></li>
                         </ul>
                     </li>
                 </ul>

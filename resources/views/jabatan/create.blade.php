@@ -21,7 +21,7 @@
                             <!-- Basic Information Tab -->
                             <div class="tab-pane fade show active" id="basic" role="tabpanel"
                                 aria-labelledby="basic-tab">
-                                <form class="needs-validation" novalidate method="POST"
+                                <form method="POST"
                                     action="{{ route('jabatan.store') }}">
                                     @csrf
                                     <div class="row gx-4 gy-3">
@@ -62,21 +62,3 @@
             </div>
         </div>
     @endsection
-
-
-    @push('scripts')
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const forms = document.querySelectorAll('.needs-validation');
-                Array.from(forms).forEach(form => {
-                    form.addEventListener('submit', event => {
-                        if (!form.checkValidity()) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            });
-        </script>
-    @endpush

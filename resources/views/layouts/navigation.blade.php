@@ -31,10 +31,6 @@
                                     class="bi bi-person-plus me-2"></i>Tambah
                                 Data Jabatan</a></li>
                         <li>
-                        <li><a class="dropdown-item" href="{{ route('alamat.create') }}"><i
-                                    class="bi bi-person-plus me-2"></i>Tambah
-                                Data Alamat</a></li>
-                        <li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
