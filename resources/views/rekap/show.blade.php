@@ -2,6 +2,11 @@
 
 @section('title', 'Detail Kehadiran')
 
+@push('styles')
+    <link rel="stylesheet" crossorigin href="{{ asset('template/assets/data-table-D3bj5bdn.css') }}">
+    <link rel="stylesheet" crossorigin href="{{ asset('css/custom-css-table.css') }}">
+@endpush
+
 @section('content')
     <div class="container-fluid">
         <div class="mb-4 d-flex justify-content-between align-items-center">
@@ -39,50 +44,60 @@
                         <thead class="table-light">
                             <tr>
                                 <th class="px-4 py-3">Tanggal</th>
-                                <th class="px-4 py-3">Jam Masuk</th>
-                                <th class="px-4 py-3">Jam Pulang</th>
-                                <th class="px-4 py-3 text-center">Status</th>
-                                <th class="px-4 py-3">Keterangan</th>
+                                <th class="py-3 text-center">Status Kehadiran</th>
+                                <th class="py-3 text-center">Status Ketepatan</th>
+                                <th class="px-4 py-3 text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($kehadirans as $k)
                                 <tr>
+                                    <!-- 1. Tanggal -->
                                     <td class="px-4 py-3 fw-medium">
                                         {{ \Carbon\Carbon::parse($k->tanggal)->locale('id')->translatedFormat('l, d F Y') }}
                                     </td>
-                                    <td class="px-4 py-3">{{ $k->jam_masuk ?? '-' }}</td>
-                                    <td class="px-4 py-3">{{ $k->jam_pulang ?? '-' }}</td>
+
+                                    <!-- 2. Status Kehadiran -->
                                     <td class="px-4 py-3 text-center">
                                         @php
-                                            $color = 'bg-secondary';
-                                            if ($k->status_kehadiran == 'hadir') {
-                                                $color = 'bg-success';
-                                            }
-                                            if ($k->status_kehadiran == 'izin') {
-                                                $color = 'bg-info';
-                                            }
-                                            if ($k->status_kehadiran == 'sakit') {
-                                                $color = 'bg-warning';
-                                            }
-                                            if ($k->status_kehadiran == 'alpa') {
-                                                $color = 'bg-danger';
-                                            }
+                                            $color = match ($k->status_kehadiran) {
+                                                'hadir' => 'bg-success',
+                                                'izin' => 'bg-info text-dark',
+                                                'sakit' => 'bg-warning text-dark',
+                                                'alpa' => 'bg-danger',
+                                                default => 'bg-secondary',
+                                            };
                                         @endphp
-                                        <span class="badge {{ $color }} px-2 py-1"
-                                            style="text-transform: capitalize;">
+                                        <span class="badge {{ $color }} px-3 py-1 text-capitalize">
                                             {{ $k->status_kehadiran }}
                                         </span>
+                                    </td>
+
+                                    <!-- 3. Status Ketepatan -->
+                                    <td class="px-4 py-3 text-capitalize text-center">
                                         @if ($k->status_ketepatan == 'terlambat')
-                                            <br><span class="badge bg-warning mt-1"
-                                                style="font-size: 10px;">Terlambat</span>
+                                            <span class="status-badge status-pending fw-bold"><i
+                                                    class="bi bi-clock me-1"></i>Terlambat</span>
+                                        @elseif ($k->status_ketepatan)
+                                            <span class="status-badge status-active"><i
+                                                    class="bi bi-clock me-1"></i>{{ $k->status_ketepatan }}</span>
+                                        @else
+                                            -
                                         @endif
                                     </td>
-                                    <td class="px-4 py-3">{{ $k->keterangan ?? '-' }}</td>
+
+                                    <!-- 4. Aksi -->
+                                    <td class="text-center">
+                                        <a href="{{ route('kehadiran.show', $k->id) }}"
+                                            class="btn-action btn-view" title="View">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="text-center py-4 text-muted">
+                                    <!-- Diubah dari 5 menjadi 4 agar pas dengan jumlah kolom di head -->
+                                    <td colspan="4" class="text-center py-4 text-muted">
                                         Belum ada catatan kehadiran di bulan ini.
                                     </td>
                                 </tr>

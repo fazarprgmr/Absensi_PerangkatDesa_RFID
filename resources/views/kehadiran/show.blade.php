@@ -15,6 +15,7 @@
         </div>
 
         <div class="row">
+            <!-- KOLOM KIRI: Tabel Data Teks -->
             <div class="col-md-7 mb-4">
                 <div class="dashboard-card h-100">
                     <div class="dashboard-card-header py-3 px-4">
@@ -74,35 +75,69 @@
                 </div>
             </div>
 
+            <!-- KOLOM KANAN: Dokumentasi Foto (Masuk & Pulang) -->
             <div class="col-md-5 mb-4">
                 <div class="dashboard-card h-100">
                     <div class="dashboard-card-header py-3 px-4">
-                        <h5 class="mb-0">Foto Bukti</h5>
+                        <h5 class="mb-0">Bukti Foto Kehadiran</h5>
                     </div>
-                    <div
-                        class="dashboard-card-body px-4 py-4 text-center d-flex flex-column align-items-center justify-content-center">
-                        @if ($kehadiran->foto_bukti)
-                            <div class="p-2 bg-white shadow-sm rounded" style="border: 1px solid #dee2e6;">
-                                <img src="{{ asset('storage/absensi/' . $kehadiran->foto_bukti) }}"
-                                    alt="Foto Bukti Kehadiran" class="img-fluid rounded"
-                                    style="max-width: 100%; max-height: 450px; object-fit: contain;">
-                            </div>
-                            <div class="mt-3 text-muted small">
-                                <i class="bi bi-file-earmark-image"></i> Nama File: {{ $kehadiran->foto_bukti }}
-                            </div>
-                        @else
-                            <div class="bg-light rounded d-flex flex-column align-items-center justify-content-center w-100"
-                                style="min-height: 350px; border: 2px dashed #ccc;">
-                                <i class="bi bi-camera-video-off text-muted" style="font-size: 4rem;"></i>
-                                <h5 class="text-muted mt-3">Tidak Ada Bukti Foto</h5>
-                                <p class="text-muted small px-4 text-center">Data ini diinput manual tanpa melampirkan file
-                                    gambar atau ESP32-CAM tidak mengirimkan gambar.</p>
-                                <a href="{{ route('kehadiran.edit', $kehadiran->id) }}"
-                                    class="btn btn-sm btn-outline-primary mt-2">
-                                    <i class="bi bi-plus-circle"></i> Upload Foto Melalui Form Edit
-                                </a>
+                    <div class="dashboard-card-body px-4 py-4">
+
+                        <!-- 1. BAGIAN FOTO MASUK / SURAT IZIN -->
+                        <div class="mb-4">
+                            <h6 class="text-muted fw-bold mb-2">
+                                <i class="bi bi-box-arrow-in-right text-primary me-1"></i>
+                                {{ in_array($kehadiran->status_kehadiran, ['izin', 'sakit']) ? 'Bukti Surat Izin / Sakit' : 'Foto Absen Masuk' }}
+                            </h6>
+
+                            @if ($kehadiran->foto_bukti)
+                                <div class="p-2 bg-white shadow-sm rounded text-center" style="border: 1px solid #dee2e6;">
+                                    <img src="{{ asset('storage/absensi/' . $kehadiran->foto_bukti) }}"
+                                        alt="Foto Bukti Masuk" class="img-fluid rounded"
+                                        style="max-height: 230px; object-fit: contain;">
+                                </div>
+                                <div class="mt-1 text-muted text-center" style="font-size: 11px;">
+                                    <i class="bi bi-file-earmark-image"></i> {{ $kehadiran->foto_bukti }}
+                                </div>
+                            @else
+                                <div class="bg-light rounded d-flex flex-column align-items-center justify-content-center p-3 text-center"
+                                    style="min-height: 150px; border: 2px dashed #ccc;">
+                                    <i class="bi bi-camera-video-off text-muted" style="font-size: 2rem;"></i>
+                                    <span class="text-muted small mt-1">Belum ada foto absen masuk / surat izin.</span>
+                                </div>
+                            @endif
+                        </div>
+
+                        <!-- 2. BAGIAN FOTO PULANG (Hanya Muncul Jika Status 'Hadir' atau Fotonya Ada) -->
+                        @if ($kehadiran->status_kehadiran === 'hadir' || $kehadiran->foto_bukti_pulang)
+                            <hr class="text-muted my-3">
+                            <div>
+                                <h6 class="text-muted fw-bold mb-2">
+                                    <i class="bi bi-box-arrow-left text-success me-1"></i> Foto Absen Pulang
+                                </h6>
+
+                                @if ($kehadiran->foto_bukti_pulang)
+                                    <div class="p-2 bg-white shadow-sm rounded text-center"
+                                        style="border: 1px solid #dee2e6;">
+                                        <img src="{{ asset('storage/absensi/' . $kehadiran->foto_bukti_pulang) }}"
+                                            alt="Foto Bukti Pulang" class="img-fluid rounded"
+                                            style="max-height: 230px; object-fit: contain;">
+                                    </div>
+                                    <div class="mt-1 text-muted text-center" style="font-size: 11px;">
+                                        <i class="bi bi-file-earmark-image"></i> {{ $kehadiran->foto_bukti_pulang }}
+                                    </div>
+                                @else
+                                    <div class="bg-light rounded d-flex flex-column align-items-center justify-content-center p-3 text-center"
+                                        style="min-height: 150px; border: 2px dashed #ccc;">
+                                        <i class="bi bi-clock-history text-muted" style="font-size: 2rem;"></i>
+                                        <span class="text-muted small mt-1 fw-bold">Belum Absen Pulang</span>
+                                        <span class="text-muted" style="font-size: 11px;">Foto akan muncul otomatis setelah
+                                            tap kartu pulang.</span>
+                                    </div>
+                                @endif
                             </div>
                         @endif
+
                     </div>
                 </div>
             </div>

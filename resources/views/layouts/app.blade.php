@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Kiaalap - Modern Education Management Dashboard for Universities">
-    <meta name="keywords" content="education, dashboard, university, management, admin">
-    <meta name="author" content="Kiaalap">
+    <meta name="description" content="Absensi Perangkat Desa berbasis RFID. Aplikasi ini dirancang untuk memudahkan pencatatan kehadiran perangkat desa menggunakan teknologi RFID.">
+    <meta name="keywords" content="absensi, perangkat desa, rfid, dashboard">
+    <meta name="author" content="Fajar Gumelar">
 
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin>

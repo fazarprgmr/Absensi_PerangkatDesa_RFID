@@ -14,6 +14,7 @@ class Kehadiran extends Model
         'status_kehadiran',
         'status_ketepatan',
         'foto_bukti',
+        'foto_bukti_pulang',
         'keterangan',
     ];
 

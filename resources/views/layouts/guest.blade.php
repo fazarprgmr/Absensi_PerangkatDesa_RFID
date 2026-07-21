@@ -9,6 +9,12 @@
 
 
     <style>
+        /* Microsoft Edge lama */
+        input::-ms-reveal,
+        input::-ms-clear {
+            display: none;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -72,6 +78,20 @@
             </p>
         </div>
     </div>
+
+    <script>
+        const password = document.getElementById('password');
+        const togglePassword = document.getElementById('togglePassword');
+
+        togglePassword.addEventListener('click', function() {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+
+            const icon = this.querySelector('i');
+            icon.classList.toggle('bi-eye');
+            icon.classList.toggle('bi-eye-slash');
+        });
+    </script>
 
 </body>
 

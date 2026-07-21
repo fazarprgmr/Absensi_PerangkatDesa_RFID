@@ -46,21 +46,25 @@ class KehadiranController extends Controller
             // A. Cek apakah sudah absen pulang?
             if ($absen->jam_pulang) {
                 return response()->json([
-                    'message' => 'Sudah Absen Pulang!', // Pesan khusus
+                    'message' => 'Sudah Absen Pulang!', 
                     'nama' => $perangkatDesa->nama,
                 ], 200);
             }
 
-            // B. Jika belum absen pulang, cek apakah sudah masuk jam pulang (14:00)?
+            // B. Jika belum absen pulang, cek apakah sudah masuk jam pulang?
             if ($jamSekarang < $batasPulang) {
                 return response()->json([
-                    'message' => 'Sudah Absen Masuk!', // Pesan agar tidak tap terus sebelum jam 2
+                    'message' => 'Sudah Absen Masuk!', 
                     'nama' => $perangkatDesa->nama,
                 ], 200);
             }
 
             // C. Jika sudah waktunya dan belum absen pulang -> Proses Pulang
             $absen->update(['jam_pulang' => $jamSekarang]);
+
+            // 🚀 PERBAIKAN: Simpan info kalau barusan ini adalah alur "PULANG" ke Cache
+            Cache::put('last_absen_id', $absen->id, now()->addMinutes(2));
+            Cache::put('last_absen_type', 'pulang', now()->addMinutes(2));
 
             return response()->json([
                 'message' => 'Absen Pulang Berhasil!',
@@ -73,7 +77,7 @@ class KehadiranController extends Controller
         $batasTelat = $standarJamMasuk->jam_toleransi;
         $statusKetepatan = ($jamSekarang > $batasTelat) ? 'terlambat' : 'tepat waktu';
 
-        Kehadiran::create([
+        $absenBaru = Kehadiran::create([
             'perangkat_desa_id' => $perangkatDesa->id,
             'tanggal' => $hariIni,
             'jam_masuk' => $jamSekarang,
@@ -81,6 +85,10 @@ class KehadiranController extends Controller
             'status_ketepatan' => $statusKetepatan,
             'keterangan' => null,
         ]);
+
+        // 🚀 PERBAIKAN: Simpan info kalau barusan ini adalah alur "MASUK" ke Cache
+        Cache::put('last_absen_id', $absenBaru->id, now()->addMinutes(2));
+        Cache::put('last_absen_type', 'masuk', now()->addMinutes(2));
 
         return response()->json([
             'message' => 'Absen Masuk Berhasil!',
@@ -91,31 +99,46 @@ class KehadiranController extends Controller
         ], 201);
     }
 
-    // Tambahkan fungsi baru ini di bawah fungsi tapRFID
-        // Ganti fungsi simpanFoto kamu dengan yang ini:
+    // Fungsi simpanFoto yang sudah DIPERBARUI & DILEBIH AMANKAN
     public function simpanFoto(Request $request)
     {
-        // Pastikan ada file foto yang dikirim dari ESP32-CAM bernama 'image'
         if ($request->hasFile('image')) {
 
-            // Cari data absen yang PALING TERAKHIR dibuat/diupdate (milik orang yang baru tap)
-            $absenTerakhir = Kehadiran::latest('updated_at')->first();
+            // 🚀 AMBIL ID DARI CACHE (Bukan latest updated_at agar tidak ketukar/salah target)
+            $lastId = Cache::get('last_absen_id');
+            $tipeAbsen = Cache::get('last_absen_type', 'masuk'); // default ke masuk
+
+            $absenTerakhir = Kehadiran::find($lastId);
+
+            // Kalau di cache sudah habis waktunya, baru gunakan fallback ke updated_at
+            if (!$absenTerakhir) {
+                $absenTerakhir = Kehadiran::latest('updated_at')->first();
+            }
 
             if ($absenTerakhir) {
                 $file = $request->file('image');
 
-                // Beri nama foto secara unik: idabsen_jam.jpg
-                $filename = 'absen_'.$absenTerakhir->id.'_'.time().'.jpg';
+                // Beri nama foto secara unik berdasarkan TIPENYA
+                $filename = $tipeAbsen . '_' . $absenTerakhir->id . '_' . time() . '.jpg';
 
-                // 🚀 PERBAIKAN DI SINI: Tambahkan parameter disk 'public' di belakang!
+                // Simpan ke storage/app/public/absensi
                 $file->storeAs('absensi', $filename, 'public');
 
-                // Update nama file ke database
-                $absenTerakhir->update([
-                    'foto_bukti' => $filename,
-                ]);
+                // 🚀 PISAHKAN KOLOM SIMPAN BERDASARKAN TIPE ABSENSI
+                if ($tipeAbsen === 'pulang') {
+                    $absenTerakhir->update([
+                        'foto_bukti_pulang' => $filename,
+                    ]);
+                } else {
+                    $absenTerakhir->update([
+                        'foto_bukti' => $filename,
+                    ]);
+                }
 
-                return response()->json(['message' => 'Foto berhasil disimpan di jalur yang benar!'], 200);
+                return response()->json([
+                    'message' => "Foto bukti ($tipeAbsen) berhasil disimpan!",
+                    'file' => $filename
+                ], 200);
             }
         }
 

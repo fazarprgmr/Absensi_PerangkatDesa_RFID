@@ -6,7 +6,7 @@
         </button>
 
         <!-- Logo for mobile -->
-        <div class="navbar-brand d-lg-none fw-bold me-auto">Kiaalap</div>
+        <div class="navbar-brand d-lg-none fw-bold me-auto">Absensi Desa</div>
 
         <!-- Spacer for desktop -->
         <div class="flex-grow-1 d-none d-lg-block"></div>

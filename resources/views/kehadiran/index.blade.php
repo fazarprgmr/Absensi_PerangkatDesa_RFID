@@ -82,7 +82,7 @@
                                 </td>
                                 <td class="text-capitalize">
                                     @if ($kehadiran->status_ketepatan)
-                                        <span class="status-badge {{ $statusKetepatanClass }}">
+                                        <span class="status-badge {{ $statusKetepatanClass }}"><i class="bi bi-clock me-1"></i>
                                             {{ $kehadiran->status_ketepatan }}
                                         </span>
                                     @else

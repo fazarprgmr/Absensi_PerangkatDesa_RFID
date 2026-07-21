@@ -2,7 +2,7 @@
     <div class="sidebar-header">
         <div class="sidebar-brand">
             <h5>
-                <i class="bi bi-check2-circle"></i>
+                <i class="bi bi-clipboard-check"></i>
                 ABSENSI DESA
             </h5>
             <button class="sidebar-close" id="sidebarClose">

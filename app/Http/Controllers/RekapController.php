@@ -30,16 +30,14 @@ class RekapController extends Controller
             $sakit = $pd->kehadirans->where('status_kehadiran', 'sakit')->count();
             $alpa = $pd->kehadirans->where('status_kehadiran', 'alpa')->count();
 
-            // Hitung berapa kali dia terlambat masuk kerja
+            // Hitung berapa kali dia terlambat masuk kerja (sebagai catatan/info)
             $terlambat = $pd->kehadirans->where('status_ketepatan', 'terlambat')->count();
-
-            // Hadir Tepat Waktu = Total Hadir dikurangi Terlambat
-            $hadir_tepat = $hadir - $terlambat;
 
             // Total hari aktif/kerja adalah gabungan seluruh hari yang ada record-nya
             $total_hari = $hadir + $izin + $sakit + $alpa;
 
             // Rumus Persentase Kehadiran: (Hadir / Total Hari Kerja) * 100
+            // Karena $hadir tidak dikurangi terlambat, orang terlambat tetap dihitung 100% hadir
             $persentase = $total_hari > 0 ? round(($hadir / $total_hari) * 100) : 0;
 
             // Bungkus data menjadi objek rapi untuk dilempar ke View
@@ -47,7 +45,7 @@ class RekapController extends Controller
                 'id' => $pd->id,
                 'nama' => $pd->nama,
                 'total_hari' => $total_hari,
-                'hadir' => $hadir_tepat,
+                'hadir' => $hadir, // DIUBAH: Menggunakan $hadir utuh (terlambat tetap dihitung hadir)
                 'izin' => $izin,
                 'sakit' => $sakit,
                 'alpa' => $alpa,
@@ -83,14 +81,13 @@ class RekapController extends Controller
             $alpa = $pd->kehadirans->where('status_kehadiran', 'alpa')->count();
             $terlambat = $pd->kehadirans->where('status_ketepatan', 'terlambat')->count();
 
-            $hadir_tepat = $hadir - $terlambat;
             $total_hari = $hadir + $izin + $sakit + $alpa;
             $persentase = $total_hari > 0 ? round(($hadir / $total_hari) * 100) : 0;
 
             $rekaps[] = (object) [
                 'nama' => $pd->nama,
                 'total_hari' => $total_hari,
-                'hadir' => $hadir_tepat,
+                'hadir' => $hadir, // DIUBAH: Menggunakan $hadir utuh untuk cetakan PDF juga
                 'izin' => $izin,
                 'sakit' => $sakit,
                 'alpa' => $alpa,
@@ -109,7 +106,7 @@ class RekapController extends Controller
 
         $pengaturan = Pengaturan::first();
 
-        // Set ukuran kertas Lanscape (Tiduran) agar tabel rekap yang panjang muat dengan sempurna
+        // Set ukuran kertas Landscape (Tiduran) agar tabel rekap yang panjang muat dengan sempurna
         $pdf = Pdf::loadView('rekap.cetak', compact('rekaps', 'namaBulan', 'tahun', 'pengaturan'))
             ->setPaper('a4', 'landscape');
 

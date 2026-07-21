@@ -2,6 +2,11 @@
 
 @section('title', 'Rekap Absensi Bulanan')
 
+@push('styles')
+    <link rel="stylesheet" crossorigin href="{{ asset('template/assets/data-table-D3bj5bdn.css') }}">
+    <link rel="stylesheet" crossorigin href="{{ asset('css/custom-css-table.css') }}">
+@endpush
+
 @section('content')
     <div class="container-fluid">
         <div class="mb-4 d-flex justify-content-between align-items-center">
@@ -68,7 +73,8 @@
                             <tr>
                                 <th class="px-4 py-3">Nama Perangkat Desa</th>
                                 <th class="text-center py-3">Total Hari Aktif</th>
-                                <th class="text-center py-3 text-success">Hadir (Tepat Waktu)</th>
+                                <!-- Diubah menjadi "Hadir" saja agar mencakup Tepat Waktu & Terlambat -->
+                                <th class="text-center py-3 text-success">Hadir</th>
                                 <th class="text-center py-3 text-warning">Terlambat</th>
                                 <th class="text-center py-3 text-primary">Izin</th>
                                 <th class="text-center py-3 text-info">Sakit</th>
@@ -89,7 +95,6 @@
                                     <td class="text-center py-3 fw-bold text-danger">{{ $rekap->alpa }}</td>
                                     <td class="text-center px-4 py-3">
                                         @php
-                                            // Menentukan warna badge berdasarkan persentase kerajinan murid/perangkat
                                             $badgeColor = 'bg-success';
                                             if ($rekap->persentase < 50) {
                                                 $badgeColor = 'bg-danger';
@@ -100,16 +105,17 @@
                                         <span
                                             class="badge {{ $badgeColor }} px-2.5 py-1.5 fs-7">{{ $rekap->persentase }}%</span>
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <a href="{{ route('rekap.show', ['id' => $rekap->id, 'bulan' => $bulan, 'tahun' => $tahun]) }}"
-                                            class="btn btn-sm btn-info text-white">
-                                            <i class="bi bi-eye"></i> Detail
+                                            class="btn-action btn-view" title="View">
+                                            <i class="bi bi-eye"></i>
                                         </a>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="8" class="text-center py-5 text-muted">
+                                    <!-- Diubah dari 8 menjadi 9 agar pas menutup seluruh kolom -->
+                                    <td colspan="9" class="text-center py-5 text-muted">
                                         <i class="bi bi-calendar-x d-block fs-2 mb-2"></i>
                                         Belum ada rekaman data kehadiran pada bulan ini.
                                     </td>

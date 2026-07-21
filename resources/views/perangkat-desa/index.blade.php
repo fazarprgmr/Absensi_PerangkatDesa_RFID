@@ -49,7 +49,7 @@
                                 <td class="text-center">{{ $pd->dusun }}</td>
                                 <td class="text-center">{{ $pd->rfid_uid }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('perangkat-desa.show', $pd->id) }}" class="btn-action btn-view" 
+                                    <a href="{{ route('perangkat-desa.show', $pd->id) }}" class="btn-action btn-view"
                                         title="View"><i class="bi bi-eye"></i></a>
                                     <a href="{{ route('perangkat-desa.edit', $pd->id) }}" class="btn-action btn-edit"
                                         title="Edit"><i class="bi bi-pencil"></i></a>

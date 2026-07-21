@@ -19,8 +19,8 @@
                 <span class="input-group-text">
                     <i class="bi bi-envelope"></i>
                 </span>
-                <input type="email" class="form-control" id="username" name="email" placeholder="Masukkan email" value="{{ old('email') }}"
-                    required aria-label="Email Address" aria-describedby="emailHelp" required>
+                <input type="email" class="form-control" id="username" name="email" placeholder="Masukkan email"
+                    value="{{ old('email') }}" required aria-label="Email Address" aria-describedby="emailHelp" required>
             </div>
             @if ($errors->has('email'))
                 <span class="text-danger">{{ $errors->first('email') }}</span>
@@ -29,13 +29,20 @@
 
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>
+
             <div class="input-group">
                 <span class="input-group-text">
                     <i class="bi bi-lock"></i>
                 </span>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password" value="{{ old('password') }}"
-                    required aria-label="Password" aria-describedby="passwordHelp" required>
+
+                <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password"
+                    required>
+
+                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                    <i class="bi bi-eye"></i>
+                </button>
             </div>
+
             @if ($errors->has('password'))
                 <span class="text-danger">{{ $errors->first('password') }}</span>
             @endif
